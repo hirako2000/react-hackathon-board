@@ -62,9 +62,18 @@ Getting Started
 Just clone the repo and install the necessary node modules:
 
 ```shell
-$ git clone https://github.com/hirako2000/react-hackathon-board.git
-$ cd react-hackathon-board
+$ git clone https://github.com/davezuko/react-redux-starter-kit.git
+$ cd react-redux-starter-kit
 $ npm install                   # Install Node modules listed in ./package.json (may take a while the first time)
+```
+
+Start mongodb
+```shell
+$ mongod
+```
+
+Start the node application
+```shell
 $ npm start                     # Compile and launch
 ```
 

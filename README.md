@@ -6,6 +6,8 @@ React Hackathon Board
 
 The primary goal of this project is to provide a web application oard to host hackathon events.
 
+[![Build Status](https://travis-ci.org/hirako2000/react-hackathon-board.svg?branch=master)](https://travis-ci.org/hirako2000/react-hackathon-board)
+
 Table of Contents
 -----------------
 1. [Requirements](#requirements)

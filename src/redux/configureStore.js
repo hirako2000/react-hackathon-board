@@ -4,8 +4,11 @@ import rootReducer from './rootReducer'
 import { routerMiddleware } from 'react-router-redux'
 
 export default function configureStore (initialState = {}, history) {
+
+  const router = routerMiddleware(history);
+
   // Compose final middleware and use devtools in debug environment
-  let middleware = applyMiddleware(thunk, routerMiddleware(history));
+  let middleware = applyMiddleware(thunk, router);
   if (__DEBUG__) {
     const devTools = window.devToolsExtension
       ? window.devToolsExtension()

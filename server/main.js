@@ -4,6 +4,7 @@ import webpack from 'webpack'
 import webpackConfig from '../build/webpack.config'
 import historyApiFallback from 'koa-connect-history-api-fallback'
 import serve from 'koa-static'
+import api from './api'
 import proxy from 'koa-proxy'
 import _debug from 'debug'
 import config from '../config'
@@ -16,6 +17,11 @@ import webpackHMRMiddleware from './middleware/webpack-hmr'
 const debug = _debug('app:server');
 const paths = config.utils_paths;
 const app = new Koa();
+
+/** Includes API
+ *
+ */
+app.use(api.routes());
 
 /**
  * Connect to MongoDB.
@@ -34,12 +40,6 @@ if (config.proxy && config.proxy.enabled) {
   app.use(convert(proxy(config.proxy.options)))
 }
 
-// This rewrites all routes requests to the root /index.html file
-// (ignoring file requests). If you want to implement isomorphic
-// rendering, you'll want to remove this middleware.
-app.use(convert(historyApiFallback({
-  verbose: false
-})));
 
 // ------------------------------------
 // Apply Webpack HMR Middleware

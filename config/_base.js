@@ -23,7 +23,7 @@ const config = {
   server_port : process.env.PORT || 3000,
 
   // DB configuration
-  db: 'mongodb://localhost:27018/hackathon',
+  db: 'mongodb://localhost:27017/hackathon',
 
   // ----------------------------------
   // Compiler Configuration

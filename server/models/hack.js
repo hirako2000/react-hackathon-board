@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
 
 var HackSchema = new Schema({
@@ -16,6 +16,6 @@ var HackSchema = new Schema({
   nominated: Boolean
 });
 
-var Hack = mongoose.model("Event", HackSchema);
+var Hack = mongoose.model('Event', HackSchema);
 
 export default Hack;

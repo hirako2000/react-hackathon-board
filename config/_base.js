@@ -1,7 +1,7 @@
 /* eslint key-spacing:0 spaced-comment:0 */
-import _debug from 'debug'
-import path from 'path'
-import { argv } from 'yargs'
+import _debug from 'debug';
+import path from 'path';
+import { argv } from 'yargs';
 
 const debug = _debug('app:config:_base');
 const config = {
@@ -56,7 +56,7 @@ const config = {
     { type : 'text-summary' },
     { type : 'lcov', dir : 'coverage' }
   ]
-}
+};
 
 /************************************************
 -------------------------------------------------
@@ -97,7 +97,7 @@ config.compiler_vendor = config.compiler_vendor
       `Package "${dep}" was not found as an npm dependency in package.json; ` +
       `it won't be included in the webpack vendor bundle.
        Consider removing it from vendor_dependencies in ~/config/index.js`
-    )
+    );
   });
 
 // ------------------------------------
@@ -113,7 +113,7 @@ config.utils_paths = (() => {
     base   : base,
     client : base.bind(null, config.dir_client),
     dist   : base.bind(null, config.dir_dist)
-  }
+  };
 })();
 
-export default config
+export default config;

@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react'
-import '../../styles/core.scss'
+import React, { PropTypes } from 'react';
+import '../../styles/core.scss';
 
 import Nav from 'react-bootstrap/lib/Nav';
 import Navbar from 'react-bootstrap/lib/Navbar';
@@ -28,16 +28,16 @@ function CoreLayout ({ children }) {
         {children}
       </div>
     </div>
-  )
+  );
 }
 
 var FullNavBar = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <Navbar inverse>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Hackathon</a>
+            <a href='#'>Hackathon</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -50,18 +50,18 @@ var FullNavBar = React.createClass({
 });
 
 var FullNavBarCollapsible = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <Navbar.Collapse>
         <Nav>
-          <NavItem eventKey={1} href="#">Hacks</NavItem>
-          <NavItem eventKey={2} href="#">Rules</NavItem>
-          <NavItem eventKey={2} href="#">Prize</NavItem>
+          <NavItem eventKey={1} href='#'>Hacks</NavItem>
+          <NavItem eventKey={2} href='#'>Rules</NavItem>
+          <NavItem eventKey={2} href='#'>Prize</NavItem>
         </Nav>
         <Nav pullRight>
-          <NavItem eventKey={1} href="#">Sign up</NavItem>
-          <NavItem eventKey={2} href="#">Login</NavItem>
-          <NavDropdown eventKey={3} title="Account" id="basic-nav-dropdown">
+          <NavItem eventKey={1} href='#'>Sign up</NavItem>
+          <NavItem eventKey={2} href='#'>Login</NavItem>
+          <NavDropdown eventKey={3} title='Account' id='basic-nav-dropdown'>
             <MenuItem eventKey={3.1}>Profile</MenuItem>
             <MenuItem eventKey={3.2}>My Hacks</MenuItem>
             <MenuItem eventKey={3.3}>Admin</MenuItem>
@@ -78,4 +78,4 @@ CoreLayout.propTypes = {
   children: PropTypes.element
 };
 
-export default CoreLayout
+export default CoreLayout;

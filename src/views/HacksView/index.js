@@ -1,2 +1,2 @@
-import HacksView from './HacksView'
-export default HacksView
+import HacksView from './HacksView';
+export default HacksView;

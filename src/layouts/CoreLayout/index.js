@@ -1,2 +1,2 @@
-import CoreLayout from './CoreLayout'
-export default CoreLayout
+import CoreLayout from './CoreLayout';
+export default CoreLayout;

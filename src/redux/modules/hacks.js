@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { createAction, handleActions } from 'redux-actions'
+import axios from 'axios';
 
 export const HACKS = 'HACKS';
 
@@ -10,7 +9,7 @@ export function hacks (value: Array): Action {
   return {
     type: HACKS,
     payload: value
-  }
+  };
 }
 
 export const listFromServer = () => (dispatch) => {
@@ -37,5 +36,5 @@ const initialState = [];
 export default function hacksReducer (state: Array = initialState, action: Action): Array {
   const handler = ACTION_HANDLERS[action.type];
 
-  return handler ? handler(state, action) : state
+  return handler ? handler(state, action) : state;
 }

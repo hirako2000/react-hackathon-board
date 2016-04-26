@@ -16,7 +16,7 @@ export function increment (value: number = 1): Action {
   return {
     type: COUNTER_INCREMENT,
     payload: value
-  }
+  };
 }
 
 // This is a thunk, meaning it is a function that immediately
@@ -30,10 +30,10 @@ export const doubleAsync = (): Function => {
     return new Promise((resolve: Function): void => {
       setTimeout(() => {
         dispatch(increment(getState().counter));
-        resolve()
-      }, 200)
-    })
-  }
+        resolve();
+      }, 200);
+    });
+  };
 };
 
 export const actions = {
@@ -55,5 +55,5 @@ const initialState = 0;
 export default function counterReducer (state: number = initialState, action: Action): number {
   const handler = ACTION_HANDLERS[action.type];
 
-  return handler ? handler(state, action) : state
+  return handler ? handler(state, action) : state;
 }

@@ -9,4 +9,4 @@ export default () => ({
     colors : true
   },
   compiler_public_path: '/'
-})
+});

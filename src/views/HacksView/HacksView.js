@@ -5,7 +5,7 @@ import { actions as hacksActions } from '../../redux/modules/hacks';
 import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 
-import {Button, Card, Content, Header, Column, Image, Reveal, Segment} from 'react-semantify';
+import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
 
 
 // We can use Flow (http://flowtype.org/) to type our component's props
@@ -88,7 +88,18 @@ export class HacksAsCardsComponent extends React.Component {
       );
     });
 
-    return <Segment loading={!this.props.hacks} className="ui stackable three column grid">{cards}</Segment>;
+    return(
+      <div className="ui container">
+        <Segment className="basic stackable one column grid">
+          <Button className="column right floated" color="blue" onClick={this._onClick} >
+            <Icon className="plus"/> Create Hack
+          </Button>
+        </Segment>
+        <Segment loading={!this.props.hacks} className="ui stackable three column grid basic">
+          {cards}
+        </Segment>
+      </div>
+    );
   }
 }
 

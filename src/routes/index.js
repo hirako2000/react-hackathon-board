@@ -9,10 +9,12 @@ import { Route } from 'react-router';
 import CoreLayout from 'layouts/CoreLayout/CoreLayout';
 import HomeView from 'views/HomeView/HomeView';
 import HacksView from 'views/HacksView/HacksView';
+import HackView from 'views/HacksView/HackView';
 
 export default (store) => (
   <Route component={CoreLayout}>
     <Route name='home' path='/' component={HomeView} />
     <Route name='hacks' path='/hacks' component={HacksView} />
+    <Route name='hack' path='/hacks/:id' component={HackView} />
   </Route>
 );

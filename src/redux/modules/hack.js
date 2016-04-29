@@ -1,41 +1,41 @@
 import axios from 'axios';
 
-export const HACKS = 'HACKS';
+export const HACK = 'HACK';
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function hacks (value: Array): Action {
+export function hack (value: Object): Action {
   return {
-    type: HACKS,
+    type: HACK,
     payload: value
   };
 }
 
-export const listFromServer = () => (dispatch) => {
+export const fetchFromServer = (id) => (dispatch) => {
   // TODO use config path instead
-  axios.get('http://localhost:3000/api/hacks')
+  axios.get('http://localhost:3000/api/hacks/' + id)
     .then((res) => {
-      dispatch(hacks(res.data));
+      dispatch(hack(res.data));
     });
 };
 
 export const actions = {
-  listFromServer
+  fetchFromServer
 };
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [HACKS]: (state: array, action: {payload: array}): array => action.payload
+  [HACK]: (state: Object, action: {payload: Object}): Object => action.payload
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = [];
-export default function hacksReducer (state: Array = initialState, action: Action): Array {
+const initialState = null;
+export default function hackReducer (state: Object = initialState, action: Action): Object {
   const handler = ACTION_HANDLERS[action.type];
 
   return handler ? handler(state, action) : state;

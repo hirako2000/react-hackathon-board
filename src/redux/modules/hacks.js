@@ -15,7 +15,9 @@ export function hacks (value: Array): Action {
 export const listFromServer = () => (dispatch) => {
   // TODO use config path instead
   axios.get('http://localhost:3000/api/hacks/list')
-    .then((res) => dispatch(hacks(res.data)));
+    .then((res) => {
+      dispatch(hacks(res.data));
+    });
 };
 
 export const actions = {

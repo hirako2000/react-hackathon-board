@@ -55,6 +55,11 @@ webpackConfig.plugins = [
     minify: {
       collapseWhitespace: true
     }
+  }),
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    'window.jQuery': 'jquery'
   })
 ];
 
@@ -264,7 +269,7 @@ webpackConfig.module.loaders.push(
   { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
   { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
   { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
-)
+);
 /* eslint-enable */
 
 // ------------------------------------

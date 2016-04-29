@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery/src/core';
+import semanticUI from 'semantic-ui/dist/semantic';
+import semanticUIcss from 'semantic-ui/dist/semantic.min.css';
 // Using hashHistory as BrowserHistory appears to be buggy with some version of react-router
 import createBrowserHistory from 'history/lib/createHashHistory';
 import { useRouterHistory } from 'react-router';

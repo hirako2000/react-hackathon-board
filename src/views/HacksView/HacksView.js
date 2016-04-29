@@ -3,6 +3,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { actions as hacksActions } from '../../redux/modules/hacks';
 import classes from './HacksView.scss';
+import ReactDOM from 'react-dom';
+
+import {Button, Card, Content, Header, Column, Image, Reveal, Segment} from 'react-semantify';
+
 
 // We can use Flow (http://flowtype.org/) to type our component's props
 // and state. For convenience we've included both regular propTypes and
@@ -27,6 +31,7 @@ export class HacksView extends React.Component<void, Props, void> {
   };
 
   render () {
+
     return (
       <div className='container text-center'>
         <h1>Hacks</h1>
@@ -40,7 +45,54 @@ export class HacksView extends React.Component<void, Props, void> {
   }
 }
 
+export class HacksAsCardsComponent extends React.Component {
+
+  static propTypes = {
+    hacks: PropTypes.array.isRequired,
+    listFromServer: PropTypes.func.isRequired
+  };
+
+  componentWillMount() {
+    this.props.listFromServer();
+    this.getData();
+  }
+
+  getData() {
+    this.setState({
+    });
+  }
+
+  render() {
+    var cards = this.props.hacks.map(function (card) {
+      return (
+        <Column key={card._id}>
+          <Card className="fluid">
+            <Reveal className="fade">
+              <Content className="hidden">
+                <Image src={card.pictureURL} className={classes['sepia']}/>
+              </Content>
+              <Content className="visible">
+                <Image src={card.pictureURL} className="" />
+              </Content>
+            </Reveal>
+
+            <Content>
+              <Header>{card.title}</Header>
+              <div className="meta">
+                <span className="time">{card.description}</span>
+                <span className="category">Test</span>
+              </div>
+            </Content>
+          </Card>
+        </Column>
+      );
+    });
+
+    return <Segment loading={!this.props.hacks} className="ui stackable three column grid">{cards}</Segment>;
+  }
+}
+
 const mapStateToProps = (state) => ({
   hacks: state.hacks
 });
-export default connect(mapStateToProps, hacksActions)(HacksView);
+export default connect(mapStateToProps, hacksActions)(HacksAsCardsComponent);

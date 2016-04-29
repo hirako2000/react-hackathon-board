@@ -1,11 +1,7 @@
 import React, { PropTypes } from 'react';
 import '../../styles/core.scss';
 
-import Nav from 'react-bootstrap/lib/Nav';
-import Navbar from 'react-bootstrap/lib/Navbar';
-import NavItem from 'react-bootstrap/lib/NavItem';
-import NavDropdown from 'react-bootstrap/lib/NavDropdown';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
+import {Menu, Item, Icon} from 'react-semantify';
 
 // Note: Stateless/function components *will not* hot reload!
 // react-transform *only* works on component classes.
@@ -21,7 +17,8 @@ function CoreLayout ({ children }) {
     <div className='page-container'>
       <div className=''>
 
-        <FullNavBar />
+        <NavBarLeft>
+        </NavBarLeft>
 
       </div>
       <div className='view-container'>
@@ -31,45 +28,42 @@ function CoreLayout ({ children }) {
   );
 }
 
-var FullNavBar = React.createClass({
+var NavBarLeft = React.createClass({
   render: function () {
-    return (
-      <Navbar inverse>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a href='#'>Hackathon</a>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-
-        <FullNavBarCollapsible/>
-
-      </Navbar>
+    return(
+    <Menu className="inverted borderless stackable">
+      <Item className="active" type="link" href="#/">
+        <Icon className="home" /> Home
+      </Item>
+      <Item className="" type="link" href="#/hacks">
+        <Icon className="lab" /> Hacks
+      </Item>
+      <Item className="" type="link" href="#/rules">
+        <Icon className="book" /> Rules
+      </Item>
+      <Item className="" type="link" href="#/prize">
+        <Icon className="gift" /> Prize
+      </Item>
+      <Item className="" type="link" href="#/hacks">
+        <Icon className="trophy" /> Judging
+      </Item>
+      <NavBarRight />
+    </Menu>
     );
   }
 });
 
-var FullNavBarCollapsible = React.createClass({
+var NavBarRight = React.createClass({
   render: function () {
-    return (
-      <Navbar.Collapse>
-        <Nav>
-          <NavItem eventKey={1} href='#'>Hacks</NavItem>
-          <NavItem eventKey={2} href='#'>Rules</NavItem>
-          <NavItem eventKey={2} href='#'>Prize</NavItem>
-        </Nav>
-        <Nav pullRight>
-          <NavItem eventKey={1} href='#'>Sign up</NavItem>
-          <NavItem eventKey={2} href='#'>Login</NavItem>
-          <NavDropdown eventKey={3} title='Account' id='basic-nav-dropdown'>
-            <MenuItem eventKey={3.1}>Profile</MenuItem>
-            <MenuItem eventKey={3.2}>My Hacks</MenuItem>
-            <MenuItem eventKey={3.3}>Admin</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey={3.3}>Logout</MenuItem>
-          </NavDropdown>
-        </Nav>
-      </Navbar.Collapse>
+    return(
+      <Menu className="right inverted borderless stackable">
+        <Item className="" type="link" href="#/login">
+          <Icon className="sign in" /> Login
+        </Item>
+        <Item className="" type="link" href="#/signup">
+          <Icon className="" /> Sign up
+        </Item>
+      </Menu>
     );
   }
 });

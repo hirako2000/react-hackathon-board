@@ -67,17 +67,21 @@ export class HacksAsCardsComponent extends React.Component {
       return (
         <Column key={card._id}>
           <Card className="fluid">
-            <Reveal className="fade">
-              <Content className="hidden">
-                <Image src={card.pictureURL} className={classes['sepia']}/>
-              </Content>
-              <Content className="visible">
-                <Image src={card.pictureURL} className="" />
-              </Content>
-            </Reveal>
+            <a href={ '#/hacks/' + card._id}>
+              <Reveal className="fade">
+                <Content className="hidden">
+                  <Image type="link" src={card.pictureURL} className={classes['sepia']}/>
+                </Content>
+                <Content className="visible">
+                  <Image src={card.pictureURL} className="" />
+                </Content>
+              </Reveal>
+            </a>
 
             <Content>
-              <Header>{card.title}</Header>
+              <a href={ '#/hacks/' + card._id}>
+                <Header>{card.title}</Header>
+              </a>
               <div className="meta">
                 <span className="time">{card.description}</span>
                 <span className="category">Test</span>

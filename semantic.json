@@ -16,7 +16,7 @@
     "clean": "dist/"
   },
   "permission": false,
-  "autoInstall": true,
+  "auto-install": true,
   "rtl": false,
   "version": "2.1.8"
 }

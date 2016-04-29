@@ -5,6 +5,7 @@ Under development, the goal of this project is to build a web application to hos
 
 [![Build Status](https://travis-ci.org/hirako2000/react-hackathon-board.svg?branch=master)](https://travis-ci.org/hirako2000/react-hackathon-board)
 [![Dependency Status](https://david-dm.org/hirako2000/react-hackathon-board.svg?style=flat)](https://david-dm.org/hirako2000/react-hackathon-board)
+[![devDependency Status](https://david-dm.org/hirako2000/react-hackathon-board/dev-status.svg)](https://david-dm.org/hirako2000/react-hackathon-board#info=devDependencies)
 
 Table of Contents
 -----------------

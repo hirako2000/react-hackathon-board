@@ -42,7 +42,7 @@ Features
 * [Webpack](https://github.com/webpack/webpack)
   * Bundle splitting and CSS extraction
   * Sass w/ CSS modules, autoprefixer, and minification
-* [Koa](https://github.com/koajs/koa) (`^2.0.0-alpha`)
+* [Koa](https://github.com/koajs/koa) (`^2.0.0`)
 * [Karma](https://github.com/karma-runner/karma)
   * Mocha w/ chai, sinon-chai, and chai-as-promised, and [chai-enzyme](https://github.com/producthunt/chai-enzyme)
   * PhantomJS

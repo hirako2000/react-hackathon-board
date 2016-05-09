@@ -4,13 +4,13 @@ import Hack from '../models/hack';
 const hacks = new Router();
 
 hacks.get('/', function * (next) {
-  console.log('hitting /hacks/');
+  console.log('GET /hacks/');
   var result = yield Hack.find({});
   this.body = result;
 });
 
 hacks.get('/:id', function * (next) {
-  console.log('hitting /hacks/' + this.params.id);
+  console.log('GET /hacks/' + this.params.id);
   var hackEntity;
   if(this.params.id) {
     hackEntity = yield Hack.findOne({ '_id' : this.params.id });
@@ -20,5 +20,23 @@ hacks.get('/:id', function * (next) {
 
   this.body = hackEntity;
 });
+
+hacks.put('/:id', function * (next) {
+  console.log('PUT /hacks/' + this.request.body.id);
+  var hackEntity;
+  if(this.params.id) {
+    hackEntity = yield Hack.findOne({ '_id' : this.params.id });
+    updateEntity(hackEntity, this.request.body);
+    hackEntity.save();
+  }
+  this.body = hackEntity;
+});
+
+var updateEntity = function(existingEntity, newEntity) {
+  existingEntity.title = newEntity.title;
+  existingEntity.shortDescription = newEntity.shortDescription;
+  existingEntity.description = newEntity.description;
+  existingEntity.open = newEntity.open;
+};
 
 export default hacks;

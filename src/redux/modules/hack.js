@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const HACK = 'HACK';
+export const UPDATE = 'UPDATE';
 
 // ------------------------------------
 // Actions
@@ -8,6 +9,13 @@ export const HACK = 'HACK';
 export function hack (value: Object): Action {
   return {
     type: HACK,
+    payload: value
+  };
+}
+
+export function update (value: Object): Action {
+  return {
+    type: UPDATE,
     payload: value
   };
 }
@@ -20,15 +28,25 @@ export const fetchFromServer = (id) => (dispatch) => {
     });
 };
 
+export const updateToSever = (id) => (dispatch) => {
+  // TODO use config path instead
+  axios.put('http://localhost:3000/api/hacks/' + id)
+    .then((res) => {
+      dispatch(hack(res.data));
+    });
+};
+
 export const actions = {
-  fetchFromServer
+  fetchFromServer,
+  updateToSever
 };
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [HACK]: (state: Object, action: {payload: Object}): Object => action.payload
+  [HACK]: (state: Object, action: {payload: Object}): Object => action.payload,
+  [UPDATE]: (state: Object, action: {payload: Object}) : Object => actio .payload
 };
 
 // ------------------------------------

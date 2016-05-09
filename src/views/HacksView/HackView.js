@@ -38,7 +38,11 @@ export class HackViewComponent extends React.Component {
         <Segment className="basic stackable three column grid">
           <div className="card">
             <Content className="visible">
-              <Header>{hack.title}</Header>
+              <Header>
+                {hack.title} (<a href={ '#/hacks/edit/' + hack._id}>
+                Edit Hack
+              </a>)
+              </Header>
               <Image src={hack.pictureURL} className="fluid" />
             </Content>
             <div className="ui divider"></div>

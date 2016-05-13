@@ -12,7 +12,8 @@ import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Lab
 type
 Props = {
   hack: object,
-  fetchFromServer: Function
+  fetchFromServer: Function,
+  updateToSever: Function
 };
 
 var TitleInput = React.createClass ({
@@ -81,14 +82,14 @@ var OpenInput = React.createClass ({
     return {value: this.props.hack.open};
   },
   handleChange: function(event) {
-    this.props.hack.open = event.target.value;
-    this.setState({value: event.target.value});
+    this.props.hack.open = !this.props.hack.open;
+    this.setState({ value: this.props.hack.open });
   },
   render: function() {
     return (
       <div className="field">
         <div className="ui checkbox">
-          <input type="checkbox" check={this.state.value}
+          <input type="checkbox" checked={this.state.value}
                  onChange={this.handleChange}/>
           <label>Open</label>
         </div>
@@ -101,8 +102,9 @@ export class HackViewComponent extends React.Component {
 
   static propTypes = {
     hack: PropTypes.object,
-    fetchFromServer: PropTypes.func.isRequired
-    // Add the Formsy Mixin
+    fetchFromServer: PropTypes.func.isRequired,
+    updateToSever: PropTypes.func.isRequired
+
   };
 
   componentWillMount() {
@@ -113,8 +115,8 @@ export class HackViewComponent extends React.Component {
   }
 
   handleSubmit(val) {
-    // Do anything you want with the form value
     console.log(val);
+    this.props.updateToSever(this.props.hack._id, val);
   }
 
   render() {

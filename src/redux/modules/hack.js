@@ -28,9 +28,9 @@ export const fetchFromServer = (id) => (dispatch) => {
     });
 };
 
-export const updateToSever = (id) => (dispatch) => {
+export const updateToSever = (id, req) => (dispatch) => {
   // TODO use config path instead
-  axios.put('http://localhost:3000/api/hacks/' + id)
+  axios.put('http://localhost:3000/api/hacks/' + id, req)
     .then((res) => {
       dispatch(hack(res.data));
     });

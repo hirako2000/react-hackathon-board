@@ -22,7 +22,7 @@ hacks.get('/:id', function * (next) {
 });
 
 hacks.put('/:id', function * (next) {
-  console.log('PUT /hacks/' + this.request.body.id);
+  console.log('PUT /hacks/' + this.params.id);
   var hackEntity;
   if(this.params.id) {
     hackEntity = yield Hack.findOne({ '_id' : this.params.id });

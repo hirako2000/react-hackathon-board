@@ -62,6 +62,10 @@ export class HacksAsCardsComponent extends React.Component {
     });
   }
 
+  handleCreate() {
+    window.location = '#/hacks/create/new/';
+  }
+
   render() {
     var cards = this.props.hacks.map(function (card) {
       return (
@@ -95,7 +99,7 @@ export class HacksAsCardsComponent extends React.Component {
     return(
       <div className="ui container">
         <Segment className="basic stackable one column grid">
-          <Button className="column right floated" color="blue" onClick={this._onClick} >
+          <Button className="column right floated" color="blue" onClick={this.handleCreate} >
             <Icon className="plus"/> Create Hack
           </Button>
         </Segment>

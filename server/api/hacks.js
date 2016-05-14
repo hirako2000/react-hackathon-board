@@ -27,8 +27,17 @@ hacks.put('/:id', function * (next) {
   if(this.params.id) {
     hackEntity = yield Hack.findOne({ '_id' : this.params.id });
     updateEntity(hackEntity, this.request.body);
-    hackEntity.save();
+    yield hackEntity.save();
   }
+  this.body = hackEntity;
+});
+
+hacks.post('/', function * (next) {
+  console.log('POST /hacks/');
+  var hack = this.request.body;
+  var hackEntity = new Hack();
+  updateEntity(hackEntity, hack);
+  yield hackEntity.save();
   this.body = hackEntity;
 });
 

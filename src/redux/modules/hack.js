@@ -28,17 +28,29 @@ export const fetchFromServer = (id) => (dispatch) => {
     });
 };
 
+export const reset = () => (dispatch) => {
+  dispatch(hack({}));
+};
+
 export const updateToSever = (id, req) => (dispatch) => {
   // TODO use config path instead
-  axios.put('http://localhost:3000/api/hacks/' + id, req)
-    .then((res) => {
-      dispatch(hack(res.data));
-    });
+  if(id) {
+    axios.put('http://localhost:3000/api/hacks/' + id, req)
+      .then((res) => {
+        dispatch(update(res.data));
+      });
+  } else {
+    axios.post('http://localhost:3000/api/hacks/', req)
+      .then((res) => {
+        dispatch(update(res.data));
+      });
+  }
 };
 
 export const actions = {
   fetchFromServer,
-  updateToSever
+  updateToSever,
+  reset
 };
 
 // ------------------------------------
@@ -46,13 +58,13 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [HACK]: (state: Object, action: {payload: Object}): Object => action.payload,
-  [UPDATE]: (state: Object, action: {payload: Object}) : Object => actio .payload
+  [UPDATE]: (state: Object, action: {payload: Object}) : Object => action.payload
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = null;
+const initialState = new Object();
 export default function hackReducer (state: Object = initialState, action: Action): Object {
   const handler = ACTION_HANDLERS[action.type];
 

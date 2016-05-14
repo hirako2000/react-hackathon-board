@@ -8,17 +8,23 @@ import { actions as hackActions } from '../../redux/modules/hack';
 import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Label} from 'react-semantify';
+import { push } from 'react-router-redux';
 
 type
 Props = {
   hack: object,
   fetchFromServer: Function,
-  updateToSever: Function
+  updateToSever: Function,
+  reset: Function
 };
 
+/* I prefer to extend React.Component
+ But creating Classes for nested elements to use both
+ Differences are minor between the two, but we might want to stick with React.Component going forward
+*/
 var TitleInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hack.title };
+    return {value: this.props.hack.title || '' };
   },
   handleChange: function(event) {
     this.props.hack.title = event.target.value;
@@ -38,7 +44,7 @@ var TitleInput = React.createClass ({
 
 var ShortDescriptionInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hack.shortDescription};
+    return {value: this.props.hack.shortDescription || '' };
   },
   handleChange: function(event) {
     this.props.hack.shortDescription = event.target.value;
@@ -59,7 +65,7 @@ var ShortDescriptionInput = React.createClass ({
 
 var DescriptionInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hack.description};
+    return {value: this.props.hack.description || '' };
   },
   handleChange: function(event) {
     this.props.hack.description = event.target.value;
@@ -79,7 +85,7 @@ var DescriptionInput = React.createClass ({
 
 var OpenInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hack.open};
+    return {value: this.props.hack.open || false };
   },
   handleChange: function(event) {
     this.props.hack.open = !this.props.hack.open;
@@ -103,20 +109,28 @@ export class HackViewComponent extends React.Component {
   static propTypes = {
     hack: PropTypes.object,
     fetchFromServer: PropTypes.func.isRequired,
-    updateToSever: PropTypes.func.isRequired
+    updateToSever: PropTypes.func.isRequired,
+    reset: PropTypes.func.isRequired
 
   };
 
   componentWillMount() {
-    this.props.fetchFromServer(this.props.params.id);
+    console.log("will mount " + this.props.params.id);
+    if (this.props.params.id) {
+      this.props.fetchFromServer(this.props.params.id);
+    } else {
+      this.props.reset();
+    }
   }
 
   componentWillUnmount () {
+    this.props.reset();
   }
 
   handleSubmit(val) {
-    console.log(val);
     this.props.updateToSever(this.props.hack._id, val);
+    // TODO - We should use react-router's history
+    window.location = '#/hacks';
   }
 
   render() {
@@ -124,17 +138,16 @@ export class HackViewComponent extends React.Component {
       return <div>Loading...</div>
     }
     return (
-      <Segment>
-        <form onSubmit={(hack) => this.handleSubmit(this.props.hack)}>
+      // The key is important for the component to be reset properly
+      <Segment key={this.props.hack._id}>
           <div className="ui form">
             <h1>{ this.props.hack.title }</h1>
             <TitleInput hack={ this.props.hack } />
             <ShortDescriptionInput hack={ this.props.hack } />
             <DescriptionInput hack={ this.props.hack } />
             <OpenInput  hack={ this.props.hack } />
-            <button className="ui button teal">Save</button>
+            <button className="ui button teal" onClick={(hack) => this.handleSubmit(this.props.hack)}>Save</button>
           </div>
-        </form>
       </Segment>
     );
   }

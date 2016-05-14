@@ -18,5 +18,6 @@ export default (store) => (
     <Route name='hacks' path='/hacks' component={HacksView} />
     <Route name='hack' path='/hacks/:id' component={HackView} />
     <Route name='editHack' path='/hacks/edit/:id' component={EditHackView} />
+    <Route name='createHack' path='/hacks/create/new/' component={EditHackView} />
   </Route>
 );

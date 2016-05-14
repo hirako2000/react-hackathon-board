@@ -24,6 +24,10 @@ export class HackViewComponent extends React.Component {
     this.getData();
   }
 
+  componentWillUnmount () {
+    this.props.reset();
+  }
+
   getData() {
     this.setState({
     });
@@ -35,7 +39,7 @@ export class HackViewComponent extends React.Component {
     }
     var hack = this.props.hack;
       return (
-        <Segment className="basic stackable three column grid">
+        <Segment key={this.props.hack._id} className="basic stackable three column grid">
           <div className="card">
             <Content className="visible">
               <Header>

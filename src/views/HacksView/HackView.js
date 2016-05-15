@@ -39,32 +39,80 @@ export class HackViewComponent extends React.Component {
     }
     var hack = this.props.hack;
       return (
-        <Segment key={this.props.hack._id} className="basic stackable three column grid">
-          <div className="card">
-            <Content className="visible">
-              <Header>
-                {hack.title} (<a href={ '#/hacks/edit/' + hack._id}>
-                Edit Hack
-              </a>)
-              </Header>
-              <Image src={'user-images/' + hack.pictureURL} className="fluid" />
-            </Content>
-            <div className="ui divider"></div>
-            <Content>
-              {hack.location}
-            </Content>
-            <div className="ui divider"></div>
-            <Content>
-              Comments
-            </Content>
+        <div className="ui internally celled grid">
+          <div className="row">
+            <div className="four wide column">
+              <Button className="fluid" color="teal">
+                Join
+              </Button>
+              <div className="ui card fluid">
+                <div className="content">
+                  <div className="header">Organizer</div>
+                  <div className="">
+                    <span>John Doe</span>
+                  </div>
+                </div>
+              </div>
+              <div className="ui card fluid">
+                <div className="content">
+                  <div className="header">Team</div>
+                  <div className="">
+                    <p>John Doe</p>
+                    <p>Don Quixote</p>
+                  </div>
+                </div>
+              </div>
+              <div className="ui card fluid">
+                <div className="content">
+                  <div className="header">Location</div>
+                  <div className="">
+                    <span>{hack.location}</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div className="twelve wide column">
+              <Segment key={this.props.hack._id} className="ui internally celled grid">
+                <div className="six wide column">
+                  <Content className="visible fluid">
+                    <Header>
+                      {hack.title} (<a href={ '#/hacks/edit/' + hack._id}>
+                      Edit Hack
+                    </a>)
+                    </Header>
+                    <Image src={'user-images/' + hack.pictureURL} className="fluid" />
+                  </Content>
+                  <div className="ui divider"></div>
+                </div>
+                <div className="ten wide column">
+                  <div className="">
+                    <div className="ui card fluid">
+                      <div className="content">
+                        <div className="header">Summary</div>
+                        <div className="">
+                          <span>{hack.shortDescription}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="ui card fluid">
+                      <div className="content">
+                        <div className="header">Description</div>
+                        <div className="">
+                          <span>{hack.description}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="ui divider"></div>
+                  <Content>
+                    Comments
+                  </Content>
+                </div>
+              </Segment>
+            </div>
           </div>
-          <div className="column">
-            <Content>
-              <Header>{hack.shortDescription}</Header>
-              <span className="">{hack.description}</span>
-            </Content>
-          </div>
-        </Segment>
+        </div>
       );
   }
 }

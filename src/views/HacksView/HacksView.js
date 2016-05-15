@@ -87,7 +87,7 @@ export class HacksAsCardsComponent extends React.Component {
                 <Header>{card.title}</Header>
               </a>
               <div className="meta">
-                <span className="time">{card.description}</span>
+                <span className="time">{card.shortDescription}</span>
                 <span className="category">Test</span>
               </div>
             </Content>

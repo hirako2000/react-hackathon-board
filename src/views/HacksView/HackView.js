@@ -34,7 +34,7 @@ export class HackViewComponent extends React.Component {
   }
 
   render() {
-    if(!this.props.hack) {
+    if(!this.props.hack.pictureURL) {
       return (<div>Loading...</div>);
     }
     var hack = this.props.hack;
@@ -47,7 +47,7 @@ export class HackViewComponent extends React.Component {
                 Edit Hack
               </a>)
               </Header>
-              <Image src={hack.pictureURL} className="fluid" />
+              <Image src={'user-images/' + hack.pictureURL} className="fluid" />
             </Content>
             <div className="ui divider"></div>
             <Content>

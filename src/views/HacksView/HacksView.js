@@ -74,10 +74,10 @@ export class HacksAsCardsComponent extends React.Component {
             <a href={ '#/hacks/' + card._id}>
               <Reveal className="fade">
                 <Content className="hidden">
-                  <Image type="link" src={card.pictureURL} className={classes['sepia']}/>
+                  <Image type="link" src={'user-images/' + card.pictureURL} className={classes['sepia']}/>
                 </Content>
                 <Content className="visible">
-                  <Image src={card.pictureURL} className="" />
+                  <Image src={'user-images/' + card.pictureURL} className="" />
                 </Content>
               </Reveal>
             </a>

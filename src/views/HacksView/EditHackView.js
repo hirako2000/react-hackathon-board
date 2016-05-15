@@ -9,6 +9,7 @@ import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Label} from 'react-semantify';
 import { push } from 'react-router-redux';
+import DropzoneSingleImageComponent from './DropzoneComponent'
 
 type
 Props = {
@@ -73,7 +74,7 @@ var DescriptionInput = React.createClass ({
   },
   render: function() {
     return (
-      <div  className="field">
+      <div className="field">
           <label>Description</label>
           <textarea value={ this.state.value }
                     onChange={this.handleChange}>
@@ -137,6 +138,8 @@ export class HackViewComponent extends React.Component {
     if(!this.props.hack) {
       return <div>Loading...</div>
     }
+    console.log("render dropzone!");
+    var dropzone;
     return (
       // The key is important for the component to be reset properly
       <Segment key={this.props.hack._id}>
@@ -146,6 +149,7 @@ export class HackViewComponent extends React.Component {
             <ShortDescriptionInput hack={ this.props.hack } />
             <DescriptionInput hack={ this.props.hack } />
             <OpenInput  hack={ this.props.hack } />
+            <DropzoneSingleImageComponent  hack={ this.props.hack } />
             <button className="ui button teal" onClick={(hack) => this.handleSubmit(this.props.hack)}>Save</button>
           </div>
       </Segment>

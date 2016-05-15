@@ -22,7 +22,7 @@ var getServerFileName = function(first, response) {
 
 var addedFileCallBack = function (file) {
   if(dropzone.files && dropzone.files.length > 1) {
-    console.log("Removing previous upload ");
+    // Simply replaces the previously added image
     dropzone.removeFile(dropzone.files[0]);
   }
 };
@@ -82,7 +82,6 @@ export class DropzoneSingleImageComponent extends React.Component {
   }
 
   render() {
-    console.log("render dropzone");
     hack = this.props.hack;
     return (
       <DropzoneComponent config={componentConfig}

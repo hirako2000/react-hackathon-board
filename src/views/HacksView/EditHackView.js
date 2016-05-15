@@ -116,7 +116,6 @@ export class HackViewComponent extends React.Component {
   };
 
   componentWillMount() {
-    console.log("will mount " + this.props.params.id);
     if (this.props.params.id) {
       this.props.fetchFromServer(this.props.params.id);
     } else {
@@ -138,8 +137,6 @@ export class HackViewComponent extends React.Component {
     if(!this.props.hack) {
       return <div>Loading...</div>
     }
-    console.log("render dropzone!");
-    var dropzone;
     return (
       // The key is important for the component to be reset properly
       <Segment key={this.props.hack._id}>
@@ -149,8 +146,10 @@ export class HackViewComponent extends React.Component {
             <ShortDescriptionInput hack={ this.props.hack } />
             <DescriptionInput hack={ this.props.hack } />
             <OpenInput  hack={ this.props.hack } />
-            <DropzoneSingleImageComponent  hack={ this.props.hack } />
-            <button className="ui button teal" onClick={(hack) => this.handleSubmit(this.props.hack)}>Save</button>
+            <DropzoneSingleImageComponent hack={ this.props.hack } />
+            <p>
+              <button className="ui button teal" onClick={(hack) => this.handleSubmit(this.props.hack)}>Save</button>
+            </p>
           </div>
       </Segment>
     );

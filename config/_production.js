@@ -8,5 +8,5 @@ export default () => ({
     chunkModules : true,
     colors : true
   },
-  compiler_public_path: `http://localhost:8080/`
+  compiler_public_path: '/'
 });

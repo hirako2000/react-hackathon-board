@@ -19,8 +19,8 @@ const config = {
   // ----------------------------------
   // Server Configuration
   // ----------------------------------
-  server_host : process.env.SERVER || 'localhost',
-  server_port : process.env.PORT || 3000,
+  server_host : 'react-hackathon.herokuapp.com' || 'localhost',
+  server_port : 8080, //|| 3000,
 
   // DB configuration
   db: process.env.MONGODB_URI || 'mongodb://localhost:27017/hackathon',

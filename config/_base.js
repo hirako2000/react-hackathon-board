@@ -23,7 +23,7 @@ const config = {
   server_port : process.env.PORT || 3000,
 
   // DB configuration
-  db:'mongodb://<dbuser>:<dbpassword>@ds025792.mlab.com:25792/heroku_ng4rkjxz',
+  db: process.env.MONGOLAB_URI | 'mongodb://localhost:27017/hackathon',
 
   // ----------------------------------
   // Compiler Configuration

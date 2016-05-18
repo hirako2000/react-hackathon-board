@@ -112,7 +112,6 @@ export class HackViewComponent extends React.Component {
     fetchFromServer: PropTypes.func.isRequired,
     updateToSever: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired
-
   };
 
   componentWillMount() {
@@ -130,6 +129,7 @@ export class HackViewComponent extends React.Component {
   handleSubmit(val) {
     this.props.updateToSever(this.props.hack._id, val);
     // TODO - We should use react-router's history
+    //this.props.history.push('#/hacks'); // deprecated?
     window.location = '#/hacks';
   }
 

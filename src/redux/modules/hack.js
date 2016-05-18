@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { reducer as notifReducer, actions as notifActions, Notifs } from 're-notif';
+const { notifSend } = notifActions;
+import notification from './notification';
 
 export const HACK = 'HACK';
 export const UPDATE = 'UPDATE';
@@ -38,11 +41,13 @@ export const updateToSever = (id, req) => (dispatch) => {
     axios.put('http://localhost:3000/api/hacks/' + id, req)
       .then((res) => {
         dispatch(update(res.data));
+        dispatch(notifSend(notification(res.data.title + ' is now updated', 'success')));
       });
   } else {
     axios.post('http://localhost:3000/api/hacks/', req)
       .then((res) => {
         dispatch(update(res.data));
+        dispatch(notifSend(notification(res.data.title + ' is now created', 'success')));
       });
   }
 };

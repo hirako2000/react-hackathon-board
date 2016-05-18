@@ -1,7 +1,30 @@
 import React, { PropTypes } from 'react';
 import '../../styles/core.scss';
+import { render } from 'react-dom';
+import { Provider, connect } from 'react-redux';
+import { reducer as notifReducer, actions as notifActions, Notifs } from 're-notif';
 
 import {Menu, Item, Icon} from 'react-semantify';
+
+const kindToClassMap = new Object();
+kindToClassMap['info'] = 'info';
+kindToClassMap['success'] = 'positive';
+kindToClassMap['warning'] = 'warning';
+kindToClassMap['danger'] = 'negative';
+
+
+class CustomNotif extends React.Component {
+
+  render() {
+    return (
+      <div className={'ui ' + kindToClassMap[this.props.kind] + ' message'}>
+        <div className="header">
+          {this.props.message}
+        </div>
+      </div>
+    );
+  }
+}
 
 // Note: Stateless/function components *will not* hot reload!
 // react-transform *only* works on component classes.
@@ -22,6 +45,7 @@ function CoreLayout ({ children }) {
 
       </div>
       <div className='view-container'>
+        <Notifs CustomComponent={CustomNotif} />
         {children}
       </div>
     </div>
@@ -72,4 +96,11 @@ CoreLayout.propTypes = {
   children: PropTypes.element
 };
 
-export default CoreLayout;
+// Map Redux state to component props
+function mapStateToProps(state) {
+  return {
+    value: state.count
+  };
+}
+
+export default connect(mapStateToProps, notifActions)(CoreLayout);

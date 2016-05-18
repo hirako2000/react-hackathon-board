@@ -23,7 +23,7 @@ const config = {
   server_port : process.env.PORT || 3000,
 
   // DB configuration
-  db: process.env.MONGOLAB_URI | 'mongodb://localhost:27017/hackathon',
+  db: process.env.MONGODB_URI | 'mongodb://localhost:27017/hackathon',
 
   // ----------------------------------
   // Compiler Configuration

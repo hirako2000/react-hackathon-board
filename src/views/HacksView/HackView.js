@@ -42,9 +42,16 @@ export class HackViewComponent extends React.Component {
         <div className="ui internally celled grid">
           <div className="row">
             <div className="four wide column">
-              <Button className="fluid" color="teal">
-                Join
-              </Button>
+              <p className="">
+                <Button className="fluid" color="red">
+                  Nominate
+                </Button>
+              </p>
+              <p>
+                <Button className="fluid" color="teal">
+                  Join
+                </Button>
+              </p>
               <div className="ui card fluid">
                 <div className="content">
                   <div className="header">Organizer</div>

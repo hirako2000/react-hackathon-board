@@ -88,7 +88,6 @@ export class HacksAsCardsComponent extends React.Component {
               </a>
               <div className="meta">
                 <span className="time">{card.shortDescription}</span>
-                <span className="category">Test</span>
               </div>
             </Content>
           </Card>

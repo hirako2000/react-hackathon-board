@@ -58,9 +58,16 @@
         "DEBUG": "app:*"
       }
     },
-    "start": {
+    "start:local": {
       "command": "babel-node bin/server",
       "env": {
+        "DEBUG": "app:*"
+      }
+    },
+    "start": {
+      "command": "npm run clean && npm run compile && babel-node bin/server",
+      "env": {
+        "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
     },

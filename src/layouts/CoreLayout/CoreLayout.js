@@ -3,6 +3,7 @@ import '../../styles/core.scss';
 import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import { reducer as notifReducer, actions as notifActions, Notifs } from 're-notif';
+import { Router, Route, Link } from 'react-router'
 
 import {Menu, Item, Icon} from 'react-semantify';
 
@@ -56,21 +57,21 @@ var NavBarLeft = React.createClass({
   render: function () {
     return(
     <Menu className="inverted borderless stackable">
-      <Item className="active" type="link" href="#/">
+      <Link activeClassName="active" className="item" to="/">
         <Icon className="home" /> Home
-      </Item>
-      <Item className="" type="link" href="#/hacks">
+      </Link>
+      <Link activeClassName="active" className="item" to="hacks">
         <Icon className="lab" /> Hacks
-      </Item>
-      <Item className="" type="link" href="#/rules">
+      </Link>
+      <Link className="item" to="rules">
         <Icon className="book" /> Rules
-      </Item>
-      <Item className="" type="link" href="#/prize">
+      </Link>
+      <Link className="item" to="prize">
         <Icon className="gift" /> Prize
-      </Item>
-      <Item className="" type="link" href="#/hacks">
+      </Link>
+      <Link className="item" to="hacks">
         <Icon className="trophy" /> Judging
-      </Item>
+      </Link>
       <NavBarRight />
     </Menu>
     );

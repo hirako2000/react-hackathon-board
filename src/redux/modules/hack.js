@@ -25,7 +25,7 @@ export function update (value: Object): Action {
 
 export const fetchFromServer = (id) => (dispatch) => {
   // TODO use config path instead
-  axios.get('http://localhost:3000/api/hacks/' + id)
+  axios.get('/api/hacks/' + id)
     .then((res) => {
       dispatch(hack(res.data));
     });
@@ -38,13 +38,13 @@ export const reset = () => (dispatch) => {
 export const updateToSever = (id, req) => (dispatch) => {
   // TODO use config path instead
   if(id) {
-    axios.put('http://localhost:3000/api/hacks/' + id, req)
+    axios.put('/api/hacks/' + id, req)
       .then((res) => {
         dispatch(update(res.data));
         dispatch(notifSend(notification(res.data.title + ' is now updated', 'success')));
       });
   } else {
-    axios.post('http://localhost:3000/api/hacks/', req)
+    axios.post('/api/hacks/', req)
       .then((res) => {
         dispatch(update(res.data));
         dispatch(notifSend(notification(res.data.title + ' is now created', 'success')));

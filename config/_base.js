@@ -4,6 +4,10 @@ import path from 'path';
 import { argv } from 'yargs';
 
 const debug = _debug('app:config:_base');
+
+// For Heroku deployment
+const heroku_host = 'react-hackathon.herokuapp.com';
+const heroku_port = 8080;
 const config = {
   env : process.env.NODE_ENV || 'development',
 
@@ -19,8 +23,8 @@ const config = {
   // ----------------------------------
   // Server Configuration
   // ----------------------------------
-  server_host : 'react-hackathon.herokuapp.com' || 'localhost',
-  server_port : 8080, //|| 3000,
+  server_host : heroku_host || 'localhost',
+  server_port : heroku_port || 3000,
 
   // DB configuration
   db: process.env.MONGODB_URI || 'mongodb://localhost:27017/hackathon',

@@ -57,10 +57,7 @@ if (config.env === 'development') {
   app.use(convert(serve(paths.client('static'))));
 } else {
   debug(
-      'Server is being run outside of live development mode. This app ' +
-      'does not provide any production-ready server functionality. To learn ' +
-      'more about deployment strategies, check out the "deployment" section ' +
-      'in the README.'
+      'Server is being run outside of live development mode.'
     );
 
     // Serving ~/dist by default. Ideally these files should be served by

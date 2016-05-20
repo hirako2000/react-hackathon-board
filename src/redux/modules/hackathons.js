@@ -14,7 +14,7 @@ export function hackathons (value: Array): Action {
 
 export const listFromServer = () => (dispatch) => {
   // TODO use config path instead
-  axios.get('http://localhost:3000/api/hackathons')
+  axios.get('/api/hackathons')
     .then((res) => {
       dispatch(hackathons(res.data));
     });

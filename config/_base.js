@@ -6,8 +6,8 @@ import { argv } from 'yargs';
 const debug = _debug('app:config:_base');
 
 // For Heroku deployment
-const heroku_host = 'react-hackathon.herokuapp.com';
-const heroku_port = 8080;
+const heroku_host = null; //'react-hackathon.herokuapp.com';
+const heroku_port = null; //8080;
 const config = {
   env : process.env.NODE_ENV || 'development',
 

@@ -61,7 +61,7 @@
     "start": {
       "command": "babel-node bin/server",
       "env": {
-        "NODE_ENV": "production",
+        "NODE_ENV": "development",
         "DEBUG": "app:*"
       }
     },

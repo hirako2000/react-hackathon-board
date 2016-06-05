@@ -8,8 +8,17 @@ const hacks = new Router();
 
 hacks.get('/', function * (next) {
   console.log('GET /hacks/');
-  var result = yield Hack.find({});
-  this.body = result;
+  var hacks = yield Hack.find({});
+  var response;
+  var user;
+  if (this.isAuthenticated()) {
+    user = this.passport.user;
+  }
+  response = {
+    hacks: hacks,
+    user: user
+  };
+  this.body = response;
 });
 
 hacks.get('/:id', function * (next) {
@@ -20,16 +29,20 @@ hacks.get('/:id', function * (next) {
   } else {
     hackEntity = new Hack;
   }
-
   this.body = hackEntity;
 });
 
 hacks.put('/:id', function * (next) {
   console.log('PUT /hacks/' + this.params.id);
+  if (!this.isAuthenticated()) {
+    this.redirect('/#/login');
+  }
+
   var hackEntity;
   if(this.params.id) {
     hackEntity = yield Hack.findOne({ '_id' : this.params.id });
     updateEntity(hackEntity, this.request.body);
+    hackEntity.owner = this.passport.user._id;
     yield hackEntity.save();
   }
   this.body = hackEntity;
@@ -37,9 +50,14 @@ hacks.put('/:id', function * (next) {
 
 hacks.post('/', function * (next) {
   console.log('POST /hacks/');
+  if (!this.isAuthenticated()) {
+    this.redirect('/#/login');
+  }
+
   var hack = this.request.body;
   var hackEntity = new Hack();
   updateEntity(hackEntity, hack);
+  hackEntity.owner = this.passport.user._id;
   yield hackEntity.save();
   this.body = hackEntity;
 });
@@ -54,6 +72,10 @@ var updateEntity = function(existingEntity, newEntity) {
 
 hacks.post('/upload-image', upload.single('file'), function * (next) {
   console.log('POST /hacks/upload-image');
+  if (!this.isAuthenticated()) {
+    this.redirect('/#/login');
+  }
+
   var rawFilename = this.req.file.filename;
   var mimeType = this.req.file.mimetype;
   console.log("Uploaded file " + rawFilename);

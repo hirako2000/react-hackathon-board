@@ -3,7 +3,8 @@ import '../../styles/core.scss';
 import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import { reducer as notifReducer, actions as notifActions, Notifs } from 're-notif';
-import { Router, Route, Link } from 'react-router'
+import { Router, Route, Link } from 'react-router';
+import AccountNavBarView from './AccountNavBar';
 
 import {Menu, Item, Icon} from 'react-semantify';
 
@@ -72,23 +73,8 @@ var NavBarLeft = React.createClass({
       <Link className="item" to="hacks">
         <Icon className="trophy" /> Judging
       </Link>
-      <NavBarRight />
+      <AccountNavBarView />
     </Menu>
-    );
-  }
-});
-
-var NavBarRight = React.createClass({
-  render: function () {
-    return(
-      <Menu className="right inverted borderless stackable">
-        <Item className="" type="link" href="#/login">
-          <Icon className="sign in" /> Login
-        </Item>
-        <Item className="" type="link" href="#/signup">
-          <Icon className="" /> Sign up
-        </Item>
-      </Menu>
     );
   }
 });

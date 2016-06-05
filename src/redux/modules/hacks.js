@@ -16,7 +16,7 @@ export const listFromServer = () => (dispatch) => {
   // TODO use config path instead
   axios.get('/api/hacks')
     .then((res) => {
-      dispatch(hacks(res.data));
+      dispatch(hacks(res.data.hacks));
     });
 };
 

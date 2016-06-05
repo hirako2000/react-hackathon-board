@@ -3,10 +3,14 @@ import convert from 'koa-convert';
 import webpack from 'webpack';
 import webpackConfig from '../build/webpack.config';
 import serve from 'koa-static';
-import api from './api';
+import api from './api/index';
 import proxy from 'koa-proxy';
 import _debug from 'debug';
 import config from '../config';
+import passport from 'koa-passport';
+import MongoStore from 'koa-generic-session-mongo';
+import User from './models/user';
+import session from 'koa-generic-session';
 
 var mongoose = require('mongoose');
 
@@ -16,9 +20,25 @@ import webpackHMRMiddleware from './middleware/webpack-hmr';
 const debug = _debug('app:server');
 const paths = config.utils_paths;
 const app = new Koa();
+app.experimental = true;
 
-/** Includes API
- *
+app.keys = ['hirakosan'];
+app.use(convert(session({
+  cookie: {
+    maxAge: 5184000000, // 60 days
+    secure: false // TODO change this to true if running on https
+  },
+  store: new MongoStore()
+})));
+/*
+ * Init passport with auth local and social strategies
+ */
+require('./api/auth/strategy');
+app.use(passport.initialize());
+app.use(passport.session());
+
+/**
+ * Includes API
  */
 app.use(api.routes());
 

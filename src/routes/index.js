@@ -7,6 +7,8 @@ import { Route } from 'react-router';
 // very easy to navigate to files regardless of how deeply nested
 // your current file is.
 import CoreLayout from 'layouts/CoreLayout/CoreLayout';
+import LoginView from 'views/LoginView/LoginView';
+import SignupView from 'views/LoginView/SignupView';
 import HomeView from 'views/HomeView/HomeView';
 import HackathonsView from 'views/HackathonsView/HackathonsView';
 import HackathonView from 'views/HackathonsView/HackathonView';
@@ -17,6 +19,8 @@ import EditHackView from 'views/HacksView/EditHackView';
 
 export default (store) => (
   <Route component={CoreLayout}>
+    <Route name='login' path='/login' component={LoginView} />
+    <Route name='signup' path='/signup' component={SignupView} />
     <Route name='home' path='/' component={HackathonsView} />
     <Route name='editHackathon' path='/hackathons/edit/:id' component={EditHackathonView} />
     <Route name='hackathon' path='/hackathons/:id' component={HackathonView} />

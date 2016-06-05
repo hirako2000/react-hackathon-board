@@ -13,7 +13,7 @@ Table of Contents
 1. [Requirements](#requirements)
 1. [Features](#features)
 1. [Getting Started](#getting-started)
-1. [Usage](#usage)
+1. [Dev](#usage)
 1. [CLI Generators](#cli-generators)
 1. [Structure](#structure)
 1. [Webpack](#webpack)
@@ -33,30 +33,7 @@ Requirements
 Features
 --------
 
-* [React](https://github.com/facebook/react) (`^15.0.0`)
-* [Redux](https://github.com/rackt/redux) (`^3.0.0`)
-  * react-redux (`^4.0.0`)
-  * redux-devtools
-  * redux-thunk middleware
-* [react-router](https://github.com/rackt/react-router) (`^2.0.0`)
-* [react-router-redux](https://github.com/rackt/react-router-redux) (`^4.0.0`)
-* [Webpack](https://github.com/webpack/webpack)
-  * Bundle splitting and CSS extraction
-  * Sass w/ CSS modules, autoprefixer, and minification
-* [Koa](https://github.com/koajs/koa) (`^2.0.0`)
-* [Karma](https://github.com/karma-runner/karma)
-  * Mocha w/ chai, sinon-chai, and chai-as-promised, and [chai-enzyme](https://github.com/producthunt/chai-enzyme)
-  * PhantomJS
-  * Code coverage reports/instrumentation with [isparta](https://github.com/deepsweet/isparta-loader)
-* [Flow](http://flowtype.org/) (`^0.22.0`)
-* [Babel](https://github.com/babel/babel) (`^6.3.0`)
-  * [react-transform-hmr](https://github.com/gaearon/react-transform-hmr) hot reloading for React components
-  * [redbox-react](https://github.com/KeywordBrain/redbox-react) visible error reporting for React components
-  * [babel-plugin-transform-runtime](https://www.npmjs.com/package/babel-plugin-transform-runtime) so transforms aren't inlined
-  * [babel-plugin-transform-react-constant-elements](https://babeljs.io/docs/plugins/transform-react-constant-elements/) save some memory allocation
-  * [babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types) remove `PropTypes`
-* [ESLint](http://eslint.org)
-  * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this.
+* Coming soon...
 
 Getting Started
 ---------------
@@ -79,10 +56,10 @@ Start the node application
 $ npm start                     # Compile and launch
 ```
 
-Usage
+Dev
 -----
 
-Before delving into the descriptions of each available npm script, here's a brief summary of the three which will most likely be your bread and butter:
+Here's a brief summary of the three which will most likely be your bread and butter:
 
 * Doing live development? Use `npm start` to spin up the dev server.
 * Compiling the application to disk? Use `npm run compile`.

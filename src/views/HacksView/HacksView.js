@@ -24,27 +24,6 @@ Props = {
 // We avoid using the `@connect` decorator on the class definition so
 // that we can export the undecorated component for testing.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
-export class HacksView extends React.Component<void, Props, void> {
-  static propTypes = {
-    hacks: PropTypes.array.isRequired,
-    listFromServer: PropTypes.func.isRequired
-  };
-
-  render () {
-
-    return (
-      <div className='container text-center'>
-        <h1>Hacks</h1>
-        <button className='btn btn-default' onClick={this.props.listFromServer}>
-          List
-        </button>
-        <span className={classes['counter--green']}>{this.props.hacks[0] ? this.props.hacks[0].title : 'click'}</span>
-
-      </div>
-    );
-  }
-}
-
 export class HacksAsCardsComponent extends React.Component {
 
   static propTypes = {

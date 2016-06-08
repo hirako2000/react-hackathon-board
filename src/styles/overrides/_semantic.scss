@@ -6,3 +6,26 @@
   margin-left: 5%;
   margin-right: 20%;
 }
+
+.hacks-summary-margin {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.card-enter {
+  opacity: 0.01;
+}
+
+.card-enter.card-enter-active {
+  opacity: 1;
+  transition: opacity 800ms linear;
+}
+
+.card-leave {
+  opacity: 1;
+}
+
+.card-leave.card-leave-active {
+  opacity: 0.01;
+  transition: opacity 1ms linear;
+}

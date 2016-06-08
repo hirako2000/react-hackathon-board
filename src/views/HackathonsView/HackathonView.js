@@ -43,7 +43,7 @@ export class HackathonViewComponent extends React.Component {
         <div className="ui stackable internally celled grid">
           <div className="row">
             <div className="four wide column">
-              <div className="visible fluid">
+              <div className="ui visible items fluid">
                 <a href={ '#/hackathons/edit/' + hackathon.hackathon._id}>
                   <div className="ui red fluid button">Edit</div>
                 </a>
@@ -51,7 +51,7 @@ export class HackathonViewComponent extends React.Component {
               <Content className="visible fluid">
                 <Image src={'user-images/' + hackathon.hackathon.pictureURL} className="fluid" />
               </Content>
-              
+
               <div className="ui card fluid">
                 <div className="content">
                   <div className="header">Organizer</div>

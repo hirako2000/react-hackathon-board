@@ -1,29 +1,18 @@
-/* @flow */
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { actions as hacksActions } from '../../redux/modules/hacks';
 import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
 
-
-// We can use Flow (http://flowtype.org/) to type our component's props
-// and state. For convenience we've included both regular propTypes and
-// Flow types, but if you want to try just using Flow you'll want to
-// disable the eslint rule `react/prop-types`.
-// NOTE: You can run `npm run flow:check` to check for any errors in your
-// code, or `npm i -g flow-bin` to have access to the binary globally.
-// Sorry Windows users :(.
 type
 Props = {
   hacks: Array,
   listFromServer: Function
 };
 
-// We avoid using the `@connect` decorator on the class definition so
-// that we can export the undecorated component for testing.
-// See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 export class HacksAsCardsComponent extends React.Component {
 
   static propTypes = {
@@ -34,10 +23,12 @@ export class HacksAsCardsComponent extends React.Component {
   componentWillMount() {
     this.props.listFromServer();
     this.getData();
+     this.onSearch = this.onSearch.bind(this);
   }
 
   getData() {
     this.setState({
+      search: ''
     });
   }
 
@@ -45,8 +36,19 @@ export class HacksAsCardsComponent extends React.Component {
     window.location = '#/hacks/create/new/';
   }
 
+  onSearch(event) {
+    this.setState({
+      search: event.target.value
+    });
+  }
+
   render() {
-    var cards = this.props.hacks.map(function (card) {
+    var searchString = this.state.search;
+    var cards = this.props.hacks
+    .filter(function(hack) {
+        return !hack.title || hack.title.toLowerCase().indexOf(searchString.toLowerCase()) != -1;
+    })
+    .map(function (card) {
       return (
         <Column key={card._id}>
           <Card className="fluid">
@@ -75,15 +77,34 @@ export class HacksAsCardsComponent extends React.Component {
     });
 
     return(
-      <div className="ui container">
-        <Segment className="basic stackable one column grid">
-          <Button className="column right floated" color="blue" onClick={this.handleCreate} >
-            <Icon className="plus"/> Create Hack
-          </Button>
-        </Segment>
-        <Segment loading={!this.props.hacks} className="ui stackable four column grid basic">
-          {cards}
-        </Segment>
+      <div className="hacks-summary-margin">
+        <div className="ui items stackable sixteen column relaxed grid basic">
+          <div className="three wide column">
+            <div className="ui field">
+              <Button className="fluid" color="blue" onClick={this.handleCreate} >
+                <Icon className="plus"/> Create Hack
+              </Button>
+              <div className="ui items form">
+                <div className="field">
+                  <input type="text" name="search"
+                  value={this.props.hacks.search}
+                  onChange={this.onSearch}
+                  placeholder="Search"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="thirteen wide column">
+            <div loading={!this.props.hacks} className="">
+              <ReactCSSTransitionGroup component="div" className="ui stackable four column grid basic"
+                transitionName="card" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                {cards}
+              </ReactCSSTransitionGroup>
+            </div>
+          </div>
+
+        </div>
       </div>
     );
   }

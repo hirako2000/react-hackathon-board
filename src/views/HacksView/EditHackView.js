@@ -9,7 +9,8 @@ import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Label} from 'react-semantify';
 import { push } from 'react-router-redux';
-import DropzoneSingleImageComponent from './DropzoneComponent'
+import DropzoneSingleImageComponent from './DropzoneComponent';
+import ReactMarkdown from 'react-markdown';
 
 type
 Props = {
@@ -74,11 +75,17 @@ var DescriptionInput = React.createClass ({
   },
   render: function() {
     return (
-      <div className="field">
-          <label>Description</label>
+      <div className="fields">
+        <div className="eight wide field">
+          <label>Description (markdown)</label>
           <textarea value={ this.state.value }
                     onChange={this.handleChange}>
-        </textarea>
+          </textarea>
+        </div>
+        <div className="eight wide field">
+          <label>Description Preview</label>
+          <ReactMarkdown source={this.props.hack.description}/>
+        </div>
       </div>
     );
   }

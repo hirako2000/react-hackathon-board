@@ -5,6 +5,7 @@ import { actions as hackActions } from '../../redux/modules/hack';
 import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
+import ReactMarkdown from 'react-markdown';
 
 type
 Props = {
@@ -93,7 +94,6 @@ export class HackViewComponent extends React.Component {
                   <div className="">
                     <div className="ui card fluid">
                       <div className="content">
-                        <div className="header">Summary</div>
                         <div className="">
                           <span>{hack.shortDescription}</span>
                         </div>
@@ -101,9 +101,8 @@ export class HackViewComponent extends React.Component {
                     </div>
                     <div className="ui card fluid">
                       <div className="content">
-                        <div className="header">Description</div>
                         <div className="">
-                          <span>{hack.description}</span>
+                          <ReactMarkdown source={hack.description}/>
                         </div>
                       </div>
                     </div>

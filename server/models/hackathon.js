@@ -7,13 +7,16 @@ var HackathonSchema = new Schema({
   shortDescription: String,
   description: String,
   rules: String,
-  prizes: [String],
+  prizes: String,
   startDate: Date,
   endDate: Date,
+  location: String,
   pictureURL: String,
   category: String,
   season: String,
-  open: Boolean
+  open: Boolean,
+  active: Boolean,
+  owner: String
 });
 
 var Hackathon = mongoose.model('Hackathon', HackathonSchema);

@@ -1,3 +1,10 @@
-.sepia {
-  filter: sepia(1);
+.brighter {
+  filter: brightness(130%);
+}
+
+.backnwhite {
+  filter: grayscale(100%);
+}
+
+.none {
 }

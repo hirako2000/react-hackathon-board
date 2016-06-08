@@ -1,8 +1,10 @@
 import Router from 'koa-router';
 import Hackathon from '../models/hackathon';
+import User from '../models/user';
 import multer from 'koa-router-multer';
 var upload = multer({ dest: 'uploads/' });
 import lwip from 'lwip';
+import _ from 'lodash';
 
 const hackathons = new Router();
 
@@ -18,18 +20,32 @@ hackathons.get('/:id', function * (next) {
   if(this.params.id) {
     hackathonEntity = yield Hackathon.findOne({ '_id' : this.params.id });
   } else {
-    hackathonEntity = new Hackathon;
+    hackathonEntity = new Hackathon();
   }
+  var owner = yield User.findOne({ '_id': hackathonEntity.owner});
+  var ownerDisplay;
+  if(owner) {
+    ownerDisplay = owner.username ? owner.username : owner.email;
+  }
+  var response = {
+    hackathon: hackathonEntity,
+    ownerDisplay: ownerDisplay
+  };
 
-  this.body = hackathonEntity;
+  this.body = response;
 });
 
 hackathons.put('/:id', function * (next) {
   console.log('PUT /hackathons/' + this.params.id);
+  if (!this.isAuthenticated()) {
+    this.redirect('/#/login');
+  }
+
   var hackathonEntity;
   if(this.params.id) {
     hackathonEntity = yield Hackathon.findOne({ '_id' : this.params.id });
     updateEntity(hackathonEntity, this.request.body);
+    hackathonEntity.owner = this.passport.user._id;
     yield hackathonEntity.save();
   }
   this.body = hackathonEntity;
@@ -37,9 +53,14 @@ hackathons.put('/:id', function * (next) {
 
 hackathons.post('/', function * (next) {
   console.log('POST /hackathons/');
+  if (!this.isAuthenticated()) {
+    this.redirect('/#/login');
+  }
+
   var hackathon = this.request.body;
   var hackathonEntity = new Hackathon();
   updateEntity(hackathonEntity, hackathon);
+  hackathonEntity.owner = this.passport.user._id;
   yield hackathonEntity.save();
   this.body = hackathonEntity;
 });
@@ -49,7 +70,9 @@ var updateEntity = function(existingEntity, newEntity) {
   existingEntity.shortDescription = newEntity.shortDescription;
   existingEntity.description = newEntity.description;
   existingEntity.rules = newEntity.rules;
+  existingEntity.location = newEntity.location;
   existingEntity.open = newEntity.open;
+  existingEntity.active = newEntity.active;
   existingEntity.startDate = newEntity.startDate;
   existingEntity.endDate = newEntity.endDate;
   existingEntity.pictureURL = newEntity.pictureURL || 'default-hack-image.png';

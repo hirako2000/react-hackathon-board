@@ -13,6 +13,7 @@ import DropzoneSingleImageComponent from '../HacksView/DropzoneComponent';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import DatePickerCss from 'react-datepicker/dist/react-datepicker.css';
+import ReactMarkdown from 'react-markdown';
 
 type
 Props = {
@@ -36,7 +37,7 @@ var DatePickerStartInput = React.createClass({
 
   render: function() {
     return (
-      <span className="field">
+      <span className="three wide field">
         <label>Start Date</label>
         <DatePicker
         selected={this.state.value}
@@ -59,7 +60,7 @@ var DatePickerEndInput = React.createClass({
 
   render: function() {
     return (
-      <span className="field">
+      <span className="three wide field">
         <label>End Date</label>
         <DatePicker
         selected={this.state.value}
@@ -80,8 +81,30 @@ var TitleInput = React.createClass ({
   },
   render: function() {
     return (
-        <div className="twelve wide field">
+        <div className="eight wide field">
           <label>Title</label>
+          <input type="text" value={ this.state.value }
+                 onChange={this.handleChange}>
+          </input>
+        </div>
+    );
+  }
+});
+
+var LocationInput = React.createClass ({
+  getInitialState: function() {
+    return {value: this.props.hackathon.location || '' };
+  },
+  handleChange: function(event) {
+    this.props.hackathon.location = event.target.value;
+    this.setState({
+      value: event.target.value
+    });
+  },
+  render: function() {
+    return (
+        <div className="two wide field">
+          <label>Location</label>
           <input type="text" value={ this.state.value }
                  onChange={this.handleChange}>
           </input>
@@ -100,7 +123,7 @@ var ShortDescriptionInput = React.createClass ({
   },
   render: function() {
     return (
-      <div  className="field">
+      <div  className="eight wide field">
         <label>Short Description</label>
           <textarea value={ this.state.value } rows="2"
                     onChange={this.handleChange}>
@@ -121,11 +144,17 @@ var DescriptionInput = React.createClass ({
   },
   render: function() {
     return (
-      <div className="field">
-          <label>Description</label>
+      <div className="fields">
+        <div className="eight wide field">
+          <label>Description (markdown)</label>
           <textarea value={ this.state.value }
                     onChange={this.handleChange}>
-        </textarea>
+          </textarea>
+        </div>
+        <div className="eight wide field">
+          <label>Description Preview</label>
+          <ReactMarkdown source={this.props.hackathon.description}/>
+        </div>
       </div>
     );
   }
@@ -141,15 +170,48 @@ var RulesInput = React.createClass ({
   },
   render: function() {
     return (
-      <div className="field">
-          <label>Rules</label>
+      <div className="fields">
+        <div className="eight wide field">
+          <label>Rules (markdown)</label>
           <textarea value={ this.state.value }
                     onChange={this.handleChange}>
-        </textarea>
+          </textarea>
+        </div>
+        <div className="eight wide field">
+          <label>Rule Preview</label>
+          <ReactMarkdown source={this.props.hackathon.rules}/>
+        </div>
       </div>
     );
   }
 });
+
+var PrizesInput = React.createClass ({
+  getInitialState: function() {
+    return {value: this.props.hackathon.prizes || '' };
+  },
+  handleChange: function(event) {
+    this.props.hackathon.prizes = event.target.value;
+    this.setState({value: event.target.value});
+  },
+  render: function() {
+    return (
+      <div className="fields">
+        <div className="eight wide field">
+          <label>Prizes (markdown)</label>
+          <textarea value={ this.state.value }
+                    onChange={this.handleChange}>
+          </textarea>
+        </div>
+        <div className="eight wide field">
+          <label>Prizes Preview</label>
+          <ReactMarkdown source={this.props.hackathon.prizes}/>
+        </div>
+      </div>
+    );
+  }
+});
+
 
 var OpenInput = React.createClass ({
   getInitialState: function() {
@@ -172,6 +234,27 @@ var OpenInput = React.createClass ({
   }
 });
 
+var ActiveInput = React.createClass ({
+  getInitialState: function() {
+    return {value: this.props.hackathon.active || false };
+  },
+  handleChange: function(event) {
+    this.props.hackathon.active = !this.props.hackathon.active;
+    this.setState({ value: this.props.hackathon.active });
+  },
+  render: function() {
+    return (
+      <div className="field">
+        <div className="ui checkbox">
+          <input type="checkbox" checked={this.state.value}
+                 onChange={this.handleChange}/>
+          <label>Active</label>
+        </div>
+      </div>
+    );
+  }
+});
+
 export class HackathonViewComponent extends React.Component {
 
   static propTypes = {
@@ -187,6 +270,7 @@ export class HackathonViewComponent extends React.Component {
     } else {
       this.props.reset();
     }
+    document.getElementById('container');
   }
 
   componentWillUnmount () {
@@ -194,33 +278,47 @@ export class HackathonViewComponent extends React.Component {
   }
 
   handleSubmit(val) {
-    this.props.updateToSever(this.props.hackathon._id, val);
+    this.props.updateToSever(this.props.hackathon.hackathon._id, val);
     // TODO - We should use react-router's history
     //this.props.history.push('#/'); // deprecated?
     window.location = '#/';
   }
 
   render() {
-    if(!this.props.hackathon) {
+    if(!this.props.hackathon || !this.props.hackathon.hackathon) {
       return <div>Loading...</div>
     }
     return (
       // The key is important for the component to be reset properly
-      <Segment key={this.props.hackathon._id}>
+      <Segment key={this.props.hackathon.hackathon._id}>
           <div className="ui form">
-            <h1>{ this.props.hackathon.title }</h1>
+            <h1>{ this.props.hackathon.hackathon.title }</h1>
+
+            <div className="ui horizontal divider header">
+              Summary
+            </div>
+            <div className="fields">
+              <TitleInput hackathon={ this.props.hackathon.hackathon } />
+              <DatePickerStartInput hackathon={ this.props.hackathon.hackathon } />
+              <DatePickerEndInput hackathon={ this.props.hackathon.hackathon } />
+              <LocationInput hackathon={ this.props.hackathon.hackathon } />
+            </div>
 
             <div className="fields">
-              <TitleInput hackathon={ this.props.hackathon } />
-              <DatePickerStartInput hackathon={ this.props.hackathon } />
-              <DatePickerEndInput hackathon={ this.props.hackathon } />
+              <ShortDescriptionInput hackathon={ this.props.hackathon.hackathon } />
+              <OpenInput hackathon={ this.props.hackathon.hackathon } />
+              <ActiveInput hackathon={ this.props.hackathon.hackathon } />
             </div>
-            <ShortDescriptionInput hackathon={ this.props.hackathon } />
-            <DescriptionInput hackathon={ this.props.hackathon } />
-            <RulesInput hackathon={ this.props.hackathon } />
-            <OpenInput  hackathon={ this.props.hackathon } />
 
-            <DropzoneSingleImageComponent hack={ this.props.hackathon } />
+            <div className="ui horizontal divider header">
+              Details
+            </div>
+
+            <DescriptionInput hackathon={ this.props.hackathon.hackathon } />
+            <RulesInput hackathon={ this.props.hackathon.hackathon } />
+            <PrizesInput hackathon={ this.props.hackathon.hackathon } />
+
+            <DropzoneSingleImageComponent hack={ this.props.hackathon.hackathon } />
             <p>
               <button className="ui button teal" onClick={(hackathon) => this.handleSubmit(this.props.hackathon)}>Save</button>
             </p>

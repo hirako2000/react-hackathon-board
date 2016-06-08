@@ -13,27 +13,6 @@ Props = {
   listFromServer: Function
 };
 
-export class HackathonsView extends React.Component<void, Props, void> {
-  static propTypes = {
-    hackathons: PropTypes.array.isRequired,
-    listFromServer: PropTypes.func.isRequired
-  };
-
-  render () {
-
-    return (
-      <div className='container text-center'>
-        <h1>Hackathons</h1>
-        <button className='btn btn-default' onClick={this.props.listFromServer}>
-          List
-        </button>
-        <span className={classes['counter--green']}>{this.props.hackathons[0] ? this.props.hackathons[0].title : 'click'}</span>
-
-      </div>
-    );
-  }
-}
-
 export class HackathonsAsCardsComponent extends React.Component {
 
   static propTypes = {
@@ -63,10 +42,11 @@ export class HackathonsAsCardsComponent extends React.Component {
             <a href={ '#/hackathons/' + card._id}>
               <Reveal className="fade">
                 <Content className="hidden">
-                  <Image type="link" src={'user-images/' + card.pictureURL} className={classes['sepia']}/>
+                  <Image type="link" src={'user-images/' + card.pictureURL} className={classes['brighter']}/>
                 </Content>
                 <Content className="visible">
-                  <Image src={'user-images/' + card.pictureURL} className="" />
+                  <Image src={'user-images/' + card.pictureURL}
+                          className={ !card.active ? classes['backnwhite'] : classes['none'] } />
                 </Content>
               </Reveal>
             </a>

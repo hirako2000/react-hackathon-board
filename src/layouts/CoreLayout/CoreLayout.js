@@ -73,6 +73,9 @@ var NavBarLeft = React.createClass({
       <Link className="item" to="hacks">
         <Icon className="trophy" /> Judging
       </Link>
+      <Link className="item" to="people">
+        <Icon className="users" /> People
+      </Link>
       <AccountNavBarView />
     </Menu>
     );

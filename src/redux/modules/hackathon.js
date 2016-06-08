@@ -38,7 +38,7 @@ export const reset = () => (dispatch) => {
 export const updateToSever = (id, req) => (dispatch) => {
   // TODO use config path instead
   if(id) {
-    axios.put('/api/hackathons/' + id, req)
+    axios.put('/api/hackathons/' + id, req.hackathon)
       .then((res) => {
         dispatch(update(res.data));
         dispatch(notifSend(notification(res.data.title + ' is now updated', 'success')));

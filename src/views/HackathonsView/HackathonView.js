@@ -5,6 +5,7 @@ import { actions as hackathonActions } from '../../redux/modules/hackathon';
 import classes from './HackathonsView.scss';
 import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
+import ReactMarkdown from 'react-markdown';
 
 type
 Props = {
@@ -34,19 +35,28 @@ export class HackathonViewComponent extends React.Component {
   }
 
   render() {
-    if(!this.props.hackathon.pictureURL) {
+    if(!this.props.hackathon || !this.props.hackathon.hackathon) {
       return (<div>Loading...</div>);
     }
     var hackathon = this.props.hackathon;
       return (
-        <div className="ui internally celled grid">
+        <div className="ui stackable internally celled grid">
           <div className="row">
-            <div className="three wide column">
+            <div className="four wide column">
+              <div className="visible fluid">
+                <a href={ '#/hackathons/edit/' + hackathon.hackathon._id}>
+                  <div className="ui red fluid button">Edit</div>
+                </a>
+              </div>
+              <Content className="visible fluid">
+                <Image src={'user-images/' + hackathon.hackathon.pictureURL} className="fluid" />
+              </Content>
+              
               <div className="ui card fluid">
                 <div className="content">
                   <div className="header">Organizer</div>
                   <div className="">
-                    <span>John Doe</span>
+                    <span>{hackathon.ownerDisplay}</span>
                   </div>
                 </div>
               </div>
@@ -54,58 +64,34 @@ export class HackathonViewComponent extends React.Component {
                 <div className="content">
                   <div className="header">Location</div>
                   <div className="">
-                    <span>{hackathon.location}</span>
+                    <span>{hackathon.hackathon.location}</span>
                   </div>
                 </div>
               </div>
 
             </div>
-            <div className="thirteen wide column">
-              <Segment key={this.props.hackathon._id} className="ui internally celled grid">
-                <div className="six wide column">
-                  <Content className="visible fluid">
-                    <Header>
-                      {hackathon.title} (<a href={ '#/hackathons/edit/' + hackathon._id}>
-                      Edit Hackathon
-                    </a>)
-                    </Header>
-                    <Image src={'user-images/' + hackathon.pictureURL} className="fluid" />
-                  </Content>
-                  <div className="ui divider"></div>
-                </div>
-                <div className="ten wide column">
+            <div className="twelve wide column">
+              <div key={this.props.hackathon.hackathon._id} className="ui stackable internally celled grid">
+
+                <div className="sixteen wide column">
                   <div className="">
-                    <div className="ui card fluid">
+                    <div className="ui items fluid">
                       <div className="content">
-                        <div className="header">Summary</div>
                         <div className="">
-                          <span>{hackathon.shortDescription}</span>
+                          <ReactMarkdown source={hackathon.hackathon.description}/>
                         </div>
                       </div>
                     </div>
-                    <div className="ui card fluid">
+                    <div className="ui items fluid">
                       <div className="content">
-                        <div className="header">Description</div>
                         <div className="">
-                          <span>{hackathon.description}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ui card fluid">
-                      <div className="content">
-                        <div className="header">Rules</div>
-                        <div className="">
-                          <span>{hackathon.rules}</span>
+                          <ReactMarkdown source={hackathon.hackathon.rules}/>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="ui divider"></div>
-                  <Content>
-                    Comments
-                  </Content>
                 </div>
-              </Segment>
+              </div>
             </div>
           </div>
         </div>

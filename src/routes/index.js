@@ -16,6 +16,7 @@ import EditHackathonView from 'views/HackathonsView/EditHackathonView';
 import HacksView from 'views/HacksView/HacksView';
 import HackView from 'views/HacksView/HackView';
 import EditHackView from 'views/HacksView/EditHackView';
+import UsersView from 'views/UsersView/UsersView';
 
 export default (store) => (
   <Route component={CoreLayout}>
@@ -31,5 +32,6 @@ export default (store) => (
     </Route>
     <Route name='editHack' path='/hacks/edit/:id' component={EditHackView} />
     <Route name='createHack' path='/hacks/create/new/' component={EditHackView} />
+    <Route name='people' path='/people' component={UsersView} />
   </Route>
 );

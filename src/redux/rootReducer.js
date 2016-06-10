@@ -6,6 +6,7 @@ import hackathon from './modules/hackathon';
 import hacks from './modules/hacks';
 import hack from './modules/hack';
 import user from './modules/user';
+import users from './modules/users';
 import { reducer as notifs } from 're-notif';
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
   hack,
   notifs,
   user,
+  users,
   router
 });

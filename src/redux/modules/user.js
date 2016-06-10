@@ -16,7 +16,7 @@ export function user (value: Object): Action {
 }
 
 export const fetchFromServer = () => (dispatch) => {
-  axios.get('/api/user')
+  axios.get('/api/users/me')
     .then((res) => {
       dispatch(user(res.data));
     });

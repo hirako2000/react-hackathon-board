@@ -14,7 +14,7 @@ api.use(bodyParser());
 
 api.use('/auth', localAPI.routes());
 api.use('/auth', socialAPI.routes());
-api.use('/user', userAPI.routes());
+api.use('/users', userAPI.routes());
 
 api.use('/hacks', hacksAPI.routes());
 api.use('/hackathons', hackathonsAPI.routes());

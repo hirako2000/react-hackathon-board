@@ -1,8 +1,10 @@
 import Router from 'koa-router';
 import Hack from '../models/hack';
+import User from '../models/user';
 import multer from 'koa-router-multer';
 var upload = multer({ dest: 'uploads/' });
 import lwip from 'lwip';
+import _ from 'lodash';
 
 const hacks = new Router();
 
@@ -11,12 +13,8 @@ hacks.get('/', function * (next) {
   var hacks = yield Hack.find({});
   var response;
   var user;
-  if (this.isAuthenticated()) {
-    user = this.passport.user;
-  }
   response = {
-    hacks: hacks,
-    user: user
+    hacks: hacks
   };
   this.body = response;
 });
@@ -29,18 +27,41 @@ hacks.get('/:id', function * (next) {
   } else {
     hackEntity = new Hack;
   }
-  this.body = hackEntity;
+  var user = this.passport.user;
+  var ownerUser = yield User.findOne({'_id': hackEntity.owner});
+
+  // build list of people who joined it
+  var joiners = [];
+  for (var i = 0; i < hackEntity.joiners.length; i++) {
+    var joiner = yield User.findOne({'_id': hackEntity.joiners[i]});
+    joiners.push({
+      username: joiner.username ? joiner.username : joiner.email,
+      id: joiner._id
+    });
+  }
+
+  var response = {
+    hack: hackEntity,
+    ownerDisplay: ownerUser.username ? ownerUser.username : ownerUser.email,
+    isOwner: hackEntity.owner == user._id,
+    hasJoined: hackEntity.joiners.indexOf(user._id) != -1,
+    joinersDisplay: joiners
+  };
+  this.body = response;
 });
 
 hacks.put('/:id', function * (next) {
   console.log('PUT /hacks/' + this.params.id);
   if (!this.isAuthenticated()) {
-    this.redirect('/#/login');
+    return this.status = 403;
   }
 
   var hackEntity;
   if(this.params.id) {
     hackEntity = yield Hack.findOne({ '_id' : this.params.id });
+    if(!this.passport.user.judge && hackEntity.owner != this.passport.user._id) {
+      return this.status = 403;
+    }
     updateEntity(hackEntity, this.request.body);
     hackEntity.owner = this.passport.user._id;
     yield hackEntity.save();
@@ -51,7 +72,7 @@ hacks.put('/:id', function * (next) {
 hacks.post('/', function * (next) {
   console.log('POST /hacks/');
   if (!this.isAuthenticated()) {
-    this.redirect('/#/login');
+    return this.status = 403;
   }
 
   var hack = this.request.body;
@@ -73,7 +94,7 @@ var updateEntity = function(existingEntity, newEntity) {
 hacks.post('/upload-image', upload.single('file'), function * (next) {
   console.log('POST /hacks/upload-image');
   if (!this.isAuthenticated()) {
-    this.redirect('/#/login');
+    return this.status = 403;
   }
 
   var rawFilename = this.req.file.filename;

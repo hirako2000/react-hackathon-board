@@ -39,15 +39,25 @@ export const updateToSever = (id, req) => (dispatch) => {
   // TODO use config path instead
   if(id) {
     axios.put('/api/hacks/' + id, req)
+      .catch((res) => {
+        dispatch(notifSend(notification('Could not update', 'warning')));
+      })
       .then((res) => {
-        dispatch(update(res.data));
-        dispatch(notifSend(notification(res.data.title + ' is now updated', 'success')));
+        if(res) {
+          dispatch(update(res.data));
+          dispatch(notifSend(notification(res.data.title + ' is now updated', 'success')));
+        }
       });
   } else {
     axios.post('/api/hacks/', req)
+      .catch((res) => {
+        dispatch(notifSend(notification('Could not create hack', 'warning')));
+      })
       .then((res) => {
-        dispatch(update(res.data));
-        dispatch(notifSend(notification(res.data.title + ' is now created', 'success')));
+        if(res) {
+          dispatch(update(res.data));
+          dispatch(notifSend(notification(res.data.title + ' is now created', 'success')));
+        }
       });
   }
 };

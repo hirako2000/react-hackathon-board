@@ -35,26 +35,34 @@ export class HackViewComponent extends React.Component {
   }
 
   render() {
-    if(!this.props.hack.pictureURL) {
+    if(!this.props.hack.hack) {
       return (<div>Loading...</div>);
     }
-    var hack = this.props.hack;
+    var hack = this.props.hack.hack;
       return (
-        <div className="ui internally celled grid">
+        <div className="ui internally stackable celled grid">
           <div className="row">
-            <div className="four wide column">
+            <div className="three wide column">
+              <a href={ '#/hacks/edit/' + hack._id} className={this.props.hack.isOwner ? 'items' : 'hide-it'}>
+                <Button className="fluid" color="teal">
+                  Edit
+                </Button>
+              </a>
+              <p/>
+
               <Button className="fluid" color="red">
                 Nominate
               </Button>
               <p/>
-              <Button className="fluid" color="teal">
+
+              <Button color="red" className={this.props.hack.hasJoined ? 'hide-it' : 'fluid'}>
                 Join
               </Button>
               <div className="ui card fluid">
                 <div className="content">
                   <div className="header">Organizer</div>
                   <div className="">
-                    <span>John Doe</span>
+                    <span>{this.props.hack.ownerDisplay}</span>
                   </div>
                 </div>
               </div>
@@ -77,29 +85,17 @@ export class HackViewComponent extends React.Component {
               </div>
 
             </div>
-            <div className="twelve wide column">
-              <Segment key={this.props.hack._id} className="ui internally celled grid">
+            <div className="thirteen wide column">
+              <div key={hack._id} className="ui internally stackable grid">
                 <div className="six wide column">
                   <Content className="visible fluid">
-                    <Header>
-                      {hack.title} (<a href={ '#/hacks/edit/' + hack._id}>
-                      Edit Hack
-                    </a>)
-                    </Header>
                     <Image src={'user-images/' + hack.pictureURL} className="fluid" />
                   </Content>
-                  <div className="ui divider"></div>
+
                 </div>
                 <div className="ten wide column">
                   <div className="">
-                    <div className="ui card fluid">
-                      <div className="content">
-                        <div className="">
-                          <span>{hack.shortDescription}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="ui card fluid">
+                    <div className="ui fluid">
                       <div className="content">
                         <div className="">
                           <ReactMarkdown source={hack.description}/>
@@ -112,7 +108,7 @@ export class HackViewComponent extends React.Component {
                     Comments
                   </Content>
                 </div>
-              </Segment>
+              </div>
             </div>
           </div>
         </div>

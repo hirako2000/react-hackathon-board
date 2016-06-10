@@ -7,8 +7,11 @@ user.get('/', function * (next) {
   var user = new Object();
   if (this.isAuthenticated()) {
     user = this.passport.user;
+    console.log("user pass " + user.password);
+    user.password = undefined;
   }
   this.body = user;
+
 });
 
 export default user;

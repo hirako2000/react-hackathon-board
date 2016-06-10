@@ -84,7 +84,7 @@ var DescriptionInput = React.createClass ({
         </div>
         <div className="eight wide field">
           <label>Description Preview</label>
-          <ReactMarkdown source={this.props.hack.description}/>
+          <ReactMarkdown source={this.props.hack.description || ''}/>
         </div>
       </div>
     );
@@ -134,7 +134,7 @@ export class HackViewComponent extends React.Component {
   }
 
   handleSubmit(val) {
-    this.props.updateToSever(this.props.hack._id, val);
+    this.props.updateToSever(this.props.hack.hack ? this.props.hack.hack._id : null, val);
     // TODO - We should use react-router's history
     //this.props.history.push('#/hacks'); // deprecated?
     window.location = '#/hacks';
@@ -144,18 +144,24 @@ export class HackViewComponent extends React.Component {
     if(!this.props.hack) {
       return <div>Loading...</div>
     }
+    if (!this.props.hack.hack) {
+      this.props.hack.hack = new Object();
+    }
+    var hack = this.props.hack.hack;
     return (
       // The key is important for the component to be reset properly
-      <Segment key={this.props.hack._id}>
+      <Segment key={ hack._id }>
           <div className="ui form">
-            <h1>{ this.props.hack.title }</h1>
-            <TitleInput hack={ this.props.hack } />
-            <ShortDescriptionInput hack={ this.props.hack } />
-            <DescriptionInput hack={ this.props.hack } />
-            <OpenInput  hack={ this.props.hack } />
-            <DropzoneSingleImageComponent hack={ this.props.hack } />
+            <h1>{ hack.title  }</h1>
+            <TitleInput hack={ this.props.hack.hack } />
+            <ShortDescriptionInput hack={ this.props.hack.hack } />
+            <DescriptionInput hack={ this.props.hack.hack } />
+            <OpenInput  hack={ this.props.hack.hack } />
+            <DropzoneSingleImageComponent hack={ this.props.hack.hack } />
             <p>
-              <button className="ui button teal" onClick={(hack) => this.handleSubmit(this.props.hack)}>Save</button>
+              <button className="ui button teal" onClick={(hack) => this.handleSubmit(this.props.hack.hack)}>
+                Save
+              </button>
             </p>
           </div>
       </Segment>

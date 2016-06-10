@@ -9,15 +9,17 @@ import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} fro
 
 type
 Props = {
-  hackathons: Array,
-  listFromServer: Function
+  hackathons: Object,
+  listFromServer: Function,
+  selectToServer: Function
 };
 
 export class HackathonsAsCardsComponent extends React.Component {
 
   static propTypes = {
-    hackathons: PropTypes.array.isRequired,
-    listFromServer: PropTypes.func.isRequired
+    hackathons: PropTypes.object.isRequired,
+    listFromServer: PropTypes.func.isRequired,
+    selectToServer: PropTypes.func.isRequired
   };
 
   componentWillMount() {
@@ -35,11 +37,21 @@ export class HackathonsAsCardsComponent extends React.Component {
   }
 
   render() {
-    var cards = this.props.hackathons.map(function (card) {
+    var selectFunction = this.props.selectToServer;
+    if(!this.props.hackathons || !this.props.hackathons.hackathons) {
+      return (<div>Loading</div>)
+    }
+    var cards = this.props.hackathons.hackathons.map(function (card) {
+
+      var handleSelect = function(id) {
+        selectFunction(id);
+        window.location = '#/hacks';
+      }
+
       return (
         <Column key={card._id}>
           <Card className="fluid">
-            <a href={ '#/hackathons/' + card._id}>
+            <a onClick={handleSelect.bind(this, card._id)}>
               <Reveal className="fade">
                 <Content className="hidden">
                   <Image type="link" src={'user-images/' + card.pictureURL} className={classes['brighter']}/>
@@ -52,26 +64,30 @@ export class HackathonsAsCardsComponent extends React.Component {
             </a>
 
             <Content>
-              <a href={ '#/hackathons/' + card._id}>
+              <a onClick={handleSelect.bind(this, card._id)}>
                 <Header className="center aligned">
-                  {card.title}
+                    {card.title}
                 </Header>
               </a>
-              <div className="center aligned ">
+              <div className="center aligned">
                 <p className="">
                   {card.shortDescription}
                 </p>
-                <div className="meta center aligned ">
-
-                  { (moment(card.startDate).month() !== moment(card.endDate).month() ?
-                    moment(card.startDate).format('Do MMM YY') :
-                      moment(card.startDate).format('Do'))
-                      + " - "
-                      + moment(card.endDate).format('Do MMM YY')
-                  }
-                </div>
+              </div>
+              <div className="ui description center aligned">
+                { (moment(card.startDate).month() !== moment(card.endDate).month() ?
+                  moment(card.startDate).format('Do MMM YY') :
+                    moment(card.startDate).format('Do'))
+                    + " - "
+                    + moment(card.endDate).format('Do MMM YY')
+                }
               </div>
             </Content>
+            <div className="extra center aligned">
+              <a href={'#/hackathons/' + card._id}>
+                  Details
+              </a>
+            </div>
           </Card>
         </Column>
       );
@@ -93,6 +109,7 @@ export class HackathonsAsCardsComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  hackathons: state.hackathons
+  hackathons: state.hackathons,
+  selectToServer: state.selectToServer
 });
 export default connect(mapStateToProps, hackathonsActions)(HackathonsAsCardsComponent);

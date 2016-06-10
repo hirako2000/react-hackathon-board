@@ -15,6 +15,7 @@ var userSchema = new mongoose.Schema({
   tokens: Array,
 
   judge: Boolean,
+  selectedHackathon: String,
 
   profile: {
     name: { type: String, default: '' },

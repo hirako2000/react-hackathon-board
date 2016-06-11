@@ -11,7 +11,15 @@ user.get('/me', function * (next) {
     user = this.passport.user;
     user.password = undefined;
   }
-  this.body = user;
+  var selectedHackathon;
+  if (user.selectedHackathon) {
+    selectedHackathon = yield Hackathon.findOne({'_id' : user.selectedHackathon});
+  }
+  var response = {
+    user: user,
+    hackathon: selectedHackathon
+  };
+  this.body = response;
 
 });
 
@@ -20,7 +28,7 @@ user.post('/select-hackathon/:id', function * (next) {
   var user = yield User.findOne({'_id': this.passport.user._id});
   user.selectedHackathon = this.params.id;
   user.save();
-  var hackathon = yield Hackathon.findOne({'_id' : this.params.id})
+  var hackathon = yield Hackathon.findOne({'_id' : this.params.id});
   this.body = hackathon;
 });
 

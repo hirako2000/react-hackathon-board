@@ -70,6 +70,7 @@ var updateEntity = function(existingEntity, newEntity) {
   existingEntity.shortDescription = newEntity.shortDescription;
   existingEntity.description = newEntity.description;
   existingEntity.rules = newEntity.rules;
+  existingEntity.prizes = newEntity.prizes;
   existingEntity.location = newEntity.location;
   existingEntity.open = newEntity.open;
   existingEntity.active = newEntity.active;

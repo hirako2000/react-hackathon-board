@@ -5,6 +5,7 @@ import { Provider, connect } from 'react-redux';
 import { reducer as notifReducer, actions as notifActions, Notifs } from 're-notif';
 import { Router, Route, Link } from 'react-router';
 import AccountNavBarView from './AccountNavBar';
+import HackathonHeaderView from './HackathonHeader';
 
 import {Menu, Item, Icon} from 'react-semantify';
 
@@ -57,27 +58,32 @@ function CoreLayout ({ children }) {
 var NavBarLeft = React.createClass({
   render: function () {
     return(
-    <Menu className="inverted borderless stackable">
-      <Link activeClassName="active" className="item" to="/">
-        <Icon className="home" /> Home
-      </Link>
-      <Link activeClassName="active" className="item" to="hacks">
-        <Icon className="lab" /> Hacks
-      </Link>
-      <Link className="item" to="rules">
-        <Icon className="book" /> Rules
-      </Link>
-      <Link className="item" to="prize">
-        <Icon className="gift" /> Prize
-      </Link>
-      <Link className="item" to="hacks">
-        <Icon className="trophy" /> Judging
-      </Link>
-      <Link className="item" to="people">
-        <Icon className="users" /> People
-      </Link>
-      <AccountNavBarView />
-    </Menu>
+    <div>
+      <Menu className="inverted borderless stackable">
+        <Link activeClassName="active" className="item" to="hackathons">
+          <Icon className="home" /> Home
+        </Link>
+        <Link activeClassName="active" className="item" to="hacks">
+          <Icon className="lab" /> Hacks
+        </Link>
+        <Link className="item" to="rules">
+          <Icon className="book" /> Rules
+        </Link>
+        <Link className="item" to="prizes">
+          <Icon className="gift" /> Prize
+        </Link>
+        <Link className="item" to="hacks">
+          <Icon className="trophy" /> Judging
+        </Link>
+        <Link className="item" to="people">
+          <Icon className="users" /> People
+        </Link>
+        <AccountNavBarView />
+      </Menu>
+      <div className="ui fluid">
+        <HackathonHeaderView />
+      </div>
+    </div>
     );
   }
 });

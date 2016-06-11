@@ -26,7 +26,7 @@ class AccountNavBarView extends React.Component {
   }
 
   render() {
-    if(!this.props.user._id) {
+    if(!this.props.user || !this.props.user.user) {
       return(
         <Menu className="right inverted borderless stackable">
           <Item className="" type="link" href="#/login">
@@ -41,7 +41,7 @@ class AccountNavBarView extends React.Component {
     return(
       <Menu className="right inverted borderless stackable">
         <Item className="">
-          <Icon className="user" /> { this.props.user.username }
+          <Icon className="user" /> { this.props.user.user.username }
         </Item>
         <Item className="" type="link" href="/api/auth/logout">
           <Icon className="sign out" /> Logout

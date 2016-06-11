@@ -17,12 +17,15 @@ import HacksView from 'views/HacksView/HacksView';
 import HackView from 'views/HacksView/HackView';
 import EditHackView from 'views/HacksView/EditHackView';
 import UsersView from 'views/UsersView/UsersView';
+import RulesView from 'views/HackathonsView/RulesView';
+import PrizesView from 'views/HackathonsView/PrizesView';
 
 export default (store) => (
   <Route component={CoreLayout}>
     <Route name='login' path='/login' component={LoginView} />
     <Route name='signup' path='/signup' component={SignupView} />
-    <Route name='home' path='/' component={HackathonsView} />
+    <Route name='home' path='/' component={HacksView} />
+    <Route name='hackathons' path='/hackathons' component={HackathonsView} />
     <Route name='editHackathon' path='/hackathons/edit/:id' component={EditHackathonView} />
     <Route name='hackathon' path='/hackathons/:id' component={HackathonView} />
     <Route name='createHackathon' path='/hackathons/create/new/' component={EditHackathonView} />
@@ -33,5 +36,7 @@ export default (store) => (
     <Route name='editHack' path='/hacks/edit/:id' component={EditHackView} />
     <Route name='createHack' path='/hacks/create/new/' component={EditHackView} />
     <Route name='people' path='/people' component={UsersView} />
+    <Route name='rules' path='/rules' component={RulesView} />
+    <Route name='prizes' path='/prizes' component={PrizesView} />
   </Route>
 );

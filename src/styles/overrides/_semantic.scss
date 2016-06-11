@@ -11,6 +11,61 @@
   display: none;
 }
 
+.padding-20px {
+  padding: 20px;
+}
+
+.hackathon-header-title {
+  color: whitesmoke;
+  font-size: 22px;
+}
+
+.hackathon-header-description {
+  color: lightgray;
+  font-size: 16px;
+}
+
+.hackathon-header-date {
+  color: whitesmoke;
+  font-size: 14px;
+}
+
+.hackathon-header-image-effect {
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.hackathon-header-image-effect-shadow {
+  content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: inset 0px 0px 15px 10px rgb(0, 0, 0);
+    margin: 15px;
+}
+
+.hackathon-header {
+  padding-bottom: 10px;
+  background-color: black;
+}
+
+.hackathon-header-image {
+    position:relative;
+    display:inline-block;
+}
+
+.hackathon-header-image:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 54px;
+  width: 415px;
+  height: 120px;
+  background: linear-gradient(90deg,transparent 0,rgb(0, 0, 0));
+}
+
 .hacks-summary-margin {
   margin-left: 5%;
   margin-right: 5%;

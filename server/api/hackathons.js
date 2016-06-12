@@ -66,11 +66,11 @@ hackathons.post('/', function * (next) {
 });
 
 var updateEntity = function(existingEntity, newEntity) {
-  existingEntity.title = newEntity.title;
-  existingEntity.shortDescription = newEntity.shortDescription;
-  existingEntity.description = newEntity.description;
-  existingEntity.rules = newEntity.rules;
-  existingEntity.prizes = newEntity.prizes;
+  existingEntity.title = newEntity.title || 'No title yet';
+  existingEntity.shortDescription = newEntity.shortDescription || 'No header yet';
+  existingEntity.description = newEntity.description || 'No description yet';
+  existingEntity.rules = newEntity.rules || 'No rules yet';
+  existingEntity.prizes = newEntity.prizes || 'No prizes yet';
   existingEntity.location = newEntity.location;
   existingEntity.open = newEntity.open;
   existingEntity.active = newEntity.active;

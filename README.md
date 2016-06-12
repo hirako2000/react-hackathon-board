@@ -8,6 +8,8 @@ Under development, the goal of this project is to build a web application to hos
 [![devDependency Status](https://david-dm.org/hirako2000/react-hackathon-board/dev-status.svg)](https://david-dm.org/hirako2000/react-hackathon-board#info=devDependencies)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/hirako2000/react-hackathon-board/edit/master/LICENSE)
 
+_Completion of a stable release of this project is set to end of **July 2016**_
+
 Table of Contents
 -----------------
 1. [Requirements](#requirements)

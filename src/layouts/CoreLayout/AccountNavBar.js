@@ -26,7 +26,7 @@ class AccountNavBarView extends React.Component {
   }
 
   render() {
-    if(!this.props.user || !this.props.user.user) {
+    if(!this.props.user || !this.props.user.user || !this.props.user.username) {
       return(
         <Menu className="right inverted borderless stackable">
           <Item className="" type="link" href="#/login">

@@ -5,17 +5,28 @@ import multer from 'koa-router-multer';
 var upload = multer({ dest: 'uploads/' });
 import lwip from 'lwip';
 import _ from 'lodash';
+import mongoose from 'mongoose';
 
 const hacks = new Router();
 
 hacks.get('/', function * (next) {
   console.log('GET /hacks/');
-  var hacks = yield Hack.find({});
+  var selectedHackathonId =  this.request.query.hackathonId;
+  console.log("with hackathon id: " + selectedHackathonId);
+  var hacks;
+  if (selectedHackathonId && selectedHackathonId !== "-1") {
+    var id = mongoose.Types.ObjectId(selectedHackathonId);
+    hacks = yield Hack.find({ '_id' : id });
+  } else {
+    hacks = yield Hack.find({});
+  }
+
   var response;
   var user;
   response = {
     hacks: hacks
   };
+  console.log("Returning " + hacks.length + " hacks");
   this.body = response;
 });
 

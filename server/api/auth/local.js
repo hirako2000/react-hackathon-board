@@ -26,7 +26,7 @@ local.post('/signup', function * (next) {
 local.get('/logout', function(next) {
   console.log("Logging out");
   this.logout();
-  this.redirect('/')
+  this.redirect('/');
 });
 
 export default local;

@@ -10,6 +10,7 @@ import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} fro
 type
 Props = {
   hackathons: Object,
+  selected: Object,
   listFromServer: Function,
   selectToServer: Function
 };
@@ -18,6 +19,7 @@ export class HackathonsAsCardsComponent extends React.Component {
 
   static propTypes = {
     hackathons: PropTypes.object.isRequired,
+    selected: PropTypes.object,
     listFromServer: PropTypes.func.isRequired,
     selectToServer: PropTypes.func.isRequired
   };
@@ -39,13 +41,20 @@ export class HackathonsAsCardsComponent extends React.Component {
   render() {
     var selectFunction = this.props.selectToServer;
     if(!this.props.hackathons || !this.props.hackathons.hackathons) {
-      return (<div>Loading</div>)
+      return (<div>Loadingo</div>)
     }
-    var cards = this.props.hackathons.hackathons.map(function (card) {
+
+    var cards = this.props.hackathons.hackathons
+    .filter(function (card) {
+      // hack to hide selected one
+      return card._id;
+    })
+    .map(function (card) {
 
       var handleSelect = function(id) {
         selectFunction(id);
-        window.location = '/';
+        //window.location = '#/';
+        //window.location = '/';
       }
 
       return (
@@ -110,6 +119,7 @@ export class HackathonsAsCardsComponent extends React.Component {
 
 const mapStateToProps = (state) => ({
   hackathons: state.hackathons,
+  selected: state.selected,
   selectToServer: state.selectToServer
 });
 export default connect(mapStateToProps, hackathonsActions)(HackathonsAsCardsComponent);

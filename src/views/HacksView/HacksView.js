@@ -10,6 +10,7 @@ import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} fro
 type
 Props = {
   hacks: Array,
+  hackathons: Object,
   listFromServer: Function
 };
 
@@ -17,13 +18,26 @@ export class HacksAsCardsComponent extends React.Component {
 
   static propTypes = {
     hacks: PropTypes.array.isRequired,
+    hackathons: PropTypes.object.isRequired,
     listFromServer: PropTypes.func.isRequired
   };
 
   componentWillMount() {
-    this.props.listFromServer();
+    var selectedHackathon = "-1";
+    if(this.props.hackathons.hackathons) {
+      for (var i = 0; i < this.props.hackathons.hackathons.length; i++) {
+        console.log("looping around hackathons");
+        if(this.props.hackathons.hackathons[i].selected) {
+          selectedHackathon = this.props.hackathons.hackathons[i].selected;
+          console.log("Found the selected hackathon");
+          break;
+        }
+      }
+    }
+
+    this.props.listFromServer(selectedHackathon);
     this.getData();
-     this.onSearch = this.onSearch.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   getData() {
@@ -110,7 +124,18 @@ export class HacksAsCardsComponent extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  hacks: state.hacks
+const mapStateToProps2 = (state) => ({
+  hacks: state.hacks,
+  selected: state.hackathons.selected !== undefined ? state.hackathons.selected : {}
 });
+
+
+const mapStateToProps = (state) => {
+  console.log(JSON.stringify(state.hackathons.selected));
+  return {
+    hacks: state.hacks,
+    hackathons: state.hackathons
+  }
+}
+
 export default connect(mapStateToProps, hacksActions)(HacksAsCardsComponent);

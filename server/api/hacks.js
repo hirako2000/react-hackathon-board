@@ -15,8 +15,7 @@ hacks.get('/', function * (next) {
   console.log("with hackathon id: " + selectedHackathonId);
   var hacks;
   if (selectedHackathonId && selectedHackathonId !== "-1") {
-    var id = mongoose.Types.ObjectId(selectedHackathonId);
-    hacks = yield Hack.find({ '_id' : id });
+    hacks = yield Hack.find({ 'hackathon' : selectedHackathonId });
   } else {
     hacks = yield Hack.find({});
   }
@@ -54,8 +53,8 @@ hacks.get('/:id', function * (next) {
   var response = {
     hack: hackEntity,
     ownerDisplay: ownerUser.username ? ownerUser.username : ownerUser.email,
-    isOwner: hackEntity.owner == user._id,
-    hasJoined: hackEntity.joiners.indexOf(user._id) != -1,
+    isOwner: user && hackEntity.owner == user._id,
+    hasJoined: user && hackEntity.joiners.indexOf(user._id) != -1,
     joinersDisplay: joiners
   };
   this.body = response;
@@ -95,6 +94,7 @@ hacks.post('/', function * (next) {
 });
 
 var updateEntity = function(existingEntity, newEntity) {
+  existingEntity.hackathon = newEntity.hackathon;
   existingEntity.title = newEntity.title;
   existingEntity.shortDescription = newEntity.shortDescription;
   existingEntity.description = newEntity.description;

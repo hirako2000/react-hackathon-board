@@ -116,28 +116,49 @@ var OpenInput = React.createClass ({
 
 var HackathonInput = React.createClass ({
   getInitialState: function() {
-      return  {value: this.props.hack.hackathon || 1}
+    if (this.props.hack.hackathon) {
+      return { value: this.props.hack.hackathon };
+    } else {
+      return { value: -1};
+    }
   },
-  handleChange: function(e) {
-      this.setState({value: e.target.value});
-      this.props.hack.hackathon = e.target.value;
-      console.log('Hackathon Dropdown changed to ' + e.target.value);
 
+  handleChange: function(event) {
+    this.setState({ value: event.target.value });
+    this.props.hack.hackathon = event.target.value;
+    console.log('Hackathon Dropdown changed to ' + event.target.value);
+    console.log('Hackathon prop changed to ' + this.props.hack.hackathon );
   },
+
   render: function() {
-    var hackathons = this.props.hackathons.hackathons.map(function (hackathon) {
-        return (
-          <option value={hackathon._id}>{hackathon.title}</option>
-        );
-      });
-
+    if (!this.props.hackathons || !this.props.hackathons.hackathons) {
       return (
-        <div className="field">
-          <select className="ui dropdown" onChange={this.handleChange} value={this.state.value}>
-            {hackathons}
-          </select>
-        </div>
+        <option key="-1" value="-1">Loading...</option>
       );
+    }
+    var hackathons = this.props.hackathons.hackathons.map(function (hackathon) {
+      return (
+        <option key={hackathon._id} value={hackathon._id}>{hackathon.title}</option>
+      );
+    });
+
+    // if none is selected, pick the active hackathon
+    if (!this.props.hack.hackathon) {
+      console.log(JSON.stringify(this.props.hackathons));
+      for (var hackathon of this.props.hackathons.hackathons) {
+        if (hackathon.active) {
+          this.props.hack.hackathon = hackathon._id;
+        }
+      }
+    }
+
+    return (
+      <div className="field">
+        <select className="ui dropdown" onChange={this.handleChange} value={this.state.value}>
+          {hackathons}
+        </select>
+      </div>
+    );
    }
 });
 
@@ -145,7 +166,7 @@ export class HackViewComponent extends React.Component {
 
   static propTypes = {
     hack: PropTypes.object,
-    hackathons: PropTypes.object,
+    hackathons: PropTypes.object.isRequired,
     fetchFromServer: PropTypes.func.isRequired,
     fetchHackathonsFromServer: PropTypes.func.isRequired,
     updateToSever: PropTypes.func.isRequired,

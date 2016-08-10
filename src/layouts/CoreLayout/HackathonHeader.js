@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import { reducer as notifReducer, actions as notifActions, Notifs } from 're-notif';
 import { Router, Route, Link } from 'react-router';
-import { actions as userActions } from '../../redux/modules/user';
+import { actions as selectedHackathonActions } from '../../redux/modules/selectedHackathon';
 import { actions as hackathonsActions } from '../../redux/modules/hackathons';
 
 import {Menu, Item, Icon, Image, Content, Header, Card} from 'react-semantify';
@@ -12,13 +12,13 @@ import moment from 'moment';
 
 type
 Props = {
-  hackathons: Object
+  selectedHackathon: Object
 };
 
 class HackathonHeaderView extends React.Component {
 
   static propTypes = {
-    hackathons: PropTypes.object
+    selectedHackathon: PropTypes.object
   };
 
   componentWillMount() {
@@ -26,58 +26,44 @@ class HackathonHeaderView extends React.Component {
   }
 
   render() {
-    if(!this.props.hackathons.hackathons) {
-      return(
+    if(!this.props.selectedHackathon || !this.props.selectedHackathon._id) {
+      return (
         <div>
           Select Hackkathon <a href="/#/hackathons">here</a>
         </div>
       );
     }
 
-    var selectedHackathon;
-    for (var i = 0; i < this.props.hackathons.hackathons.length; i++) {
-      console.log("looping around hackathons");
-      if(this.props.hackathons.hackathons[i].selected) {
-        selectedHackathon = this.props.hackathons.hackathons[i].selected;
-        console.log("Found the selected hackathon");
-        break;
-      }
-    }
-    if (!selectedHackathon || !selectedHackathon.pictureURL) {
-      return (
-        <div></div>
-      );
-    }
     return(
       <Content>
         <div className="center aligned hackathon-header">
           <div className="ui six column stackable grid">
             <div className="three wide column"/>
             <div className="three wide column center aligned">
-              <Image className="hackathon-header-image-effect" src={'user-images/' + selectedHackathon.pictureURL}/>
+              <Image className="hackathon-header-image-effect" src={'user-images/' + this.props.selectedHackathon.pictureURL}/>
               <div className="hackathon-header-image-effect-shadow"></div>
             </div>
             <div className="four wide column center aligned">
               <Content className="padding-20px">
                 <Header className="center aligned">
-                    <span className="hackathon-header-title">{selectedHackathon.title} </span>
+                    <span className="hackathon-header-title">{this.props.selectedHackathon.title} </span>
                 </Header>
                 <div className="center aligned hackathon-header-description">
                   <p className="">
-                    {selectedHackathon.shortDescription}
+                    {this.props.selectedHackathon.shortDescription}
                   </p>
                 </div>
                 <div className="ui description center aligned hackathon-header-date">
-                  { (moment(selectedHackathon.startDate).month() !== moment(selectedHackathon.endDate).month() ?
-                    moment(selectedHackathon.startDate).format('Do MMM YY') :
-                      moment(selectedHackathon.startDate).format('Do'))
+                  { (moment(this.props.selectedHackathon.startDate).month() !== moment(this.props.selectedHackathon.endDate).month() ?
+                    moment(this.props.selectedHackathon.startDate).format('Do MMM YY') :
+                      moment(this.props.selectedHackathon.startDate).format('Do'))
                       + " - "
-                      + moment(selectedHackathon.endDate).format('Do MMM YY')
+                      + moment(this.props.selectedHackathon.endDate).format('Do MMM YY')
                   }
                 </div>
               </Content>
               <div className="extra center aligned">
-                <a href={'#/hackathons/' + selectedHackathon._id}>
+                <a href={'#/hackathons/' + this.props.selectedHackathon._id}>
                     Details
                 </a>
               </div>
@@ -91,6 +77,6 @@ class HackathonHeaderView extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  hackathons: state.hackathons
+  selectedHackathon: state.selectedHackathon
 });
-export default connect(mapStateToProps, userActions)(HackathonHeaderView);
+export default connect(mapStateToProps, selectedHackathonActions)(HackathonHeaderView);

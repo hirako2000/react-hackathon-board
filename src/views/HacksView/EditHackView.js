@@ -14,8 +14,10 @@ import ReactMarkdown from 'react-markdown';
 
 type
 Props = {
-  hack: object,
+  hack: Object,
+  hackathons: Object,
   fetchFromServer: Function,
+  fetchHackathonsFromServer: Function,
   updateToSever: Function,
   reset: Function
 };
@@ -112,11 +114,40 @@ var OpenInput = React.createClass ({
   }
 });
 
+var HackathonInput = React.createClass ({
+  getInitialState: function() {
+      return  {value: this.props.hack.hackathon || 1}
+  },
+  handleChange: function(e) {
+      this.setState({value: e.target.value});
+      this.props.hack.hackathon = e.target.value;
+      console.log('Hackathon Dropdown changed to ' + e.target.value);
+
+  },
+  render: function() {
+    var hackathons = this.props.hackathons.hackathons.map(function (hackathon) {
+        return (
+          <option value={hackathon._id}>{hackathon.title}</option>
+        );
+      });
+
+      return (
+        <div className="field">
+          <select className="ui dropdown" onChange={this.handleChange} value={this.state.value}>
+            {hackathons}
+          </select>
+        </div>
+      );
+   }
+});
+
 export class HackViewComponent extends React.Component {
 
   static propTypes = {
     hack: PropTypes.object,
+    hackathons: PropTypes.object,
     fetchFromServer: PropTypes.func.isRequired,
+    fetchHackathonsFromServer: PropTypes.func.isRequired,
     updateToSever: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired
   };
@@ -127,6 +158,8 @@ export class HackViewComponent extends React.Component {
     } else {
       this.props.reset();
     }
+    console.log("going to fetch existing hackathons");
+    this.props.fetchHackathonsFromServer();
   }
 
   componentWillUnmount () {
@@ -157,6 +190,7 @@ export class HackViewComponent extends React.Component {
             <ShortDescriptionInput hack={ this.props.hack.hack } />
             <DescriptionInput hack={ this.props.hack.hack } />
             <OpenInput  hack={ this.props.hack.hack } />
+            <HackathonInput  hack={ this.props.hack.hack } hackathons= {this.props.hackathons} />
             <DropzoneSingleImageComponent hack={ this.props.hack.hack } />
             <p>
               <button className="ui button teal" onClick={(hack) => this.handleSubmit(this.props.hack.hack)}>
@@ -171,6 +205,7 @@ export class HackViewComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  hack: state.hack
+  hack: state.hack,
+  hackathons: state.hackathons
 });
 export default connect(mapStateToProps, hackActions)(HackViewComponent);

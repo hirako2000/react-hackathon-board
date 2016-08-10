@@ -3,6 +3,7 @@ import { routerReducer as router } from 'react-router-redux';
 import counter from './modules/counter';
 import hackathons from './modules/hackathons';
 import hackathon from './modules/hackathon';
+import selectedHackathon from './modules/selectedHackathon';
 import hacks from './modules/hacks';
 import hack from './modules/hack';
 import user from './modules/user';
@@ -13,6 +14,7 @@ export default combineReducers({
   counter,
   hackathons,
   hackathon,
+  selectedHackathon,
   hacks,
   hack,
   notifs,

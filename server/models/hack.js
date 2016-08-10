@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var HackSchema = new Schema({
   id: Number,
-  owner: String, 
+  owner: String,
   joiners: [String],
   title: String,
   shortDescription: String,
@@ -11,6 +11,7 @@ var HackSchema = new Schema({
   pictureURL: String,
   category: String,
   season: String,
+  hackathon: String,
   open: Boolean,
   location: String,
   science: Boolean,

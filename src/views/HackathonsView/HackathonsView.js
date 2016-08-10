@@ -45,14 +45,10 @@ export class HackathonsAsCardsComponent extends React.Component {
     }
 
     var cards = this.props.hackathons.hackathons
-    .filter(function (card) {
-      // hack to hide selected one
-      return card._id;
-    })
     .map(function (card) {
 
-      var handleSelect = function(id) {
-        selectFunction(id);
+      var handleSelect = function(hackathon) {
+        selectFunction(hackathon);
         //window.location = '#/';
         //window.location = '/';
       }
@@ -60,7 +56,7 @@ export class HackathonsAsCardsComponent extends React.Component {
       return (
         <Column key={card._id}>
           <Card className="fluid">
-            <a onClick={handleSelect.bind(this, card._id)}>
+            <a onClick={handleSelect.bind(this, card)}>
               <Reveal className="fade">
                 <Content className="hidden">
                   <Image type="link" src={'user-images/' + card.pictureURL} className={classes['brighter']}/>
@@ -73,7 +69,7 @@ export class HackathonsAsCardsComponent extends React.Component {
             </a>
 
             <Content>
-              <a onClick={handleSelect.bind(this, card._id)}>
+              <a onClick={handleSelect.bind(this, card)}>
                 <Header className="center aligned">
                     {card.title}
                 </Header>

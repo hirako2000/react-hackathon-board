@@ -2,6 +2,7 @@ import axios from 'axios';
 import { reducer as notifReducer, actions as notifActions, Notifs } from 're-notif';
 const { notifSend } = notifActions;
 import notification from './notification';
+import {hackathons} from './hackathons';
 
 export const HACK = 'HACK';
 export const UPDATE = 'UPDATE';
@@ -28,6 +29,14 @@ export const fetchFromServer = (id) => (dispatch) => {
   axios.get('/api/hacks/' + id)
     .then((res) => {
       dispatch(hack(res.data));
+    });
+};
+
+export const fetchHackathonsFromServer = () => (dispatch) => {
+  // TODO use config path instead
+  axios.get('/api/hackathons/')
+    .then((res) => {
+      dispatch(hackathons(res.data));
     });
 };
 
@@ -64,6 +73,7 @@ export const updateToSever = (id, req) => (dispatch) => {
 
 export const actions = {
   fetchFromServer,
+  fetchHackathonsFromServer,
   updateToSever,
   reset
 };

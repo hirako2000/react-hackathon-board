@@ -115,13 +115,32 @@ export class HackViewComponent extends React.Component {
                     <span>{this.props.hack.ownerDisplay}</span>
                   </div>
                 </div>
+
+                <div className="extra content">
+                    <span className="left floated">
+                      {this.props.hack.hack.completed === true ? "Completed" : "Uncompleted"}
+                    </span>
+                    <i className="float-right minus circle icon"
+                     className={this.props.hack.hack.completed !== true ? 'float-right minus circle icon' : 'float-right checkmark icon'}>
+                    </i>
+                </div>
+
               </div>
               <div className="ui card fluid">
                 <div className="content">
                   <div className="header">Team</div>
                   <TeamList hack={ this.props.hack } />
                 </div>
+                <div className="extra content">
+                    <span className="left floated">
+                      {this.props.hack.hack.open === true ? "Open" : "Closed"}
+                    </span>
+                    <i className="float-right minus circle icon"
+                     className={this.props.hack.hack.open !== true ? 'float-right minus circle icon' : 'float-right checkmark icon'}>
+                    </i>
+                </div>
               </div>
+
               <div className="ui card fluid">
                 <div className="content">
                   <div className="header">Location</div>

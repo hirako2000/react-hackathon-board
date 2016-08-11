@@ -107,8 +107,41 @@ var OpenInput = React.createClass ({
         <div className="ui checkbox">
           <input type="checkbox" checked={this.state.value}
                  onChange={this.handleChange}/>
-          <label>Open</label>
+          <label>
+            Open
+          </label>
         </div>
+        <span className="ui" data-position="top left" data-tooltip="Check this box if the hack is open to other participants" data-inverted="">
+          <i className="help icon"></i>
+        </span>
+      </div>
+    );
+  }
+});
+
+var CompletedInput = React.createClass ({
+  getInitialState: function() {
+
+
+    return {value: this.props.hack.completed || false };
+
+  },
+  handleChange: function(event) {
+    this.props.hack.completed = !this.props.hack.completed;
+    this.setState({ value: this.props.hack.completed });
+  },
+
+  render: function() {
+    return (
+      <div className="field">
+        <div className="ui checkbox">
+          <input type="checkbox" checked={this.state.value}
+                 onChange={this.handleChange}/>
+          <label>Completed</label>
+        </div>
+        <span className="ui" data-position="top left" data-tooltip="Check this box once the hack is completed" data-inverted="">
+          <i className="help icon"></i>
+        </span>
       </div>
     );
   }
@@ -210,6 +243,7 @@ export class HackViewComponent extends React.Component {
             <ShortDescriptionInput hack={ this.props.hack.hack } />
             <DescriptionInput hack={ this.props.hack.hack } />
             <OpenInput  hack={ this.props.hack.hack } />
+            <CompletedInput  hack={ this.props.hack.hack } />
             <HackathonInput  hack={ this.props.hack.hack } hackathons= {this.props.hackathons} />
             <DropzoneSingleImageComponent hack={ this.props.hack.hack } />
             <p>

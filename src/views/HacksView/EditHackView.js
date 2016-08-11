@@ -144,7 +144,6 @@ var HackathonInput = React.createClass ({
 
     // if none is selected, pick the active hackathon
     if (!this.props.hack.hackathon) {
-      console.log(JSON.stringify(this.props.hackathons));
       for (var hackathon of this.props.hackathons.hackathons) {
         if (hackathon.active) {
           this.props.hack.hackathon = hackathon._id;

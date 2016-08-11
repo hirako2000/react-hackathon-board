@@ -32,6 +32,27 @@ export const fetchFromServer = (id) => (dispatch) => {
     });
 };
 
+export const join = (hackEntity) => (dispatch) => {
+  axios.post('/api/hacks/' + hackEntity._id + "/join")
+    .then((res) => {
+      axios.get('/api/hacks/' + hackEntity._id)
+        .then((ress) => {
+          dispatch(hack(ress.data));
+        });
+    });
+};
+
+
+export const leave = (hackEntity) => (dispatch) => {
+  axios.post('/api/hacks/' + hackEntity._id + "/leave")
+    .then((res) => {
+      axios.get('/api/hacks/' + hackEntity._id)
+        .then((ress) => {
+          dispatch(hack(ress.data));
+        });
+    });
+};
+
 export const fetchHackathonsFromServer = () => (dispatch) => {
   // TODO use config path instead
   axios.get('/api/hackathons/')
@@ -73,6 +94,8 @@ export const updateToSever = (id, req) => (dispatch) => {
 
 export const actions = {
   fetchFromServer,
+  join,
+  leave,
   fetchHackathonsFromServer,
   updateToSever,
   reset

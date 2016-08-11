@@ -10,14 +10,49 @@ import ReactMarkdown from 'react-markdown';
 type
 Props = {
   hack: object,
-  fetchFromServer: Function
+  user: object,
+  fetchFromServer: Function,
+  join: Function,
+  leave: Function,
 };
+
+var TeamList = React.createClass ({
+  getInitialState: function() {
+    if (this.props.hack.joiners) {
+      return { value: this.props.hack.joiners };
+    } else {
+      return { value: []};
+    }
+  },
+
+  render: function() {
+    if (!this.props.hack || !this.props.hack.joinersDisplay) {
+      return (
+        <div>Loading...</div>
+      );
+    }
+    var members = this.props.hack.joinersDisplay.map(function (member) {
+      return (
+        <p key={member._id}>{member.username}</p>
+      );
+    });
+
+    return (
+      <div className="field">
+        {members}
+      </div>
+    );
+   }
+});
 
 export class HackViewComponent extends React.Component {
 
   static propTypes = {
     hack: PropTypes.object,
-    fetchFromServer: PropTypes.func.isRequired
+    user: PropTypes.object,
+    fetchFromServer: PropTypes.func.isRequired,
+    join: PropTypes.func.isRequired,
+    leave: PropTypes.func.isRequired
   };
 
   componentWillMount() {
@@ -32,6 +67,14 @@ export class HackViewComponent extends React.Component {
   getData() {
     this.setState({
     });
+  }
+
+  handleJoin(hack) {
+    this.props.join(hack);
+  }
+
+  handleLeave(hack) {
+    this.props.leave(hack);
   }
 
   render() {
@@ -50,14 +93,21 @@ export class HackViewComponent extends React.Component {
               </a>
               <p/>
 
-              <Button className="fluid" color="red">
+              <Button color="red"  className={this.props.user && this.props.user.user.judge === true ? 'fluid' : 'hide-it' }>
                 Nominate
               </Button>
               <p/>
 
-              <Button color="red" className={this.props.hack.hasJoined ? 'hide-it' : 'fluid'}>
+              <Button color="red" className={!this.props.user.user._id || this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
+                      onClick={(hack) => this.handleJoin(this.props.hack.hack)}>
                 Join
               </Button>
+              <p/>
+              <Button color="red" className={!this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
+                      onClick={(hack) => this.handleLeave(this.props.hack.hack)}>
+                Leave
+              </Button>
+
               <div className="ui card fluid">
                 <div className="content">
                   <div className="header">Organizer</div>
@@ -69,10 +119,7 @@ export class HackViewComponent extends React.Component {
               <div className="ui card fluid">
                 <div className="content">
                   <div className="header">Team</div>
-                  <div className="">
-                    <p>John Doe</p>
-                    <p>Don Quixote</p>
-                  </div>
+                  <TeamList hack={ this.props.hack } />
                 </div>
               </div>
               <div className="ui card fluid">
@@ -117,6 +164,7 @@ export class HackViewComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  hack: state.hack
+  hack: state.hack,
+  user: state.user
 });
 export default connect(mapStateToProps, hackActions)(HackViewComponent);

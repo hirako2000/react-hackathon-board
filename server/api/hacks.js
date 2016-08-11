@@ -102,6 +102,39 @@ var updateEntity = function(existingEntity, newEntity) {
   existingEntity.pictureURL = newEntity.pictureURL || 'default-hack-image.png';
 };
 
+hacks.post('/:id/join', function * (next) {
+  console.log('POST /hacks/' + this.params.id + "/join");
+  var hackEntity;
+  if(this.params.id) {
+    hackEntity = yield Hack.findOne({ '_id' : this.params.id });
+  } else {
+    return;
+  }
+  var user = this.passport.user;
+
+  hackEntity.joiners.push(user._id);
+  yield hackEntity.save();
+
+  this.body = {success: "true"};
+});
+
+hacks.post('/:id/leave', function * (next) {
+  console.log('POST /hacks/' + this.params.id + "/leave");
+  var hackEntity;
+  if(this.params.id) {
+    hackEntity = yield Hack.findOne({ '_id' : this.params.id });
+  } else {
+    return;
+  }
+  var user = this.passport.user;
+
+  var indexOfJoiner = hackEntity.joiners.indexOf(user._id);
+  hackEntity.joiners.splice(indexOfJoiner, 1);
+  yield hackEntity.save();
+
+  this.body = {success: "true"};
+});
+
 hacks.post('/upload-image', upload.single('file'), function * (next) {
   console.log('POST /hacks/upload-image');
   if (!this.isAuthenticated()) {

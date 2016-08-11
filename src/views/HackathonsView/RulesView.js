@@ -10,13 +10,15 @@ import ReactMarkdown from 'react-markdown';
 
 type
 Props = {
-  user: Object
+  user: Object,
+  selectedHackathon: Object
 };
 
 class RulesView extends React.Component {
 
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
+    selectedHackathon: PropTypes.object
   };
 
   componentWillMount() {
@@ -24,7 +26,7 @@ class RulesView extends React.Component {
   }
 
   render() {
-    if(!this.props.user.hackathon || !this.props.user.hackathon.rules) {
+    if(!this.props.selectedHackathon || !this.props.selectedHackathon.rules) {
       return(
         <div>
           Loading...
@@ -37,7 +39,7 @@ class RulesView extends React.Component {
         <Segment>
           <div className="content">
             <div className="">
-              <ReactMarkdown source={this.props.user.hackathon.rules}/>
+              <ReactMarkdown source={this.props.selectedHackathon.rules}/>
             </div>
           </div>
         </Segment>
@@ -48,6 +50,7 @@ class RulesView extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user
+  user: state.user,
+  selectedHackathon: state.selectedHackathon
 });
 export default connect(mapStateToProps, userActions)(RulesView);

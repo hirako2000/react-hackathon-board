@@ -10,13 +10,15 @@ import ReactMarkdown from 'react-markdown';
 
 type
 Props = {
-  user: Object
+  user: Object,
+  selectedHackathon: Object
 };
 
 class PrizesView extends React.Component {
 
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
+    selectedHackathon: PropTypes.object
   };
 
   componentWillMount() {
@@ -24,7 +26,7 @@ class PrizesView extends React.Component {
   }
 
   render() {
-    if(!this.props.user.hackathon || !this.props.user.hackathon.prizes) {
+    if(!this.props.selectedHackathon || !this.props.selectedHackathon.prizes) {
       return(
         <div>
           Loading...
@@ -48,6 +50,7 @@ class PrizesView extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user
+  user: state.user,
+  selectedHackathon: state.selectedHackathon
 });
 export default connect(mapStateToProps, userActions)(PrizesView);

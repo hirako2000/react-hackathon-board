@@ -13,6 +13,7 @@ var HackSchema = new Schema({
   season: String,
   hackathon: String,
   open: Boolean,
+  completed: Boolean,
   location: String,
   science: Boolean,
   nominated: Boolean

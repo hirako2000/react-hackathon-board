@@ -1,5 +1,6 @@
 import Router from 'koa-router';
 import Hack from '../models/hack';
+import Hackathon from '../models/hackathon';
 import User from '../models/user';
 import multer from 'koa-router-multer';
 var upload = multer({ dest: 'uploads/' });
@@ -17,7 +18,8 @@ hacks.get('/', function * (next) {
   if (selectedHackathonId && selectedHackathonId !== "-1") {
     hacks = yield Hack.find({ 'hackathon' : selectedHackathonId });
   } else {
-    hacks = yield Hack.find({});
+    var activeHackathon = yield Hackathon.findOne({'active': true});
+    hacks = yield Hack.find({'hackathon' : activeHackathon._id});
   }
 
   var response;
@@ -99,6 +101,7 @@ var updateEntity = function(existingEntity, newEntity) {
   existingEntity.shortDescription = newEntity.shortDescription;
   existingEntity.description = newEntity.description;
   existingEntity.open = newEntity.open;
+  existingEntity.completed = newEntity.completed;
   existingEntity.pictureURL = newEntity.pictureURL || 'default-hack-image.png';
 };
 

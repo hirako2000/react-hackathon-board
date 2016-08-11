@@ -22,7 +22,7 @@ class HackathonHeaderView extends React.Component {
   };
 
   componentWillMount() {
-
+    this.props.listFromServer();
   }
 
   render() {

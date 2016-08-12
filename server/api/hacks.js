@@ -65,7 +65,7 @@ hacks.get('/:id', function * (next) {
 hacks.put('/:id', function * (next) {
   console.log('PUT /hacks/' + this.params.id);
   if (!this.isAuthenticated()) {
-    return this.status = 403;
+    return this.status = 401;
   }
 
   var hackEntity;
@@ -84,7 +84,7 @@ hacks.put('/:id', function * (next) {
 hacks.post('/', function * (next) {
   console.log('POST /hacks/');
   if (!this.isAuthenticated()) {
-    return this.status = 403;
+    return this.status = 401;
   }
 
   var hack = this.request.body;
@@ -107,6 +107,10 @@ var updateEntity = function(existingEntity, newEntity) {
 
 hacks.post('/:id/join', function * (next) {
   console.log('POST /hacks/' + this.params.id + "/join");
+  if (!this.isAuthenticated()) {
+    return this.status = 401;
+  }
+
   var hackEntity;
   if(this.params.id) {
     hackEntity = yield Hack.findOne({ '_id' : this.params.id });
@@ -123,6 +127,10 @@ hacks.post('/:id/join', function * (next) {
 
 hacks.post('/:id/leave', function * (next) {
   console.log('POST /hacks/' + this.params.id + "/leave");
+  if (!this.isAuthenticated()) {
+    return this.status = 401;
+  }
+
   var hackEntity;
   if(this.params.id) {
     hackEntity = yield Hack.findOne({ '_id' : this.params.id });
@@ -133,6 +141,29 @@ hacks.post('/:id/leave', function * (next) {
 
   var indexOfJoiner = hackEntity.joiners.indexOf(user._id);
   hackEntity.joiners.splice(indexOfJoiner, 1);
+  yield hackEntity.save();
+
+  this.body = {success: "true"};
+});
+
+hacks.post('/:id/nominate', function * (next) {
+  console.log('POST /hacks/' + this.params.id + "/nominate");
+  if (!this.isAuthenticated()) {
+    return this.status = 401;
+  }
+  var user = this.passport.user;
+  if (!user.judge === true) {
+    return this.status = 403;
+  }
+
+  var hackEntity;
+  if(this.params.id) {
+    hackEntity = yield Hack.findOne({ '_id' : this.params.id });
+  } else {
+    return this.status = 404;
+  }
+
+  hackEntity.nominated = true;
   yield hackEntity.save();
 
   this.body = {success: "true"};

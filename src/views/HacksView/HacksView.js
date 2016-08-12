@@ -55,6 +55,14 @@ export class HacksAsCardsComponent extends React.Component {
       return (
         <Column key={card._id}>
           <Card className="fluid">
+            <div className={card.nominated === true ? "extra content" : "hide-it"}>
+                <span className="left floated">
+                  {card.nominated === true ? "Nominated" : ""}
+                </span>
+                <i className="float-right minus circle icon"
+                 className={card.nominated !== true ? 'float-right minus circle icon' : 'float-right red trophy icon'}>
+                </i>
+            </div>
             <a href={ '#/hacks/' + card._id}>
               <Reveal className="fade">
                 <Content className="hidden">
@@ -74,6 +82,14 @@ export class HacksAsCardsComponent extends React.Component {
                 <span className="time">{card.shortDescription}</span>
               </div>
             </Content>
+            <div className={card.completed === true ? "extra content" : "hide-it"}>
+                <span className="left floated">
+                  {card.completed === true ? "Completed" : "Uncompleted"}
+                </span>
+                <i className="float-right minus circle icon"
+                 className={card.completed !== true ? 'float-right minus circle icon' : 'float-right green checkmark icon'}>
+                </i>
+            </div>
           </Card>
         </Column>
       );

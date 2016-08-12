@@ -14,6 +14,7 @@ Props = {
   fetchFromServer: Function,
   join: Function,
   leave: Function,
+  nominate: Function
 };
 
 var TeamList = React.createClass ({
@@ -52,7 +53,8 @@ export class HackViewComponent extends React.Component {
     user: PropTypes.object,
     fetchFromServer: PropTypes.func.isRequired,
     join: PropTypes.func.isRequired,
-    leave: PropTypes.func.isRequired
+    leave: PropTypes.func.isRequired,
+    nominate: PropTypes.func.isRequired
   };
 
   componentWillMount() {
@@ -77,6 +79,10 @@ export class HackViewComponent extends React.Component {
     this.props.leave(hack);
   }
 
+  handleNominate(hack) {
+    this.props.nominate(hack);
+  }
+
   render() {
     if(!this.props.hack.hack) {
       return (<div>Loading...</div>);
@@ -93,7 +99,10 @@ export class HackViewComponent extends React.Component {
               </a>
               <p/>
 
-              <Button color="red"  className={this.props.user && this.props.user.user.judge === true ? 'fluid' : 'hide-it' }>
+              <Button color="red"
+                      className={this.props.hack.hack.nominated === true || !this.props.user.user._id
+                        || this.props.user.user.judge !== true ? 'hide-it' : 'fluid' }
+                      onClick={(hack) => this.handleNominate(this.props.hack.hack)}>
                 Nominate
               </Button>
               <p/>
@@ -116,17 +125,16 @@ export class HackViewComponent extends React.Component {
                   </div>
                 </div>
 
-                <div className="extra content">
-                    <span className="left floated">
-                      {this.props.hack.hack.completed === true ? "Completed" : "Uncompleted"}
-                    </span>
-                    <i className="float-right minus circle icon"
-                     className={this.props.hack.hack.completed !== true ? 'float-right minus circle icon' : 'float-right checkmark icon'}>
-                    </i>
-                </div>
-
               </div>
               <div className="ui card fluid">
+                <div className={this.props.hack.hack.nominated === true ? "extra content" : "hide-it"}>
+                    <span className="left floated">
+                      {this.props.hack.hack.nominated === true ? "Nominated" : ""}
+                    </span>
+                    <i className="float-right minus circle icon"
+                     className={this.props.hack.hack.nominated !== true ? 'float-right minus circle icon' : 'float-right red trophy icon'}>
+                    </i>
+                </div>
                 <div className="content">
                   <div className="header">Team</div>
                   <TeamList hack={ this.props.hack } />
@@ -137,6 +145,14 @@ export class HackViewComponent extends React.Component {
                     </span>
                     <i className="float-right minus circle icon"
                      className={this.props.hack.hack.open !== true ? 'float-right minus circle icon' : 'float-right checkmark icon'}>
+                    </i>
+                </div>
+                <div className="extra content">
+                    <span className="left floated">
+                      {this.props.hack.hack.completed === true ? "Completed" : "Uncompleted"}
+                    </span>
+                    <i className="float-right minus circle icon"
+                     className={this.props.hack.hack.completed !== true ? 'float-right minus circle icon' : 'float-right checkmark icon'}>
                     </i>
                 </div>
               </div>

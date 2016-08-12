@@ -42,9 +42,18 @@ export const join = (hackEntity) => (dispatch) => {
     });
 };
 
-
 export const leave = (hackEntity) => (dispatch) => {
   axios.post('/api/hacks/' + hackEntity._id + "/leave")
+    .then((res) => {
+      axios.get('/api/hacks/' + hackEntity._id)
+        .then((ress) => {
+          dispatch(hack(ress.data));
+        });
+    });
+};
+
+export const nominate = (hackEntity) => (dispatch) => {
+  axios.post('/api/hacks/' + hackEntity._id + "/nominate")
     .then((res) => {
       axios.get('/api/hacks/' + hackEntity._id)
         .then((ress) => {
@@ -96,6 +105,7 @@ export const actions = {
   fetchFromServer,
   join,
   leave,
+  nominate,
   fetchHackathonsFromServer,
   updateToSever,
   reset

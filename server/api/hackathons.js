@@ -38,7 +38,11 @@ hackathons.get('/:id', function * (next) {
 hackathons.put('/:id', function * (next) {
   console.log('PUT /hackathons/' + this.params.id);
   if (!this.isAuthenticated()) {
-    this.redirect('/#/login');
+    return this.status = 401;
+  }
+  var user = this.passport.user;
+  if (!user.judge === true) {
+    return this.status = 403;
   }
 
   var hackathonEntity;
@@ -54,7 +58,11 @@ hackathons.put('/:id', function * (next) {
 hackathons.post('/', function * (next) {
   console.log('POST /hackathons/');
   if (!this.isAuthenticated()) {
-    this.redirect('/#/login');
+    return this.status = 401;
+  }
+  var user = this.passport.user;
+  if (!user.judge === true) {
+    return this.status = 403;
   }
 
   var hackathon = this.request.body;
@@ -81,6 +89,14 @@ var updateEntity = function(existingEntity, newEntity) {
 
 hackathons.post('/upload-image', upload.single('file'), function * (next) {
   console.log('POST /hackathons/upload-image');
+  if (!this.isAuthenticated()) {
+    return this.status = 401;
+  }
+  var user = this.passport.user;
+  if (!user.judge === true) {
+    return this.status = 403;
+  }
+
   var rawFilename = this.req.file.filename;
   var mimeType = this.req.file.mimetype;
   console.log("Uploaded file " + rawFilename);

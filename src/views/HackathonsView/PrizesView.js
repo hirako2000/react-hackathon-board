@@ -39,7 +39,7 @@ class PrizesView extends React.Component {
         <Segment>
           <div className="content">
             <div className="">
-              <ReactMarkdown source={this.props.user.hackathon.prizes}/>
+              <ReactMarkdown source={this.props.selectedHackathon.prizes}/>
             </div>
           </div>
         </Segment>

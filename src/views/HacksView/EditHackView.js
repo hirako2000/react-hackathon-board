@@ -150,17 +150,20 @@ var CompletedInput = React.createClass ({
 var HackathonInput = React.createClass ({
   getInitialState: function() {
     if (this.props.hack.hackathon) {
-      return { value: this.props.hack.hackathon };
+      return { value: this.props.hack.hackathon._id };
     } else {
-      return { value: -1};
+      if(this.props.selectedHackathon) {
+        this.props.hack.hackathon = this.props.selectedHackathon._id;
+        return {value: this.props.selectedHackathon._id}
+      } else {
+        return { value: -1};
+      }
     }
   },
 
   handleChange: function(event) {
     this.setState({ value: event.target.value });
     this.props.hack.hackathon = event.target.value;
-    console.log('Hackathon Dropdown changed to ' + event.target.value);
-    console.log('Hackathon prop changed to ' + this.props.hack.hackathon );
   },
 
   render: function() {
@@ -169,24 +172,20 @@ var HackathonInput = React.createClass ({
         <option key="-1" value="-1">Loading...</option>
       );
     }
+
     var hackathons = this.props.hackathons.hackathons.map(function (hackathon) {
       return (
-        <option key={hackathon._id} value={hackathon._id}>{hackathon.title}</option>
+        <option key={hackathon._id} value={hackathon._id}
+                >{hackathon.title}
+        </option>
       );
     });
 
-    // if none is selected, pick the active hackathon
-    if (!this.props.hack.hackathon) {
-      for (var hackathon of this.props.hackathons.hackathons) {
-        if (hackathon.active) {
-          this.props.hack.hackathon = hackathon._id;
-        }
-      }
-    }
-
     return (
       <div className="field">
-        <select className="ui dropdown" onChange={this.handleChange} value={this.state.value}>
+        <select className="ui dropdown"
+                value={this.props.hack.hackathon}
+                onChange={this.handleChange}>
           {hackathons}
         </select>
       </div>
@@ -244,7 +243,7 @@ export class HackViewComponent extends React.Component {
             <DescriptionInput hack={ this.props.hack.hack } />
             <OpenInput  hack={ this.props.hack.hack } />
             <CompletedInput  hack={ this.props.hack.hack } />
-            <HackathonInput  hack={ this.props.hack.hack } hackathons= {this.props.hackathons} />
+            <HackathonInput  hack={ this.props.hack.hack } hackathons= {this.props.hackathons} selectedHackathon={this.props.selectedHackathon}/>
             <DropzoneSingleImageComponent hack={ this.props.hack.hack } />
             <p>
               <button className="ui button teal" onClick={(hack) => this.handleSubmit(this.props.hack.hack)}>
@@ -260,6 +259,7 @@ export class HackViewComponent extends React.Component {
 
 const mapStateToProps = (state) => ({
   hack: state.hack,
-  hackathons: state.hackathons
+  hackathons: state.hackathons,
+  selectedHackathon: state.selectedHackathon
 });
 export default connect(mapStateToProps, hackActions)(HackViewComponent);

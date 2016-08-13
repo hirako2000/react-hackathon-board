@@ -290,7 +290,7 @@ export class HackathonViewComponent extends React.Component {
     }
     return (
       // The key is important for the component to be reset properly
-      <Segment key={this.props.hackathon.hackathon._id}>
+      <Segment key={this.props.hackathon.hackathon ? this.props.hackathon.hackathon._id : null}>
           <div className="ui form">
             <h1>{ this.props.hackathon.hackathon.title }</h1>
 
@@ -330,6 +330,6 @@ export class HackathonViewComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  hackathon: state.hackathon || { hackathon: {}}
+  hackathon: state.hackathon ? state.hackathon : {hackathon : {}}
 });
 export default connect(mapStateToProps, hackathonActions)(HackathonViewComponent);

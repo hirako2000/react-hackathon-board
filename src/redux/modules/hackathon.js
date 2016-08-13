@@ -44,7 +44,7 @@ export const updateToSever = (id, req) => (dispatch) => {
         dispatch(notifSend(notification(res.data.title + ' is now updated', 'success')));
       });
   } else {
-    axios.post('/api/hackathons/', req)
+    axios.post('/api/hackathons/', req.hackathon)
       .then((res) => {
         dispatch(update(res.data));
         dispatch(notifSend(notification(res.data.title + ' is now created', 'success')));

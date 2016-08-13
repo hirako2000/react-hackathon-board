@@ -285,7 +285,7 @@ export class HackathonViewComponent extends React.Component {
   }
 
   render() {
-    if(!this.props.hackathon || !this.props.hackathon.hackathon) {
+    if(!this.props.hackathon) {
       return <div>Loading...</div>
     }
     return (
@@ -330,6 +330,6 @@ export class HackathonViewComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  hackathon: state.hackathon
+  hackathon: state.hackathon || { hackathon: {}}
 });
 export default connect(mapStateToProps, hackathonActions)(HackathonViewComponent);

@@ -32,7 +32,7 @@ export const fetchFromServer = (id) => (dispatch) => {
 };
 
 export const reset = () => (dispatch) => {
-  dispatch(hackathon({}));
+  dispatch(hackathon({hackathon: {}}));
 };
 
 export const updateToSever = (id, req) => (dispatch) => {

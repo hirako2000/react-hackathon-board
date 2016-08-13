@@ -19,7 +19,11 @@ hacks.get('/', function * (next) {
     hacks = yield Hack.find({ 'hackathon' : selectedHackathonId });
   } else {
     var activeHackathon = yield Hackathon.findOne({'active': true});
-    hacks = yield Hack.find({'hackathon' : activeHackathon._id});
+    if (!activeHackathon) {
+      hacks = [];
+    } else {
+      hacks = yield Hack.find({'hackathon' : activeHackathon._id});
+    }
   }
 
   var response;

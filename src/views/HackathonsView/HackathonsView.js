@@ -44,6 +44,14 @@ export class HackathonsAsCardsComponent extends React.Component {
       return (<div>Loadingo</div>)
     }
 
+    if(this.props.hackathons.hackathons.length === 0) {
+      return  (
+        <h2>
+          There is no hackathon yet!
+        </h2>
+      )
+    }
+
     var cards = this.props.hackathons.hackathons
     .map(function (card) {
 
@@ -101,7 +109,8 @@ export class HackathonsAsCardsComponent extends React.Component {
     return(
       <div className="ui container">
         <Segment className="basic stackable one column grid">
-          <Button className="column right floated" color="blue" onClick={this.handleCreate} >
+          <Button className={!this.props.user || !this.props.user.user || !this.props.user.user._id ? 'hide-it' : "column right floated"}
+                  color="blue" onClick={this.handleCreate} >
             <Icon className="plus"/> Create Hackathon
           </Button>
         </Segment>

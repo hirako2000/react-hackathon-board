@@ -93,6 +93,26 @@ var DescriptionInput = React.createClass ({
   }
 });
 
+var LocationInput = React.createClass ({
+  getInitialState: function() {
+    return {value: this.props.hack.location || '' };
+  },
+  handleChange: function(event) {
+    this.props.hack.location = event.target.value;
+    this.setState({value: event.target.value});
+  },
+  render: function() {
+    return (
+        <div className="field">
+          <label>Location</label>
+          <input type="text" value={ this.state.value }
+                 onChange={this.handleChange}>
+          </input>
+        </div>
+    );
+  }
+});
+
 var OpenInput = React.createClass ({
   getInitialState: function() {
     return {value: this.props.hack.open || false };
@@ -140,6 +160,31 @@ var CompletedInput = React.createClass ({
           <label>Completed</label>
         </div>
         <span className="ui" data-position="top left" data-tooltip="Check this box once the hack is completed" data-inverted="">
+          <i className="help icon"></i>
+        </span>
+      </div>
+    );
+  }
+});
+
+var ScienceInput = React.createClass ({
+  getInitialState: function() {
+    return {value: this.props.hack.science || false };
+  },
+  handleChange: function(event) {
+    this.props.hack.science = !this.props.hack.science;
+    this.setState({ value: this.props.hack.science });
+  },
+
+  render: function() {
+    return (
+      <div className="field">
+        <div className="ui checkbox">
+          <input type="checkbox" checked={this.state.value}
+                 onChange={this.handleChange}/>
+          <label>Science</label>
+        </div>
+        <span className="ui" data-position="top left" data-tooltip="Check this box if this is science project" data-inverted="">
           <i className="help icon"></i>
         </span>
       </div>
@@ -210,7 +255,6 @@ export class HackViewComponent extends React.Component {
     } else {
       this.props.reset();
     }
-    console.log("going to fetch existing hackathons");
     this.props.fetchHackathonsFromServer();
   }
 
@@ -238,10 +282,19 @@ export class HackViewComponent extends React.Component {
       <Segment key={ hack._id }>
           <div className="ui form">
             <h1>{ hack.title  }</h1>
-            <TitleInput hack={ this.props.hack.hack } />
+            <div className="fields">
+              <div className="eight wide field">
+                <TitleInput hack={ this.props.hack.hack } />
+              </div>
+              <div className="eight wide field">
+                <LocationInput  hack={ this.props.hack.hack } />
+              </div>
+            </div>
             <ShortDescriptionInput hack={ this.props.hack.hack } />
             <DescriptionInput hack={ this.props.hack.hack } />
             <OpenInput  hack={ this.props.hack.hack } />
+            <ScienceInput  hack={ this.props.hack.hack } />
+
             <CompletedInput  hack={ this.props.hack.hack } />
             <HackathonInput  hack={ this.props.hack.hack } hackathons= {this.props.hackathons} selectedHackathon={this.props.selectedHackathon}/>
             <DropzoneSingleImageComponent hack={ this.props.hack.hack } />

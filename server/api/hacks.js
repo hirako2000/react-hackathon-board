@@ -107,6 +107,8 @@ var updateEntity = function(existingEntity, newEntity) {
   existingEntity.open = newEntity.open;
   existingEntity.completed = newEntity.completed;
   existingEntity.pictureURL = newEntity.pictureURL || 'default-hack-image.png';
+  existingEntity.science = newEntity.science;
+  existingEntity.location = newEntity.location;
 };
 
 hacks.post('/:id/join', function * (next) {

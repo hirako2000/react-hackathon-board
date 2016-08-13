@@ -124,6 +124,14 @@ export class HackViewComponent extends React.Component {
                     <span>{this.props.hack.ownerDisplay}</span>
                   </div>
                 </div>
+                <div className="extra content">
+                    <span className="left floated">
+                      Science
+                    </span>
+                    <i className="float-right minus circle icon"
+                     className={this.props.hack.hack.science !== true ? 'float-right minus circle icon' : 'float-right checkmark icon'}>
+                    </i>
+                </div>
 
               </div>
               <div className="ui card fluid">

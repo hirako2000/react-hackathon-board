@@ -1,5 +1,5 @@
 [version]
-0.27.0
+0.30.0
 
 [ignore]
 .*/bin/.*

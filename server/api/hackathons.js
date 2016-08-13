@@ -50,6 +50,10 @@ hackathons.put('/:id', function * (next) {
     hackathonEntity = yield Hackathon.findOne({ '_id' : this.params.id });
     updateEntity(hackathonEntity, this.request.body);
     hackathonEntity.owner = this.passport.user._id;
+    if (hackathonEntity.active === true) {
+      // set other hackathons as inactive
+      yield Hackathon.update({}, {active: false}, {multi: true});
+    }
     yield hackathonEntity.save();
   }
   this.body = hackathonEntity;
@@ -69,6 +73,10 @@ hackathons.post('/', function * (next) {
   var hackathonEntity = new Hackathon();
   updateEntity(hackathonEntity, hackathon);
   hackathonEntity.owner = this.passport.user._id;
+  if (hackathonEntity.active === true) {
+    // set other hackathons as inactive
+    yield Hackathon.update({}, {active: false}, {multi: true});
+  }
   yield hackathonEntity.save();
   this.body = hackathonEntity;
 });

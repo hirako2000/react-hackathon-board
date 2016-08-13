@@ -18,12 +18,14 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-User.findOne({ username: 'test' }, function (err, testUser) {
+User.findOne({ username: 'test@test.com' }, function (err, testUser) {
   if (!testUser) {
     console.log('test user did not exist; creating test user...');
     testUser = new User({
-      username: 'test',
-      password: 'test'
+      username: 'test@test.com',
+      email: 'test@test.com',
+      password: 'test',
+      judge: true
     });
     testUser.save();
     console.log('test user created')

@@ -12,7 +12,7 @@
     "compile": "better-npm-run compile",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "start": "better-npm-run start",
+    "start": "better-npm-run start -- --no_debug",
     "dev": "better-npm-run dev",
     "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
@@ -40,6 +40,7 @@
     "deploy": {
       "command": "npm run clean && npm run compile",
       "env": {
+        "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
     },
@@ -60,7 +61,7 @@
     "start": {
       "command": "babel-node bin/server",
       "env": {
-        "NODE_ENV": "development",
+        "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
     },
@@ -87,6 +88,7 @@
     "babel-plugin-transform-react-constant-elements": "^6.9.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.2.7",
     "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
@@ -136,11 +138,11 @@
     "passport-twitter": "^1.0.4",
     "postcss-loader": "^0.9.1",
     "re-notif": "^1.0.2",
-    "react": "^15.1.0",
-    "react-addons-css-transition-group": "^15.1.0",
-    "react-addons-test-utils": "^15.1.0",
+    "react": "^15.3.0",
+    "react-addons-css-transition-group": "^15.3.0",
+    "react-addons-test-utils": "^15.3.0",
     "react-datepicker": "^0.29.0",
-    "react-dom": "^15.1.0",
+    "react-dom": "^15.3.0",
     "react-dropzone-component": "^1.0.4",
     "react-markdown": "^2.2.0",
     "react-redux": "^4.4.5",

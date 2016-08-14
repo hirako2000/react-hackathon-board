@@ -18,7 +18,6 @@ export const listFromServer = (value) => (dispatch) => {
   var hackathonId = value && value._id ? value._id : "-1";
   axios.get('/api/hacks?hackathonId=' + hackathonId)
     .then((res) => {
-      console.log("dispatching hacks...");
       dispatch(hacks(res.data.hacks));
     });
 };

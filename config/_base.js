@@ -27,7 +27,7 @@ const config = {
   server_port : heroku_port || 3000,
 
   // DB configuration
-  db: process.env.MONGODB_URI || 'mongodb://localhost:27017/hackathon',
+  db: process.env.MONGODB_URI || 'mongodb://localhost:27017/hackathon-scratch',
 
   // ----------------------------------
   // Compiler Configuration
@@ -44,8 +44,11 @@ const config = {
     colors : true
   },
   compiler_vendor : [
+    'babel-polyfill',
     'history',
+    'jquery',
     'react',
+    'react-dom',
     'react-redux',
     'react-router',
     'react-router-redux',

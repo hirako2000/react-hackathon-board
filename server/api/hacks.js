@@ -3,7 +3,7 @@ import Hack from '../models/hack';
 import Hackathon from '../models/hackathon';
 import User from '../models/user';
 import multer from 'koa-router-multer';
-var upload = multer({ dest: 'uploads/' });
+var upload = multer({ dest: './dist/uploads/' });
 import lwip from 'lwip';
 import _ from 'lodash';
 import mongoose from 'mongoose';
@@ -198,9 +198,9 @@ hacks.post('/upload-image', upload.single('file'), function * (next) {
   }
   var outputFileName = rawFilename + '.' + fileType;
 
-  lwip.open('./uploads/' + rawFilename, fileType,  function(err, image){
+  lwip.open('./dist/uploads/' + rawFilename, fileType,  function(err, image){
     // TODO check for errors
-    var outputPath = './src/static/user-images/' + outputFileName;
+    var outputPath = './dist/user-images/' + outputFileName;
     // People are crazy, they send off huge image, we don't want that, but let's size them down
     // This logic will crop larger images, while keeping image ratio if image is smaller than 800*800
     var toWidth = 800;

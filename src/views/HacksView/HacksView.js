@@ -130,7 +130,6 @@ export class HacksAsCardsComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(JSON.stringify(state.hackathons.selected));
   return {
     hacks: state.hacks,
     selectedHackathon: state.selectedHackathon

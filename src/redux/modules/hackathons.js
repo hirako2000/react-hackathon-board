@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 import { selected } from './selectedHackathon';
+import { reducer as notifReducer, actions as notifActions, Notifs } from 're-notif';
+const { notifSend } = notifActions;
+import notification from './notification';
 
 export const HACKATHONS = 'HACKATHONS';
 export const SELECT = 'SELECT';
@@ -28,6 +31,7 @@ export const selectToServer = (hackathon) => (dispatch) => {
   axios.post('/api/users/select-hackathon/' + hackathon._id)
     .then((res) => {
       dispatch(selected(hackathon));
+      dispatch(notifSend(notification(hackathon.title + ' is now selected', 'success')));
     });
 };
 

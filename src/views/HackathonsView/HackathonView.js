@@ -60,7 +60,7 @@ export class HackathonViewComponent extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="ui card fluid">
+              <div className={hackathon.hackathon.location ? "ui card fluid" : "hide-it"}>
                 <div className="content">
                   <div className="header">Location</div>
                   <div className="">

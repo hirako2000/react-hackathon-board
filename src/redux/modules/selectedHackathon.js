@@ -27,8 +27,12 @@ export const listFromServer = () => (dispatch) => {
       for (var i = 0; i < response.length; i++) {
         if (response[i].active) {
           dispatch(select(response[i]));
-          break;
+          return;
         }
+      }
+      // if none are active, let's pick one
+      if(response.length > 0) {
+        dispatch(select(response[0]));
       }
     });
 };

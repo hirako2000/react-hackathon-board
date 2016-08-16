@@ -197,11 +197,20 @@ var HackathonInput = React.createClass ({
     if (this.props.hack.hackathon) {
       return { value: this.props.hack.hackathon._id };
     } else {
-      if(this.props.selectedHackathon) {
+      if(this.props.selectedHackathon._id) {
         this.props.hack.hackathon = this.props.selectedHackathon._id;
-        return {value: this.props.selectedHackathon._id}
+        return {value: this.props.hack.hackathon}
       } else {
+        console.log("No selected hackathons");
+        console.log("hackathons size: " + this.props.hackathons.length);
+        for (var hackathon in this.props.hackathons) {
+          if(hackathon.active === true){
+            this.props.hack.hackathon = hackathon._id;
+            return { value: hackathon._id};
+          }
+        }
         return { value: -1};
+
       }
     }
   },
@@ -220,8 +229,8 @@ var HackathonInput = React.createClass ({
 
     var hackathons = this.props.hackathons.hackathons.map(function (hackathon) {
       return (
-        <option key={hackathon._id} value={hackathon._id}
-                >{hackathon.title}
+        <option key={hackathon._id} value={hackathon._id}>
+          {hackathon.title}
         </option>
       );
     });

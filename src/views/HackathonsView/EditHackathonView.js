@@ -25,7 +25,7 @@ Props = {
 
 var DatePickerStartInput = React.createClass({
   getInitialState: function() {
-    return {value: moment(this.props.hackathon.startDate) };
+    return {value: moment(this.props.hackathon ? this.props.hackathon.startDate : {}) };
   },
 
   handleChange: function(date) {
@@ -48,7 +48,7 @@ var DatePickerStartInput = React.createClass({
 
 var DatePickerEndInput = React.createClass({
   getInitialState: function() {
-    return {value: moment(this.props.hackathon.endDate) };
+    return {value: moment(this.props.hackathon ? this.props.hackathon.endDate : {}) };
   },
 
   handleChange: function(date) {
@@ -71,7 +71,7 @@ var DatePickerEndInput = React.createClass({
 
 var TitleInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon.title || '' };
+    return {value: this.props.hackathon ? this.props.hackathon.title : '' };
   },
   handleChange: function(event) {
     this.props.hackathon.title = event.target.value;
@@ -93,7 +93,7 @@ var TitleInput = React.createClass ({
 
 var LocationInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon.location || '' };
+    return {value: this.props.hackathon ? this.props.hackathon.location : '' };
   },
   handleChange: function(event) {
     this.props.hackathon.location = event.target.value;
@@ -115,7 +115,7 @@ var LocationInput = React.createClass ({
 
 var ShortDescriptionInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon.shortDescription || '' };
+    return {value: this.props.hackathon ? this.props.hackathon.shortDescription : '' };
   },
   handleChange: function(event) {
     this.props.hackathon.shortDescription = event.target.value;
@@ -136,7 +136,7 @@ var ShortDescriptionInput = React.createClass ({
 
 var DescriptionInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon.description || '' };
+    return {value: this.props.hackathon ? this.props.hackathon.description : '' };
   },
   handleChange: function(event) {
     this.props.hackathon.description = event.target.value;
@@ -153,7 +153,7 @@ var DescriptionInput = React.createClass ({
         </div>
         <div className="eight wide field">
           <label>Description Preview</label>
-          <ReactMarkdown source={this.props.hackathon.description}/>
+          <ReactMarkdown source={this.props.hackathon ? this.props.hackathon.description : ''}/>
         </div>
       </div>
     );
@@ -162,7 +162,7 @@ var DescriptionInput = React.createClass ({
 
 var RulesInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon.rules || '' };
+    return {value: this.props.hackathon ? this.props.hackathon.rules : '' };
   },
   handleChange: function(event) {
     this.props.hackathon.rules = event.target.value;
@@ -179,7 +179,7 @@ var RulesInput = React.createClass ({
         </div>
         <div className="eight wide field">
           <label>Rule Preview</label>
-          <ReactMarkdown source={this.props.hackathon.rules}/>
+          <ReactMarkdown source={this.props.hackathon ? this.props.hackathon.rules: ''}/>
         </div>
       </div>
     );
@@ -188,7 +188,7 @@ var RulesInput = React.createClass ({
 
 var PrizesInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon.prizes || '' };
+    return {value: this.props.hackathon ? this.props.hackathon.prizes : '' };
   },
   handleChange: function(event) {
     this.props.hackathon.prizes = event.target.value;
@@ -205,7 +205,7 @@ var PrizesInput = React.createClass ({
         </div>
         <div className="eight wide field">
           <label>Prizes Preview</label>
-          <ReactMarkdown source={this.props.hackathon.prizes}/>
+          <ReactMarkdown source={this.props.hackathon ? this.props.hackathon.prizes : ''}/>
         </div>
       </div>
     );
@@ -215,7 +215,7 @@ var PrizesInput = React.createClass ({
 
 var OpenInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon.open || false };
+    return {value: this.props.hackathon ? this.props.hackathon.open : true };
   },
   handleChange: function(event) {
     this.props.hackathon.open = !this.props.hackathon.open;
@@ -236,7 +236,7 @@ var OpenInput = React.createClass ({
 
 var ActiveInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon.active || false };
+    return {value: this.props.hackathon ? this.props.hackathon.active : false };
   },
   handleChange: function(event) {
     this.props.hackathon.active = !this.props.hackathon.active;
@@ -292,7 +292,7 @@ export class HackathonViewComponent extends React.Component {
       // The key is important for the component to be reset properly
       <Segment key={this.props.hackathon.hackathon ? this.props.hackathon.hackathon._id : null}>
           <div className="ui form">
-            <h1>{ this.props.hackathon.hackathon.title }</h1>
+            <h1>{ this.props.hackathon && this.props.hackathon.hackathon ? this.props.hackathon.hackathon.title : ''}</h1>
 
             <div className="ui horizontal divider header">
               Summary
@@ -330,6 +330,6 @@ export class HackathonViewComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  hackathon: state.hackathon ? state.hackathon : {hackathon : {}}
+  hackathon: state.hackathon
 });
 export default connect(mapStateToProps, hackathonActions)(HackathonViewComponent);

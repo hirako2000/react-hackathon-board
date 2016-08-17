@@ -141,10 +141,7 @@ var OpenInput = React.createClass ({
 
 var CompletedInput = React.createClass ({
   getInitialState: function() {
-
-
     return {value: this.props.hack.completed || false };
-
   },
   handleChange: function(event) {
     this.props.hack.completed = !this.props.hack.completed;
@@ -201,8 +198,6 @@ var HackathonInput = React.createClass ({
         this.props.hack.hackathon = this.props.selectedHackathon._id;
         return {value: this.props.hack.hackathon}
       } else {
-        console.log("No selected hackathons");
-        console.log("hackathons size: " + this.props.hackathons.length);
         for (var hackathon in this.props.hackathons) {
           if(hackathon.active === true){
             this.props.hack.hackathon = hackathon._id;
@@ -272,6 +267,9 @@ export class HackViewComponent extends React.Component {
   }
 
   handleSubmit(val) {
+    if(!val.hackathon && this.props.selectedHackathon._id) {
+      val.hackathon = this.props.selectedHackathon._id;
+    }
     this.props.updateToSever(this.props.hack.hack ? this.props.hack.hack._id : null, val);
     // TODO - We should use react-router's history
     //this.props.history.push('#/hacks'); // deprecated?

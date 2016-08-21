@@ -43,7 +43,7 @@ export class HackathonViewComponent extends React.Component {
         <div className="ui stackable internally celled grid">
           <div className="row">
             <div className="four wide column">
-              <div className="ui visible items fluid">
+              <div className={!this.props.user || !this.props.user.user || this.props.user.user.judge !== true ? "hide-it" : "ui visible items fluid"}>
                 <a href={ '#/hackathons/edit/' + hackathon.hackathon._id}>
                   <div className="ui red fluid button">Edit</div>
                 </a>
@@ -100,6 +100,7 @@ export class HackathonViewComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  hackathon: state.hackathon
+  hackathon: state.hackathon,
+  user: state.user
 });
 export default connect(mapStateToProps, hackathonActions)(HackathonViewComponent);

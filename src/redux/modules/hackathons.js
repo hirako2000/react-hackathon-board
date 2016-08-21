@@ -27,12 +27,8 @@ export const listFromServer = () => (dispatch) => {
 };
 
 export const selectToServer = (hackathon) => (dispatch) => {
-  // TODO check the user is actually logged in
-  axios.post('/api/users/select-hackathon/' + hackathon._id)
-    .then((res) => {
-      dispatch(selected(hackathon));
-      dispatch(notifSend(notification(hackathon.title + ' is now selected', 'success')));
-    });
+    dispatch(selected(hackathon));
+    dispatch(notifSend(notification(hackathon.title + ' is now selected', 'success')));
 };
 
 export const actions = {

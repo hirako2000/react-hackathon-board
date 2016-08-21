@@ -100,7 +100,7 @@ export class HacksAsCardsComponent extends React.Component {
         <div className="ui items stackable sixteen column relaxed grid basic">
           <div className="three wide column">
             <div className="ui field">
-              <Button className="fluid" color="blue" onClick={this.handleCreate} >
+              <Button className={!this.props.user || !this.props.user.user || !this.props.user.user._id ? 'hide-it' : "fluid"} color="blue" onClick={this.handleCreate} >
                 <Icon className="plus"/> Create Hack
               </Button>
               <div className="ui items form">
@@ -132,7 +132,8 @@ export class HacksAsCardsComponent extends React.Component {
 const mapStateToProps = (state) => {
   return {
     hacks: state.hacks,
-    selectedHackathon: state.selectedHackathon
+    selectedHackathon: state.selectedHackathon,
+    user: state.user
   }
 }
 

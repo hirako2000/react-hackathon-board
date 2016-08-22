@@ -6,14 +6,22 @@ export class SignupView extends React.Component<void, Props, void> {
   constructor(props) {
     super(props);
     this.state = {
+        fullname: '',
         username: '',
         password: '',
         passwordConfirm: ''
     };
 
+    this.onFullnameChange = this.onFullnameChange.bind(this);
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onPasswordConfirmChange = this.onPasswordConfirmChange.bind(this);
+  };
+
+  onFullnameChange(ev) {
+    this.setState({
+      fullname: ev.target.value
+    });
   };
 
   onUsernameChange(ev) {
@@ -41,6 +49,13 @@ export class SignupView extends React.Component<void, Props, void> {
     $('form').form({
       on: 'blur',
       fields: {
+          fullname: {
+            identifier: 'fullname',
+            rules: [{
+              type: 'empty',
+              prompt: 'Please enter your full name'
+            }]
+          },
           username: {
               identifier: 'username',
               rules: [{
@@ -73,6 +88,11 @@ export class SignupView extends React.Component<void, Props, void> {
         <Segment className="ui stackable six columns grid basic">
           <div className="seven wide column">
             <form action="/api/auth/signup" method="POST" className="ui form">
+              <div className="field">
+                <label>Full Name</label>
+                <input type= "text" name="fullname" value={this.props.fullname}
+                       onChange={this.onFullnameChange} placeholder="John Doe" />
+              </div>
               <div className="field">
                 <label>Email</label>
                 <input type= "text" name="username" value={this.props.username}

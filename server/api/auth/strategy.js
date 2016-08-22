@@ -6,7 +6,7 @@ import PassortFacebook from 'passport-facebook';
 import PassportGithub from 'passport-github';
 import PassportGoogleOauth from 'passport-google-oauth';
 
-var user = { id: 1, username: 'test' }
+var user = { id: 1, username: 'test' };
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -58,12 +58,16 @@ passport.use(new PassportLocal.Strategy(function(username, password, done) {
   });
 }));
 
-passport.use('local-signup', new PassportLocal.Strategy(function(username, password, done) {
+passport.use('local-signup', new PassportLocal.Strategy({passReqToCallback: true}, function(req, username, password, done) {
   console.log("local signup strategy hit");
+  var fullname = req.body.fullname;
   User.findOne({ email: username }, function (err, user){
     if(!user) {
       console.log(username + " signing up with password..");
       var newUser = new User({
+        profile: {
+          name: fullname
+        },
         username: username,
         password: password,
         email: username
@@ -71,13 +75,14 @@ passport.use('local-signup', new PassportLocal.Strategy(function(username, passw
       newUser.save(function (error) {
         if (error){
           console.log('error', error);
+          done(null, false);
         } else {
           console.log(username + ' user created');
           done(null, newUser);
         }});
     } else {
       console.log(username + " already exists");
-      done(null, null);
+      done(null, false, { message: 'Email address already taken' });
     }
   });
 }));
@@ -116,7 +121,7 @@ passport.use(new PassortFacebook.Strategy({
           foundUser.save();
         }
         console.log(profile.displayName + ' logged in through Facebook');
-        done(null, foundUser);
+        done(null, false, { message: 'Email address already taken' });
       }
     });
   }

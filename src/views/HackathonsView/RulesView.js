@@ -34,16 +34,21 @@ class RulesView extends React.Component {
       );
     }
     return(
-      <Content>
-      <div className="ui items fluid">
-        <Segment>
-          <div className="content">
-            <div className="">
-              <ReactMarkdown source={this.props.selectedHackathon.rules}/>
+      <Content className="hacks-summary-margin">
+        <div className="ui items fluid">
+          <div className="ui items stackable sixteen column relaxed grid basic">
+            <div className="three wide column fluid">
+              <h1>Rules</h1>
             </div>
+            <Segment className="thirteen wide column">
+              <div className="content">
+                <div className="">
+                  <ReactMarkdown source={this.props.selectedHackathon.rules}/>
+                </div>
+              </div>
+            </Segment>
           </div>
-        </Segment>
-      </div>
+        </div>
       </Content>
     );
   }

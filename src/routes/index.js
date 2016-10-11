@@ -9,6 +9,7 @@ import { Route } from 'react-router';
 import CoreLayout from 'layouts/CoreLayout/CoreLayout';
 import LoginView from 'views/LoginView/LoginView';
 import SignupView from 'views/LoginView/SignupView';
+import ProfileView from 'views/ProfileView/ProfileView';
 import HomeView from 'views/HomeView/HomeView';
 import HackathonsView from 'views/HackathonsView/HackathonsView';
 import HackathonView from 'views/HackathonsView/HackathonView';
@@ -24,6 +25,7 @@ export default (store) => (
   <Route component={CoreLayout}>
     <Route name='login' path='/login' component={LoginView} />
     <Route name='signup' path='/signup' component={SignupView} />
+    <Route name='profile' path='/profile' component={ProfileView} />
     <Route name='home' path='/' component={HacksView} />
     <Route name='hackathons' path='/hackathons' component={HackathonsView} />
     <Route name='editHackathon' path='/hackathons/edit/:id' component={EditHackathonView} />

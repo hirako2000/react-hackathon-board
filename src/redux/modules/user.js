@@ -4,6 +4,7 @@ const { notifSend } = notifActions;
 import notification from './notification';
 
 export const USER = 'USER';
+export const UPDATE = 'UPDATE';
 
 // ------------------------------------
 // Actions
@@ -15,10 +16,30 @@ export function user (value: Object): Action {
   };
 }
 
+export function update (value: Object): Action {
+  return {
+    type: UPDATE,
+    payload: value
+  };
+}
+
 export const fetchFromServer = () => (dispatch) => {
   axios.get('/api/users/me')
     .then((res) => {
       dispatch(user(res.data));
+    });
+};
+
+export const updateToSever = (req) => (dispatch) => {
+  axios.put('/api/users/me', req)
+    .catch((res) => {
+      dispatch(notifSend(notification('Could not update profile', 'warning')));
+    })
+    .then((res) => {
+      if(res) {
+        dispatch(update(res.data));
+        dispatch(notifSend(notification(res.data.user.username + ' is now updated', 'success')));
+      }
     });
 };
 
@@ -28,6 +49,7 @@ export const reset = () => (dispatch) => {
 
 export const actions = {
   fetchFromServer,
+  updateToSever,
   reset
 };
 
@@ -35,7 +57,8 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [USER]: (state: Object, action: {payload: Object}): Object => action.payload
+  [USER]: (state: Object, action: {payload: Object}): Object => action.payload,
+  [UPDATE]: (state: Object, action: {payload: Object}) : Object => action.payload
 };
 
 // ------------------------------------

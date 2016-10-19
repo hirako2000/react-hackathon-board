@@ -78,14 +78,14 @@ export class HackathonViewComponent extends React.Component {
                     <div className="ui items fluid">
                       <div className="content">
                         <div className="">
-                          <ReactMarkdown source={hackathon.hackathon.description}/>
+                          <ReactMarkdown source={this.props.hackathon.hackathon.description}/>
                         </div>
                       </div>
                     </div>
                     <div className="ui items fluid">
                       <div className="content">
                         <div className="">
-                          <ReactMarkdown source={hackathon.hackathon.rules}/>
+                          <ReactMarkdown source={this.props.hackathon.hackathon.rules}/>
                         </div>
                       </div>
                     </div>

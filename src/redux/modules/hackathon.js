@@ -4,7 +4,7 @@ const { notifSend } = notifActions;
 import notification from './notification';
 
 export const HACKATHON = 'HACKATHON';
-export const UPDATE = 'UPDATE';
+export const UPDATE = 'UPDATE_HACKATHON';
 
 // ------------------------------------
 // Actions

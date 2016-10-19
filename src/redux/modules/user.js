@@ -4,7 +4,7 @@ const { notifSend } = notifActions;
 import notification from './notification';
 
 export const USER = 'USER';
-export const UPDATE = 'UPDATE';
+export const UPDATE = 'UPDATE_USER';
 
 // ------------------------------------
 // Actions

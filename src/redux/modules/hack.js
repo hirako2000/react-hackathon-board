@@ -5,7 +5,7 @@ import notification from './notification';
 import {hackathons} from './hackathons';
 
 export const HACK = 'HACK';
-export const UPDATE = 'UPDATE';
+export const UPDATE = 'UPDATE_HACK';
 
 // ------------------------------------
 // Actions

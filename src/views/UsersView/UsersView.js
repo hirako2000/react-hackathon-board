@@ -36,7 +36,7 @@ export class UsersAsCardsComponent extends React.Component {
             <a href={ '#/people/' + card._id}>
               <Reveal className="fade">
                 <Content className="visible">
-                  <Image src={card.pictureURL}
+                  <Image src={card.profile.pictureURL}
                          />
                 </Content>
               </Reveal>
@@ -45,16 +45,15 @@ export class UsersAsCardsComponent extends React.Component {
             <Content>
               <a href={ '#/people/' + card._id}>
                 <Header className="center aligned">
-                  {card.username}
+                  {card.profile.name}
                 </Header>
               </a>
-              <div className="center aligned ">
+              <div className="center aligned">
                 <p className="">
-                  {card.email}
+                  {card.username}
                 </p>
-                <div className="meta center aligned ">
-
-
+                <div className="meta center aligned">
+                  {card.profile.location}
                 </div>
               </div>
             </Content>

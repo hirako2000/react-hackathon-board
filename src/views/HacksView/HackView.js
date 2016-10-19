@@ -107,12 +107,12 @@ export class HackViewComponent extends React.Component {
               </Button>
               <p/>
 
-              <Button color="red" className={this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
+              <Button color="red" className={!this.props.user.user._id || this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
                       onClick={(hack) => this.handleJoin(this.props.hack.hack)}>
                 Join
               </Button>
               <p/>
-              <Button color="red" className={!this.props.user.user || !this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
+              <Button color="red" className={!this.props.user.user._id || !this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
                       onClick={(hack) => this.handleLeave(this.props.hack.hack)}>
                 Leave
               </Button>

@@ -66,16 +66,16 @@ var NavBarLeft = React.createClass({
         <Link activeClassName="active" className="item" to="hacks">
           <Icon className="lab" /> Hacks
         </Link>
-        <Link className="item" to="rules">
+        <Link activeClassName="active" className="item" to="rules">
           <Icon className="book" /> Rules
         </Link>
-        <Link className="item" to="prizes">
+        <Link activeClassName="active" className="item" to="prizes">
           <Icon className="gift" /> Prize
         </Link>
-        <Link className="item" to="hacks">
+        <Link activeClassName="active" className="item" to="hacks">
           <Icon className="trophy" /> Judging
         </Link>
-        <Link className="item" to="people">
+        <Link activeClassName="active" className="item" to="people">
           <Icon className="users" /> People
         </Link>
         <AccountNavBarView />

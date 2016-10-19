@@ -62,4 +62,10 @@ user.get('/', function * (next) {
   this.body = users;
 });
 
+user.get('/:id', function * (next) {
+  console.log('GET /users/' + this.params.id);
+  var user = yield User.findOne({'_id': this.params.id}, 'username profile judge');
+  this.body = user;
+});
+
 export default user;

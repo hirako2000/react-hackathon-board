@@ -6,7 +6,7 @@ import { reducer as notifReducer, actions as notifActions, Notifs } from 're-not
 import { Router, Route, Link } from 'react-router';
 import { actions as userActions } from '../../redux/modules/user';
 
-import { Menu, Item, Icon, Dropdown, Text} from 'react-semantify';
+import { Menu, Item, Icon, Dropdown} from 'react-semantify';
 
 type
 Props = {
@@ -29,12 +29,12 @@ class AccountNavBarView extends React.Component {
     if(!this.props.user || !this.props.user.user || !this.props.user.user._id) {
       return(
         <Menu className="right inverted borderless stackable">
-          <Item className="" type="link" href="#/login">
+          <Link activeClassName="active" className="item" to="login">
             <Icon className="sign in" /> Login
-          </Item>
-          <Item className="" type="link" href="#/signup">
+          </Link>
+          <Link activeClassName="active" className="item" to="signup">
             <Icon className="" /> Sign up
-          </Item>
+          </Link>
         </Menu>
       );
     }

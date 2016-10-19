@@ -75,7 +75,6 @@ export class ProfileView extends React.Component<void, Props, void> {
   }
 
   componentWillUnmount () {
-    this.props.reset();
   }
 
   componentDidMount() {

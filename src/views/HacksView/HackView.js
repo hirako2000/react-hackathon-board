@@ -34,7 +34,9 @@ var TeamList = React.createClass ({
     }
     var members = this.props.hack.joinersDisplay.map(function (member) {
       return (
-        <p key={member.id}>{member.username}</p>
+        <a href={ '#/people/' + member.id}>
+          <p key={member.id}>{member.username}</p>
+        </a>
       );
     });
 
@@ -121,7 +123,9 @@ export class HackViewComponent extends React.Component {
                 <div className="content">
                   <div className="header">Organizer</div>
                   <div className="">
-                    <span>{this.props.hack.ownerDisplay}</span>
+                    <a href={ '#/people/' + this.props.hack.hack.owner}>
+                      <span>{this.props.hack.ownerDisplay}</span>
+                    </a>
                   </div>
                 </div>
                 <div className="extra content">

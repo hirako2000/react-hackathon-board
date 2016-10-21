@@ -70,12 +70,12 @@ export class HackathonsAsCardsComponent extends React.Component {
 
             <Content>
               <a onClick={handleSelect.bind(this, card)}>
-                <Header className="center aligned">
+                <Header className="center aligned word-wrap">
                     {card.title}
                 </Header>
               </a>
               <div className="center aligned">
-                <p className="">
+                <p className="word-wrap">
                   {card.shortDescription}
                 </p>
               </div>

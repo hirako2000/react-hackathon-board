@@ -53,10 +53,10 @@ export class HackCardComponent extends React.Component {
 
           <Content>
             <a href={ '#/hacks/' + hack._id}>
-              <Header>{hack.title}</Header>
+              <Header className="word-wrap">{hack.title}</Header>
             </a>
             <div className="meta">
-              <span className="time">{hack.shortDescription}</span>
+              <span className="time word-wrap">{hack.shortDescription}</span>
             </div>
           </Content>
           <div className={hack.completed === true ? "extra content" : "hide-it"}>

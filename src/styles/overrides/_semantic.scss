@@ -105,6 +105,10 @@
   height: 100%;
 }
 
+.loading-height {
+  height: 320px;
+}
+
 @media (min-height: 320px) {
   .ui.footer {
     position: fixed;

@@ -6,6 +6,7 @@ import classes from './HackathonsView.scss';
 import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
 import ReactMarkdown from 'react-markdown';
+import moment from 'moment';
 
 type
 Props = {
@@ -60,6 +61,22 @@ export class HackathonViewComponent extends React.Component {
                   </div>
                 </div>
               </div>
+
+              <div className="ui card fluid">
+                <div className="content">
+                  <div className="header">Date</div>
+                  <div className="ui description">
+                    { (moment(hackathon.hackathon.startDate).month() !== moment(hackathon.hackathon.endDate).month() ?
+                      moment(hackathon.hackathon.startDate).format('Do MMM YY') :
+                      moment(hackathon.hackathon.startDate).format('Do'))
+                    + " - "
+                    + moment(hackathon.hackathon.endDate).format('Do MMM YY')
+                    }
+                  </div>
+                </div>
+              </div>
+
+
               <div className={hackathon.hackathon.location ? "ui card fluid" : "hide-it"}>
                 <div className="content">
                   <div className="header">Location</div>
@@ -74,22 +91,24 @@ export class HackathonViewComponent extends React.Component {
               <div key={this.props.hackathon.hackathon._id} className="ui stackable internally celled grid">
 
                 <div className="sixteen wide column">
-                  <div className="">
-                    <div className="ui items fluid">
-                      <div className="content">
-                        <div className="">
-                          <ReactMarkdown source={this.props.hackathon.hackathon.description ? this.props.hackathon.hackathon.description : ''}/>
-                        </div>
-                      </div>
+                  <Segment>
+                    <h3>About this Hackahton</h3>
+                    <div className="">
+                      <ReactMarkdown source={this.props.hackathon.hackathon.description ? this.props.hackathon.hackathon.description : ''}/>
                     </div>
-                    <div className="ui items fluid">
-                      <div className="content">
-                        <div className="">
-                          <ReactMarkdown source={this.props.hackathon.hackathon.rules ? this.props.hackathon.hackathon.rules : ''}/>
-                        </div>
-                      </div>
+                  </Segment>
+                  <Segment>
+                    <h3>Rules</h3>
+                    <div className="">
+                      <ReactMarkdown source={this.props.hackathon.hackathon.rules ? this.props.hackathon.hackathon.rules : ''}/>
                     </div>
-                  </div>
+                  </Segment>
+                  <Segment>
+                    <h3>Prize</h3>
+                    <div className="">
+                      <ReactMarkdown source={this.props.hackathon.hackathon.prizes ? this.props.hackathon.hackathon.prizes : ''}/>
+                    </div>
+                  </Segment>
                 </div>
               </div>
             </div>

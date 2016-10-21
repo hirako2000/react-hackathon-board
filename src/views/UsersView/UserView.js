@@ -50,43 +50,33 @@ class UserView extends React.Component {
               <h1>{this.props.otherUser.profile.name}</h1>
             </div>
             <div className="thirteen wide column">
-                <div className="ui raised segment">
-                  <div className="ui blue ribbon label">
-                    Description
-                  </div>
-                  <p></p>
+              <Segment>
+                <h3>About me</h3>
                   <pre className="">
                     {this.props.otherUser.profile.description}
                   </pre>
-                  <p></p>
+              </Segment>
 
-                  <div className="ui blue ribbon label">
-                    Location
-                  </div>
-                  <p></p>
+              <Segment>
+                <h3>Location</h3>
                   <span>
                     {this.props.otherUser.profile.location}
                   </span>
-                  <p></p>
+              </Segment>
 
-                  <div className="ui blue ribbon label">
-                    Website
-                  </div>
-                  <p></p>
+              <Segment>
+                <h3>Website</h3>
                   <span>
                     {this.props.otherUser.profile.website}
                   </span>
-                  <p></p>
+              </Segment>
 
-                  <div className="ui blue ribbon label">
-                    Email
-                  </div>
-                  <p></p>
-                  <span>
+              <Segment>
+                <h3>Email</h3>
+                 <span>
                     {this.props.otherUser.username}
                   </span>
-                  <p></p>
-                </div>
+              </Segment>
             </div>
           </div>
         </div>

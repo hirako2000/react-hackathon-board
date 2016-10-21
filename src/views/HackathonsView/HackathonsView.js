@@ -41,7 +41,15 @@ export class HackathonsAsCardsComponent extends React.Component {
   render() {
     var selectFunction = this.props.selectToServer;
     if(!this.props.hackathons || !this.props.hackathons.hackathons) {
-      return (<div>Loadingo</div>)
+      return (
+        <div className="ui vertical segment loading-height">
+          <div className="ui active inverted dimmer row">
+            <div className="ui medium inverted text loader">Loading</div>
+          </div>
+          <p></p>
+          <p></p>
+        </div>
+      )
     }
 
     var cards = this.props.hackathons.hackathons

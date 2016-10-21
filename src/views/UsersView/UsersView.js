@@ -29,6 +29,17 @@ export class UsersAsCardsComponent extends React.Component {
   }
 
   render() {
+    if(!this.props.users) {
+      return (
+        <div className="ui vertical segment loading-height">
+          <div className="ui active inverted dimmer row">
+            <div className="ui medium inverted text loader">Loading</div>
+          </div>
+          <p></p>
+          <p></p>
+        </div>
+      )
+    }
     var cards = this.props.users.map(function (card) {
       return (
         <Column key={card._id}>
@@ -64,9 +75,6 @@ export class UsersAsCardsComponent extends React.Component {
 
     return(
       <div className="ui container">
-        <Segment className="basic stackable one column grid">
-
-        </Segment>
         <Segment loading={!this.props.users} className="ui stackable three column grid basic">
           {cards}
         </Segment>

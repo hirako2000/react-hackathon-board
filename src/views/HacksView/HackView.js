@@ -34,7 +34,7 @@ var TeamList = React.createClass ({
     }
     var members = this.props.hack.joinersDisplay.map(function (member) {
       return (
-        <a href={ '#/people/' + member.id}>
+        <a href={ '#/people/' + member.id} key={member.id}>
           <p key={member.id}>{member.username}</p>
         </a>
       );

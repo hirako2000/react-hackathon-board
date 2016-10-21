@@ -53,14 +53,14 @@ hacks.get('/:id', function * (next) {
   for (var i = 0; i < hackEntity.joiners.length; i++) {
     var joiner = yield User.findOne({'_id': hackEntity.joiners[i]});
     joiners.push({
-      username: joiner.username ? joiner.username : joiner.email,
+      username: joiner.profile.name ? joiner.profile.name : joiner.email,
       id: joiner._id
     });
   }
 
   var response = {
     hack: hackEntity,
-    ownerDisplay: ownerUser.username ? ownerUser.username : ownerUser.email,
+    ownerDisplay: ownerUser.profile.name ? ownerUser.profile.name : ownerUser.email,
     isOwner: user && hackEntity.owner == user._id,
     hasJoined: user && hackEntity.joiners.indexOf(user._id) != -1,
     joinersDisplay: joiners

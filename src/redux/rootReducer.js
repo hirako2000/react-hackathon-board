@@ -6,6 +6,7 @@ import hackathon from './modules/hackathon';
 import selectedHackathon from './modules/selectedHackathon';
 import hacks from './modules/hacks';
 import myHacks from './modules/hacks';
+import nominatedHacks from './modules/hacks';
 import hack from './modules/hack';
 import user from './modules/user';
 import users from './modules/users';
@@ -19,6 +20,7 @@ export default combineReducers({
   selectedHackathon,
   hacks,
   myHacks,
+  nominatedHacks,
   hack,
   notifs,
   user,

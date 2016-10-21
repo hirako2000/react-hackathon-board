@@ -83,6 +83,30 @@ hacks.get('/my', function * (next) {
   this.body = response;
 });
 
+hacks.get('/nominated', function * (next) {
+  console.log('GET /hacks/nominated');
+  var selectedHackathonId =  this.request.query.hackathonId;
+  console.log("Nominated hacks with hackathon id: " + selectedHackathonId);
+  var hacks;
+  if (selectedHackathonId && selectedHackathonId !== "-1") {
+    hacks = yield Hack.find({ 'hackathon' : selectedHackathonId, 'nominated': true });
+  } else {
+    var activeHackathon = yield Hackathon.findOne({'active': true, 'nominated': true});
+    if (!activeHackathon) {
+      hacks = [];
+    } else {
+      hacks = yield Hack.find({'hackathon' : activeHackathon._id, 'nominated': true});
+    }
+  }
+
+  var response;
+  response = {
+    hacks: hacks
+  };
+  console.log("Returning " + hacks.length + " nominated hacks");
+  this.body = response;
+});
+
 hacks.put('/:id', function * (next) {
   console.log('PUT /hacks/' + this.params.id);
   if (!this.isAuthenticated()) {

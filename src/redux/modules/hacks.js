@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const HACKS = 'HACKS';
 export const MY_HACKS = 'MY_HACKS';
+export const NOMINATED_HACKS = 'MY_HACKS';
 
 // ------------------------------------
 // Actions
@@ -20,9 +21,16 @@ export function myHacks (value: Array): Action {
   };
 }
 
-export const listFromServer = (value) => (dispatch) => {
+export function nominatedHacks (value: Array): Action {
+  return {
+    type: NOMINATED_HACKS,
+    payload: value
+  };
+}
+
+export const listFromServer = (hackathon) => (dispatch) => {
   // TODO use config path instead
-  var hackathonId = value && value._id ? value._id : "-1";
+  var hackathonId = hackathon && hackathon._id ? hackathon._id : "-1";
   axios.get('/api/hacks?hackathonId=' + hackathonId)
     .then((res) => {
       dispatch(hacks(res.data.hacks));
@@ -30,16 +38,24 @@ export const listFromServer = (value) => (dispatch) => {
 };
 
 export const listMyHacksFromServer = () => (dispatch) => {
-  // TODO use config path instead
   axios.get('/api/hacks/my')
     .then((res) => {
       dispatch(myHacks(res.data.hacks));
     });
 };
 
+export const listNominatedHacksFromServer = (hackathon) => (dispatch) => {
+  var hackathonId = hackathon && hackathon._id ? hackathon._id : "-1";
+  axios.get('/api/hacks/nominated?hackathonId=' + hackathonId)
+    .then((res) => {
+      dispatch(nominatedHacks(res.data.hacks));
+    });
+};
+
 export const actions = {
   listFromServer,
-  listMyHacksFromServer
+  listMyHacksFromServer,
+  listNominatedHacksFromServer
 };
 
 // ------------------------------------
@@ -47,7 +63,8 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [HACKS]: (state: array, action: {payload: array}): array => action.payload,
-  [MY_HACKS]: (state: array, action: {payload: array}): array => action.payload
+  [MY_HACKS]: (state: array, action: {payload: array}): array => action.payload,
+  [NOMINATED_HACKS]: (state: array, action: {payload: array}): array => action.payload
 };
 
 // ------------------------------------

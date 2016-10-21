@@ -72,7 +72,7 @@ var NavBarLeft = React.createClass({
         <Link activeClassName="active" className="item" to="prizes">
           <Icon className="gift" /> Prize
         </Link>
-        <Link activeClassName="active" className="item" to="hacks">
+        <Link activeClassName="active" className="item" to="judging">
           <Icon className="trophy" /> Judging
         </Link>
         <Link activeClassName="active" className="item" to="people">

@@ -43,31 +43,27 @@ export class UsersAsCardsComponent extends React.Component {
     var cards = this.props.users.map(function (card) {
       return (
         <Column key={card._id}>
-          <Card className="fluid">
-            <a href={ '#/people/' + card._id}>
-              <Reveal className="fade">
-                <Content className="visible">
-                  <Image src={card.profile.pictureURL}
-                         />
-                </Content>
-              </Reveal>
-            </a>
-
-            <Content>
-              <a href={ '#/people/' + card._id}>
-                <Header className="center aligned">
-                  {card.profile.name}
-                </Header>
+          <Card className="ui">
+              <a className="image" href ={ '#/people/' + card._id}>
+                  <img src={
+                    card.profile.picture && card.profile.picture != ''
+                        ? 'user-images/' + card.profile.picture
+                      : 'user-images/' + 'default-hack-image.png'}/>
               </a>
-              <div className="center aligned">
-                <p className="">
+              <div className="content">
+                <a href={ '#/people/' + card._id} className="header">
+                  {card.profile.name}
+                </a>
+                <div className="description">
+                  <i className="mail icon"></i>
                   {card.username}
-                </p>
-                <div className="meta center aligned">
-                  {card.profile.location}
                 </div>
               </div>
-            </Content>
+              <div className="extra content">
+                <i className="marker icon"></i>
+                {card.profile.location ? card.profile.location : 'Unknown location' }
+              </div>
+
           </Card>
         </Column>
       );

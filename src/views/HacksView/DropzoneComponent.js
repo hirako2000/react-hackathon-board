@@ -5,6 +5,7 @@ import ReactDOMServer from 'react-dom/server';
 var dropzone;
 var fileName;
 var hack;
+var user;
 
 var componentConfig = {
   iconFiletypes: ['.jpg', '.png', '.gif'],
@@ -17,7 +18,13 @@ var componentConfig = {
 
 var getServerFileName = function(first, response) {
   fileName = response.filename;
-  hack.pictureURL = fileName;
+  if(hack) {
+    // a bit hacky, would be nice to make this component usable by anything instead
+    // of adding more variables like this, but anyway.
+    hack.pictureURL = fileName;
+  } else {
+    user.profile.picture = fileName;
+  }
 };
 
 var addedFileCallBack = function (file) {
@@ -83,6 +90,7 @@ export class DropzoneSingleImageComponent extends React.Component {
 
   render() {
     hack = this.props.hack;
+    user = this.props.user;
     return (
       <DropzoneComponent config={componentConfig}
                          eventHandlers={eventHandlers}

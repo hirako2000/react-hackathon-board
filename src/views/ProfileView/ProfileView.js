@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Label} from 'react-semantify';
 import { actions as userActions } from '../../redux/modules/user';
+import DropzoneSingleImageComponent from '../HacksView/DropzoneComponent';
 
 type
 Props = {
@@ -123,6 +124,8 @@ export class ProfileView extends React.Component<void, Props, void> {
                        value={this.props.user.user.profile.description}
                        onChange={this.onDescriptionChange} />
               </div>
+
+              <DropzoneSingleImageComponent user={ this.props.user.user } />
               <p>
                 <button className="ui fluid teal button"
                         onClick={(user) => this.handleSubmit(this.props.user.user)}>

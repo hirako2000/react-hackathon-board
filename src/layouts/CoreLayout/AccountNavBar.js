@@ -42,7 +42,7 @@ class AccountNavBarView extends React.Component {
       <Menu className="right inverted borderless stackable">
         <Dropdown init={true} className="inverted">
           <Item>
-            <Icon className="user" /> { this.props.user.user.username }
+            <Icon className="user" /> { this.props.user.user.profile.name ? this.props.user.user.profile.name : this.props.user.user.username }
           </Item>
           <Menu className="inverted">
             <Item className="" type="link" href="/#/hacks/my">

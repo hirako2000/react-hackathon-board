@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const HACKS = 'HACKS';
+export const MY_HACKS = 'MY_HACKS';
 
 // ------------------------------------
 // Actions
@@ -8,6 +9,13 @@ export const HACKS = 'HACKS';
 export function hacks (value: Array): Action {
   return {
     type: HACKS,
+    payload: value
+  };
+}
+
+export function myHacks (value: Array): Action {
+  return {
+    type: MY_HACKS,
     payload: value
   };
 }
@@ -21,15 +29,25 @@ export const listFromServer = (value) => (dispatch) => {
     });
 };
 
+export const listMyHacksFromServer = () => (dispatch) => {
+  // TODO use config path instead
+  axios.get('/api/hacks/my')
+    .then((res) => {
+      dispatch(myHacks(res.data.hacks));
+    });
+};
+
 export const actions = {
-  listFromServer
+  listFromServer,
+  listMyHacksFromServer
 };
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [HACKS]: (state: array, action: {payload: array}): array => action.payload
+  [HACKS]: (state: array, action: {payload: array}): array => action.payload,
+  [MY_HACKS]: (state: array, action: {payload: array}): array => action.payload
 };
 
 // ------------------------------------

@@ -15,6 +15,7 @@ import HackathonsView from 'views/HackathonsView/HackathonsView';
 import HackathonView from 'views/HackathonsView/HackathonView';
 import EditHackathonView from 'views/HackathonsView/EditHackathonView';
 import HacksView from 'views/HacksView/HacksView';
+import MyHacksView from 'views/HacksView/MyHacksView';
 import HackView from 'views/HacksView/HackView';
 import EditHackView from 'views/HacksView/EditHackView';
 import UsersView from 'views/UsersView/UsersView';
@@ -33,6 +34,7 @@ export default (store) => (
     <Route name='hackathon' path='/hackathons/:id' component={HackathonView} />
     <Route name='createHackathon' path='/hackathons/create/new/' component={EditHackathonView} />
     <Route name='hacks' path='/hacks' component={HacksView} />
+    <Route name='myHacks' path='/hacks/my' component={MyHacksView} />
     <Route name='hack' path="/hacks">
       <Route path=":id" component={HackView}/>
     </Route>

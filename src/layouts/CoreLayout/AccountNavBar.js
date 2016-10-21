@@ -45,7 +45,7 @@ class AccountNavBarView extends React.Component {
             <Icon className="user" /> { this.props.user.user.username }
           </Item>
           <Menu className="inverted">
-            <Item className="" type="link" href="/#/my-hacks">
+            <Item className="" type="link" href="/#/hacks/my">
               My Hacks
             </Item>
             <Item className="" type="link" href="/#/profile">

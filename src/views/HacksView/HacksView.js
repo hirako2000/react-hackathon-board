@@ -4,6 +4,7 @@ import { actions as hacksActions } from '../../redux/modules/hacks';
 import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import HackCardComponent from './HackCardComponent';
 
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
 
@@ -53,45 +54,8 @@ export class HacksAsCardsComponent extends React.Component {
     })
     .map(function (card) {
       return (
-        <Column key={card._id}>
-          <Card className="fluid">
-            <div className={card.nominated === true ? "extra content" : "hide-it"}>
-                <span className="left floated">
-                  {card.nominated === true ? "Nominated" : ""}
-                </span>
-                <i className="float-right minus circle icon"
-                 className={card.nominated !== true ? 'float-right minus circle icon' : 'float-right red trophy icon'}>
-                </i>
-            </div>
-            <a href={ '#/hacks/' + card._id}>
-              <Reveal className="fade">
-                <Content className="hidden">
-                  <Image type="link" src={'user-images/' + card.pictureURL}  className={classes['brighter']}/>
-                </Content>
-                <Content className="visible">
-                  <Image src={'user-images/' + card.pictureURL} className="" />
-                </Content>
-              </Reveal>
-            </a>
-
-            <Content>
-              <a href={ '#/hacks/' + card._id}>
-                <Header>{card.title}</Header>
-              </a>
-              <div className="meta">
-                <span className="time">{card.shortDescription}</span>
-              </div>
-            </Content>
-            <div className={card.completed === true ? "extra content" : "hide-it"}>
-                <span className="left floated">
-                  {card.completed === true ? "Completed" : "Uncompleted"}
-                </span>
-                <i className="float-right minus circle icon"
-                 className={card.completed !== true ? 'float-right minus circle icon' : 'float-right green checkmark icon'}>
-                </i>
-            </div>
-          </Card>
-        </Column>
+        <HackCardComponent hack={card} key={card._id}>
+        </HackCardComponent>
       );
     });
 
@@ -135,6 +99,6 @@ const mapStateToProps = (state) => {
     selectedHackathon: state.selectedHackathon,
     user: state.user
   }
-}
+};
 
 export default connect(mapStateToProps, hacksActions)(HacksAsCardsComponent);

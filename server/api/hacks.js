@@ -68,6 +68,21 @@ hacks.get('/:id', function * (next) {
   this.body = response;
 });
 
+hacks.get('/my', function * (next) {
+  console.log('GET /hacks/my');
+  if (!this.isAuthenticated()) {
+    return this.status = 401;
+  }
+  var user = this.passport.user;
+  var hacks = yield Hack.find({ $or: [{'owner': user._id}, {'joiners': user._id}]});
+
+  var response = {
+    hacks: hacks
+  };
+  console.log("Returning " + hacks.length + " hacks");
+  this.body = response;
+});
+
 hacks.put('/:id', function * (next) {
   console.log('PUT /hacks/' + this.params.id);
   if (!this.isAuthenticated()) {

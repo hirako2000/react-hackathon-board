@@ -153,7 +153,7 @@ var DescriptionInput = React.createClass ({
         </div>
         <div className="eight wide field">
           <label>Description Preview</label>
-          <ReactMarkdown source={this.props.hackathon ? this.props.hackathon.description : ''}/>
+          <ReactMarkdown source={this.props.hackathon && this.props.hackathon.description ? this.props.hackathon.description : ''}/>
         </div>
       </div>
     );
@@ -179,7 +179,7 @@ var RulesInput = React.createClass ({
         </div>
         <div className="eight wide field">
           <label>Rule Preview</label>
-          <ReactMarkdown source={this.props.hackathon ? this.props.hackathon.rules: ''}/>
+          <ReactMarkdown source={this.props.hackathon && this.props.hackathon.rules ? this.props.hackathon.rules : ''}/>
         </div>
       </div>
     );
@@ -205,7 +205,7 @@ var PrizesInput = React.createClass ({
         </div>
         <div className="eight wide field">
           <label>Prizes Preview</label>
-          <ReactMarkdown source={this.props.hackathon ? this.props.hackathon.prizes : ''}/>
+          <ReactMarkdown source={this.props.hackathon && this.props.hackathon.prizes ? this.props.hackathon.prizes : ''}/>
         </div>
       </div>
     );

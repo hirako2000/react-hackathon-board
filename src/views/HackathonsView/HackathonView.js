@@ -35,7 +35,7 @@ export class HackathonViewComponent extends React.Component {
   }
 
   render() {
-    if(!this.props.hackathon || !this.props.hackathon.hackathon) {
+    if(!this.props.hackathon || !this.props.hackathon.hackathon || !this.props.hackathon.hackathon.pictureURL) {
       return (<div>Loading...</div>);
     }
     var hackathon = this.props.hackathon;
@@ -78,14 +78,14 @@ export class HackathonViewComponent extends React.Component {
                     <div className="ui items fluid">
                       <div className="content">
                         <div className="">
-                          <ReactMarkdown source={this.props.hackathon.hackathon.description}/>
+                          <ReactMarkdown source={this.props.hackathon.hackathon.description ? this.props.hackathon.hackathon.description : ''}/>
                         </div>
                       </div>
                     </div>
                     <div className="ui items fluid">
                       <div className="content">
                         <div className="">
-                          <ReactMarkdown source={this.props.hackathon.hackathon.rules}/>
+                          <ReactMarkdown source={this.props.hackathon.hackathon.rules ? this.props.hackathon.hackathon.rules : ''}/>
                         </div>
                       </div>
                     </div>

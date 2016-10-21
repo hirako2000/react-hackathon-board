@@ -96,3 +96,20 @@
 .word-wrap {
   word-wrap: break-word
 }
+
+.padding-bottom-footer {
+  padding-bottom: 80px;
+}
+
+.full-height {
+  height: 100%;
+}
+
+@media (min-height: 320px) {
+  .ui.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 3000;
+  }
+}

@@ -40,16 +40,31 @@ class CustomNotif extends React.Component {
 // define it with a plain javascript function...
 function CoreLayout ({ children }) {
   return (
-    <div className='page-container'>
-      <div className=''>
+    <div className="">
+      <div className='page-container padding-bottom-footer'>
+        <div className=''>
 
-        <NavBarLeft>
-        </NavBarLeft>
+          <NavBarLeft>
+          </NavBarLeft>
 
+        </div>
+        <div className='view-container'>
+          <Notifs CustomComponent={CustomNotif} />
+          {children}
+        </div>
       </div>
-      <div className='view-container'>
-        <Notifs CustomComponent={CustomNotif} />
-        {children}
+      <div className="ui inverted vertical footer segment">
+        <div className="ui container">
+            <div className="ui content">
+              Made with<a href="https://facebook.github.io/react/"> React </a>
+              and <a href="http://semantic-ui.com/"> Semantic-ui </a>, backed
+              by<a href="https://nodejs.org/en/"> Node </a>and<a href="https://github.com/mongodb/mongo"> mongoDB</a>.
+            </div>
+
+            <div className="ui content">
+              Found a bug? Report an<a href="https://github.com/hirako2000/react-hackathon-board/issues"> issue.</a>
+            </div>
+        </div>
       </div>
     </div>
   );
@@ -58,32 +73,32 @@ function CoreLayout ({ children }) {
 var NavBarLeft = React.createClass({
   render: function () {
     return(
-    <div>
-      <Menu className="inverted borderless stackable">
-        <Link activeClassName="active" className="item" to="hackathons">
-          <Icon className="home" /> Home
-        </Link>
-        <Link activeClassName="active" className="item" to="hacks">
-          <Icon className="lab" /> Hacks
-        </Link>
-        <Link activeClassName="active" className="item" to="rules">
-          <Icon className="book" /> Rules
-        </Link>
-        <Link activeClassName="active" className="item" to="prizes">
-          <Icon className="gift" /> Prize
-        </Link>
-        <Link activeClassName="active" className="item" to="judging">
-          <Icon className="trophy" /> Judging
-        </Link>
-        <Link activeClassName="active" className="item" to="people">
-          <Icon className="users" /> People
-        </Link>
-        <AccountNavBarView />
-      </Menu>
-      <div className="ui fluid">
-        <HackathonHeaderView />
+      <div>
+        <Menu className="inverted borderless stackable">
+          <Link activeClassName="active" className="item" to="hackathons">
+            <Icon className="home" /> Home
+          </Link>
+          <Link activeClassName="active" className="item" to="hacks">
+            <Icon className="lab" /> Hacks
+          </Link>
+          <Link activeClassName="active" className="item" to="rules">
+            <Icon className="book" /> Rules
+          </Link>
+          <Link activeClassName="active" className="item" to="prizes">
+            <Icon className="gift" /> Prize
+          </Link>
+          <Link activeClassName="active" className="item" to="judging">
+            <Icon className="trophy" /> Judging
+          </Link>
+          <Link activeClassName="active" className="item" to="people">
+            <Icon className="users" /> People
+          </Link>
+          <AccountNavBarView />
+        </Menu>
+        <div className="ui fluid">
+          <HackathonHeaderView />
+        </div>
       </div>
-    </div>
     );
   }
 });

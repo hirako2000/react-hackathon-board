@@ -33,13 +33,20 @@ export class HackCardComponent extends React.Component {
       <Column key={hack._id}>
         <Card className="fluid">
           <div className={hack.nominated === true ? "extra content" : "hide-it"}>
-            <span className="left floated">
-              {hack.nominated === true ? "Nominated" : ""}
-            </span>
-            <i className="float-right minus circle icon"
-               className={hack.nominated !== true ? 'float-right minus circle icon' : 'float-right red trophy icon'}>
+            <div className="left floated">
+             Nominated
+            </div>
+            <i className="float-right red trophy icon">
             </i>
           </div>
+          <div className={hack.completed === true ? "extra content" : "hide-it"}>
+            <span className="left floated">
+              Completed
+            </span>
+            <i className="float-right green checkmark icon">
+            </i>
+          </div>
+
           <a href={ '#/hacks/' + hack._id}>
             <Reveal className="fade">
               <Content className="hidden">
@@ -59,13 +66,9 @@ export class HackCardComponent extends React.Component {
               <span className="time word-wrap">{hack.shortDescription}</span>
             </div>
           </Content>
-          <div className={hack.completed === true ? "extra content" : "hide-it"}>
-            <span className="left floated">
-              {hack.completed === true ? "Completed" : "Uncompleted"}
-            </span>
-            <i className="float-right minus circle icon"
-               className={hack.completed !== true ? 'float-right minus circle icon' : 'float-right green checkmark icon'}>
-            </i>
+          <div className="extra content">
+            <i className="marker icon"></i>
+            {hack.location ? hack.location : 'Unknown location' }
           </div>
         </Card>
       </Column>

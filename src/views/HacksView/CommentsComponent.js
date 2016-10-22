@@ -71,14 +71,12 @@ var CommentInput = React.createClass ({
     };
   },
   handleChange: function(event) {
-    console.log("change of comment: " + event.target.value);
     this.setState({
       value: event.target.value
     });
   },
 
   handleSubmit: function(val) {
-    console.log("Submitting comment: " + this.state.value);
     this.props.sendComment(this.props.hackId, {'content': this.state.value});
     this.setState({
       value: ''

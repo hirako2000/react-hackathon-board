@@ -8,6 +8,7 @@ import hacks from './modules/hacks';
 import myHacks from './modules/hacks';
 import nominatedHacks from './modules/hacks';
 import hack from './modules/hack';
+import comments from './modules/comments';
 import user from './modules/user';
 import users from './modules/users';
 import otherUser from './modules/otherUser';
@@ -22,6 +23,7 @@ export default combineReducers({
   myHacks,
   nominatedHacks,
   hack,
+  comments,
   notifs,
   user,
   users,

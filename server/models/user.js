@@ -23,6 +23,7 @@ var userSchema = new mongoose.Schema({
     location: { type: String, default: '' },
     website: { type: String, default: '' },
     picture: { type: String, default: '' },
+    avatar: { type: String, default: ''},
     description: { type: String, default: ''}
   },
 

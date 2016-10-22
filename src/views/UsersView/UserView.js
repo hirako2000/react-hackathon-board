@@ -13,6 +13,22 @@ Props = {
   fetchFromServer: Function
 };
 
+var Avatar = React.createClass({
+
+  render: function() {
+    if(this.props.profile.picture){
+      return (
+        <img className="ui medium circular image" src={'user-images/' + this.props.profile.picture} />
+      )
+    } else {
+      return(
+        <object className="ui medium circular image" type="image/svg+xml" data={'user-images/' + this.props.profile.avatar}>
+        </object>
+      );
+    }
+  }
+});
+
 class UserView extends React.Component {
 
   static propTypes = {
@@ -47,9 +63,7 @@ class UserView extends React.Component {
         <div className="ui items fluid">
           <div className="ui items stackable sixteen column relaxed grid basic">
             <div className="three wide column fluid">
-              <img className="ui medium circular image" src={
-              this.props.otherUser.profile.picture && this.props.otherUser.profile.picture != '' ? 'user-images/' + this.props.otherUser.profile.picture
-              : 'user-images/' + 'default-hack-image.png'} />
+              <Avatar profile={this.props.otherUser.profile} />
               <div className="text-center">
                 <h3>{this.props.otherUser.profile.name}</h3>
               </div>

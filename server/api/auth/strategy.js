@@ -7,6 +7,7 @@ import PassportGithub from 'passport-github';
 import PassportGoogleOauth from 'passport-google-oauth';
 
 var user = { id: 1, username: 'test' };
+const allAvatars = ["abraham-lincoln.svg", "john-fitzgerald-kennedy.svg", "pope-francis.svg", "arnold-schwarzenegger.svg", "johnny-depp.svg", "rafael-nadal.svg", "barack-obama.svg", "kim-jong-il.svg", "robin-williams.svg", "bruce-lee.svg", "leonardo-di-caprio.svg", "roger-federer.svg", "charlie-chaplin.svg", "lionel-messi.svg", "rowan-atkinson.svg", "charlie-sheen.svg", "mahatma-gandhi.svg", "sheikh-mohammed.svg", "che-guevara.svg", "margaret-thatcher.svg", "steve-jobs.svg", "cristiano-ronaldo.svg", "michael-schumacher.svg", "vladimir-lenin.svg", "isif-stalin.svg", "mike-tyson.svg", "vladimir-putin.svg", "jawaharlal-nehru.svg", "pel.svg", "winston-churchill.svg"];
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -64,9 +65,11 @@ passport.use('local-signup', new PassportLocal.Strategy({passReqToCallback: true
   User.findOne({ email: username }, function (err, user){
     if(!user) {
       console.log(username + " signing up with password..");
+      var randomAvatar = allAvatars[Math.floor(Math.random()*allAvatars.length)];
       var newUser = new User({
         profile: {
-          name: fullname
+          name: fullname,
+          avatar: randomAvatar
         },
         username: username,
         password: password,
@@ -99,7 +102,11 @@ passport.use(new PassortFacebook.Strategy({
     console.log("call back with profile id: " + profile.id + " email? " +  profile.emails);
     User.findOne({ email: profile.emails[0].value }, function (err, user){
       if(!user) {
+        var randomAvatar = allAvatars[Math.floor(Math.random()*allAvatars.length)];
         var newUser = new User({
+          profile: {
+            avatar: randomAvatar
+          },
           username: profile.displayName,
           password: 'test', // TODO fix this to generate a random password, and send via email
           facebook: profile.id,
@@ -137,7 +144,11 @@ passport.use(new PassportGithub.Strategy({
     var foundUser = null;
     User.findOne({ email: profile.emails[0].value }, function (err, user){
       if(!user) {
+        var randomAvatar = allAvatars[Math.floor(Math.random()*allAvatars.length)];
         var newUser = new User({
+          profile: {
+            avatar: randomAvatar
+          },
           username: profile.displayName,
           password: 'test', // TODO fix this to generate a random password, and send via email
           github: profile.id,
@@ -174,7 +185,11 @@ passport.use(new PassportGoogleOauth.OAuth2Strategy({
     var foundUser = null;
     User.findOne({ email: profile.emails[0].value }, function (err, user) {
       if(!user) {
+        var randomAvatar = allAvatars[Math.floor(Math.random()*allAvatars.length)];
         var newUser = new User({
+          profile: {
+            avatar: randomAvatar
+          },
           username: profile.displayName,
           password: 'test', // TODO fix this to generate a random password, and send via email
           google: profile.id,

@@ -6,6 +6,7 @@ import {hackathons} from './hackathons';
 
 export const HACK = 'HACK';
 export const UPDATE = 'UPDATE_HACK';
+export const COMMENTS = 'COMMENTS';
 
 // ------------------------------------
 // Actions

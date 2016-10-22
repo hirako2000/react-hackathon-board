@@ -2,6 +2,7 @@ import Router from 'koa-router';
 import Hack from '../models/hack';
 import Hackathon from '../models/hackathon';
 import User from '../models/user';
+import Comment from '../models/comment';
 import multer from 'koa-router-multer';
 const uploadDir = './uploads/';
 const imageDir = './src/static/user-images/';
@@ -64,6 +65,79 @@ hacks.get('/:id', function * (next) {
     isOwner: user && hackEntity.owner == user._id,
     hasJoined: user && hackEntity.joiners.indexOf(user._id) != -1,
     joinersDisplay: joiners
+  };
+  this.body = response;
+});
+
+hacks.get('/:id/comments', function * (next) {
+  console.log('GET /hacks/' + this.params.id + '/comments');
+  var comments;
+  if(this.params.id) {
+    comments = yield Comment.find({ 'hack' : this.params.id });
+  } else {
+    return this.status = 404;
+  }
+
+  var commentsObjects = [];
+  for (var i = 0; i < comments.length; i++) {
+    var commentObject = comments[i].toObject();
+    var author = yield User.findOne({'_id': comments[i].author}, 'username profile');
+    if(!author) {
+      continue;
+    }
+    commentObject.authorDisplay = author.profile.name ? author.profile.name : author.username;
+    commentObject.authorAvatar = author.profile.avatar;
+    commentObject.authorPicture = author.profile.picture;
+    commentsObjects.push(commentObject);
+  }
+
+  var response = {
+    comments: commentsObjects
+  };
+  this.body = response;
+});
+
+hacks.post('/:id/comments', function * (next) {
+  console.log('POST /hacks/' + this.params.id + '/comments');
+  console.log('with ' + this.request.body.content);
+  if (!this.isAuthenticated()) {
+    return this.status = 401;
+  }
+  var comments;
+  if(this.params.id) {
+    comments = yield Comment.find({ 'hack' : this.params.id });
+  } else {
+    return this.status = 404;
+  }
+
+  var author = yield User.findOne({'_id': this.passport.user._id}, 'username');
+
+  var comment = this.request.body;
+
+  var commentEntity = new Comment();
+  commentEntity.content = comment.content;
+  commentEntity.date = new Date();
+  commentEntity.author = author._id;
+  commentEntity.hack = this.params.id;
+  yield commentEntity.save();
+
+  var comments = yield Comment.find({'hack': this.params.id});
+
+  var commentsObjects = [];
+  for (var i = 0; i < comments.length; i++) {
+    var commentObject = comments[i].toObject();
+    var author = yield User.findOne({'_id': comments[i].author}, 'username profile');
+    if(!author) {
+      continue;
+    }
+    commentObject.authorDisplay = author.profile.name ? author.profile.name : author.username;
+    commentObject.authorAvatar = author.profile.avatar;
+    commentObject.authorPicture = author.profile.picture;
+    commentsObjects.push(commentObject);
+  }
+
+  var response = {
+    comments: commentsObjects
   };
   this.body = response;
 });

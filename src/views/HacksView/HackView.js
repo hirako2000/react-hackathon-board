@@ -6,6 +6,7 @@ import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
 import ReactMarkdown from 'react-markdown';
+import CommentsComponent from './CommentsComponent';
 
 type
 Props = {
@@ -202,10 +203,16 @@ var MainPart = React.createClass ({
           </Content>
         </div>
         <div className="ten wide column">
+          <div className="text-center">
+            <h2>
+              {this.props.hack.hack.title}
+            </h2>
+          </div>
           <div className="">
             <div className="ui fluid">
-              <div className="content">
-                <div className="">
+              <div className="segment">
+                <h4>About this hack</h4>
+                <div className="word-wrap">
                   <ReactMarkdown source={this.props.hack.hack.description}/>
                 </div>
               </div>
@@ -213,7 +220,7 @@ var MainPart = React.createClass ({
           </div>
           <div className="ui divider"></div>
           <Content>
-            Comments
+            <CommentsComponent params={this.props.params} />
           </Content>
         </div>
       </div>);
@@ -255,7 +262,7 @@ export class HackViewComponent extends React.Component {
             leave={this.props.leave} nominate={this.props.nominate}/>
           </div>
           <div className="thirteen wide column">
-            <MainPart hack={this.props.hack}/>
+            <MainPart hack={this.props.hack} params={this.props.params}/>
           </div>
         </div>
       </div>

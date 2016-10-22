@@ -11,6 +11,22 @@ Props = {
   listFromServer: Function
 };
 
+var Avatar = React.createClass({
+
+  render: function() {
+    if(this.props.profile.picture){
+      return (
+      <img src={'user-images/' + this.props.profile.picture} />
+      )
+    } else {
+      return(
+        <object type="image/svg+xml" data={'user-images/' + this.props.profile.avatar}>
+        </object>
+      );
+    }
+  }
+});
+
 export class UsersAsCardsComponent extends React.Component {
 
   static propTypes = {
@@ -45,10 +61,7 @@ export class UsersAsCardsComponent extends React.Component {
         <Column key={card._id}>
           <Card className="ui">
               <a className="image" href ={ '#/people/' + card._id}>
-                  <img src={
-                    card.profile.picture && card.profile.picture != ''
-                        ? 'user-images/' + card.profile.picture
-                      : 'user-images/' + 'default-hack-image.png'}/>
+                <Avatar profile={card.profile}/>
               </a>
               <div className="content">
                 <a href={ '#/people/' + card._id} className="header">

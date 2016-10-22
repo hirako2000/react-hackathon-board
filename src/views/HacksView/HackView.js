@@ -218,6 +218,8 @@ var MainPart = React.createClass ({
               </div>
             </div>
           </div>
+        </div>
+        <div className="sixteen wide column">
           <div className="ui divider"></div>
           <Content>
             <CommentsComponent params={this.props.params} />

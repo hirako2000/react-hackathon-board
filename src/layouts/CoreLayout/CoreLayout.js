@@ -75,7 +75,7 @@ var All = React.createClass({
             {this.props.children}
           </div>
         </div>
-        <div className="ui inverted vertical footer segment">
+        <div className="ui inverted vertical footer segment desktop">
           <div className="ui container">
             <div className="ui content">
               Made with<a href="https://facebook.github.io/react/"> React </a>

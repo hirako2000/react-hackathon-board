@@ -77,7 +77,7 @@
 
 .card-enter.card-enter-active {
   opacity: 1;
-  transition: opacity 800ms linear;
+  transition: opacity 500ms linear;
 }
 
 .card-leave {
@@ -85,7 +85,7 @@
 }
 
 .card-leave.card-leave-active {
-  opacity: 0.01;
+  opacity: 0.0;
   transition: opacity 1ms linear;
 }
 

@@ -81,7 +81,7 @@ export class HacksAsCardsComponent extends React.Component {
           <div className="thirteen wide column">
             <div className="">
               <ReactCSSTransitionGroup component="div" className="ui stackable four column grid basic"
-                transitionName="card" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                transitionName="card-disabled" transitionEnterTimeout={500} transitionLeaveTimeout={1}>
                 {cards}
               </ReactCSSTransitionGroup>
             </div>

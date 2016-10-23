@@ -1,6 +1,6 @@
 {
   "name": "react-hackathon-board",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "description": "Hackathon board with React/node/mongo",
   "main": "index.js",
   "engines": {

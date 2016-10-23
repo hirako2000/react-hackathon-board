@@ -28,7 +28,6 @@ export const listFromServer = () => (dispatch) => {
 
 export const selectToServer = (hackathon) => (dispatch) => {
     dispatch(selected(hackathon));
-    dispatch(notifSend(notification(hackathon.title + ' is now selected', 'success')));
 };
 
 export const actions = {

@@ -17,7 +17,6 @@ export function selected (value: Object): Action {
 
 export const select = (hackathon) => (dispatch) => {
   dispatch(selected(hackathon));
-  dispatch(notifSend(notification(hackathon.title + ' is now selected', 'success')));
 };
 
 export const listFromServer = () => (dispatch) => {

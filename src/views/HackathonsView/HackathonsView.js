@@ -57,9 +57,10 @@ export class HackathonsAsCardsComponent extends React.Component {
 
       var handleSelect = function(hackathon) {
         selectFunction(hackathon);
+        window.location = '#/hacks';
         //window.location = '#/';
         //window.location = '/';
-      }
+      };
 
       return (
         <Column key={card._id}>

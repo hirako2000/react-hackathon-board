@@ -90,7 +90,7 @@ export class SignupView extends React.Component<void, Props, void> {
             <form action="/api/auth/signup" method="POST" className="ui form">
               <div className="field">
                 <label>Full Name</label>
-                <input type= "text" name="fullname" value={this.props.fullname}
+                <input type= "text" name="fullname" value={this.props.fullname} maxLength="35"
                        onChange={this.onFullnameChange} placeholder="John Doe" />
               </div>
               <div className="field">

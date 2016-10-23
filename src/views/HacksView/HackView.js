@@ -36,7 +36,7 @@ var TeamList = React.createClass ({
     var members = this.props.hack.joinersDisplay.map(function (member) {
       return (
         <a href={ '#/people/' + member.id} key={member.id}>
-          <p key={member.id}>{member.username}</p>
+          <p className="word-wrap" key={member.id}>{member.username}</p>
         </a>
       );
     });
@@ -114,7 +114,7 @@ var LeftBar = React.createClass ({
             <div className="header">Organizer</div>
             <div className="">
               <a href={ '#/people/' + this.props.hack.hack.owner}>
-                <span>{this.props.hack.ownerDisplay}</span>
+                <span className="word-wrap">{this.props.hack.ownerDisplay}</span>
               </a>
             </div>
           </div>
@@ -163,7 +163,7 @@ var LeftBar = React.createClass ({
           <div className="content">
             <div className="header">Location</div>
             <div className="">
-              <span>{this.props.hack.hack.location}</span>
+              <span className="word-wrap">{this.props.hack.hack.location}</span>
             </div>
           </div>
         </div>

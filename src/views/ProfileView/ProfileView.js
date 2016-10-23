@@ -47,6 +47,9 @@ export class ProfileView extends React.Component<void, Props, void> {
   };
 
   onNameChange(ev) {
+    if (ev.target.value.length > 35) {
+      return;
+    }
     this.props.user.user.profile.name = ev.target.value;
     this.setState({name: event.target.value});
   };
@@ -57,6 +60,9 @@ export class ProfileView extends React.Component<void, Props, void> {
   };
 
   onLocationChange(ev) {
+    if (ev.target.value.length > 35) {
+      return;
+    }
     this.props.user.user.profile.location = ev.target.value;
     this.setState({location: event.target.value});
   };

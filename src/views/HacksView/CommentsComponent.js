@@ -89,9 +89,9 @@ var CommentInput = React.createClass ({
         <textarea value={ this.state.value } rows="4"
                   onChange={this.handleChange}>
         </textarea>
-        <div>
+        <div className="ui items">
           <button className="ui right floated small teal button" onClick={(comment) => this.handleSubmit(this.props.comment)}>
-            Add comment
+           Add comment
           </button>
         </div>
       </div>
@@ -143,7 +143,7 @@ export class CommentsComponent extends React.Component {
         <div className="ui comments">
           <CommentsList comments={this.props.comments}/>
         </div>
-        <div className="ui form">
+        <div className={!this.props.user || !this.props.user.user || !this.props.user.user._id ? 'hide-it' : "ui form"}>
           <CommentInput sendComment={this.props.sendComment} hackId={this.props.params.id}/>
         </div>
       </div>
@@ -153,6 +153,7 @@ export class CommentsComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  comments: state.comments
+  comments: state.comments,
+  user: state.user
 });
 export default connect(mapStateToProps, commentsActions)(CommentsComponent);

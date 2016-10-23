@@ -97,7 +97,7 @@ export class ProfileView extends React.Component<void, Props, void> {
             <div className="ui form" id="validating-form">
               <div className="field">
                 <label>Email</label>
-                <input disabled="true" type= "text" name="username" value={this.props.user.user.username}
+                <input disabled="true" type= "text" name="username" value={this.props.user.user.email}
                        onChange={this.onUsernameChange} placeholder="Email" />
               </div>
               <div className="field">

@@ -93,7 +93,7 @@ class UserView extends React.Component {
               <Segment>
                 <h3>Email</h3>
                  <span>
-                    {this.props.otherUser.username}
+                    {this.props.otherUser.email}
                   </span>
               </Segment>
             </div>

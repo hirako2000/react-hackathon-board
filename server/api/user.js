@@ -58,13 +58,13 @@ user.post('/select-hackathon/:id', function * (next) {
 
 user.get('/', function * (next) {
   console.log('GET /users/');
-  var users = yield User.find({}, 'username profile judge');
+  var users = yield User.find({}, 'username email profile judge');
   this.body = users;
 });
 
 user.get('/:id', function * (next) {
   console.log('GET /users/' + this.params.id);
-  var user = yield User.findOne({'_id': this.params.id}, 'username profile judge');
+  var user = yield User.findOne({'_id': this.params.id}, 'username email profile judge');
   this.body = user;
 });
 

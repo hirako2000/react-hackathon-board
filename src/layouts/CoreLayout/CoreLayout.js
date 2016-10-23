@@ -8,6 +8,7 @@ import AccountNavBarView from './AccountNavBar';
 import HackathonHeaderView from './HackathonHeader';
 
 import {Menu, Item, Icon} from 'react-semantify';
+var Hamburger = require('react-burger-menu').slide;
 
 const kindToClassMap = new Object();
 kindToClassMap['info'] = 'info';
@@ -41,20 +42,41 @@ class CustomNotif extends React.Component {
 function CoreLayout ({ children }) {
   return (
     <div className="">
-      <div className='page-container padding-bottom-footer'>
-        <div className=''>
+      <All children={children}/>
+    </div>
+  );
+}
 
-          <NavBarLeft>
-          </NavBarLeft>
+var All = React.createClass({
+  showHamburger: function(event) {
+    event.preventDefault();
+  },
 
+  render: function() {
+    return(
+      <div>
+        <div className="mobile">
+          <Hamburger width={ 250 } isOpen={ false } customBurgerIcon={ <i className="icon content hamburger"></i> }>
+              <NavBarLeft />
+          </Hamburger>
+          <a onClick={ this.showHamburger } className="menu-item--small" href="">
+            <i className="icon content hamburger"></i>
+          </a>
         </div>
-        <div className='view-container'>
-          <Notifs CustomComponent={CustomNotif} />
-          {children}
+        <div className='page-container padding-bottom-footer'>
+          <div className=''>
+            <div className="desktop">
+              <NavBarLeft>
+              </NavBarLeft>
+            </div>
+          </div>
+          <div className='view-container'>
+            <Notifs CustomComponent={CustomNotif} />
+            {this.props.children}
+          </div>
         </div>
-      </div>
-      <div className="ui inverted vertical footer segment">
-        <div className="ui container">
+        <div className="ui inverted vertical footer segment">
+          <div className="ui container">
             <div className="ui content">
               Made with<a href="https://facebook.github.io/react/"> React </a>
               and <a href="http://semantic-ui.com/"> Semantic-ui </a>, backed
@@ -64,39 +86,44 @@ function CoreLayout ({ children }) {
             <div className="ui content">
               Found a bug? Report an<a href="https://github.com/hirako2000/react-hackathon-board/issues"> issue.</a>
             </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+
+});
 
 var NavBarLeft = React.createClass({
+
   render: function () {
     return(
       <div>
-        <Menu className="inverted borderless stackable">
-          <Link activeClassName="active" className="item" to="hackathons">
-            <Icon className="home" /> Home
-          </Link>
-          <Link activeClassName="active" className="item" to="hacks">
-            <Icon className="lab" /> Hacks
-          </Link>
-          <Link activeClassName="active" className="item" to="rules">
-            <Icon className="book" /> Rules
-          </Link>
-          <Link activeClassName="active" className="item" to="prizes">
-            <Icon className="gift" /> Prize
-          </Link>
-          <Link activeClassName="active" className="item" to="judging">
-            <Icon className="trophy" /> Judging
-          </Link>
-          <Link activeClassName="active" className="item" to="people">
-            <Icon className="users" /> People
-          </Link>
-          <AccountNavBarView />
-        </Menu>
-        <div className="ui fluid">
-          <HackathonHeaderView />
+        <div>
+          <Menu className="inverted borderless stackable">
+            <Link activeClassName="active" className="item" to="hackathons">
+              <Icon className="home" /> Home
+            </Link>
+            <Link activeClassName="active" className="item" to="hacks">
+              <Icon className="lab" /> Hacks
+            </Link>
+            <Link activeClassName="active" className="item" to="rules">
+              <Icon className="book" /> Rules
+            </Link>
+            <Link activeClassName="active" className="item" to="prizes">
+              <Icon className="gift" /> Prize
+            </Link>
+            <Link activeClassName="active" className="item" to="judging">
+              <Icon className="trophy" /> Judging
+            </Link>
+            <Link activeClassName="active" className="item" to="people">
+              <Icon className="users" /> People
+            </Link>
+            <AccountNavBarView />
+          </Menu>
+          <div className="ui fluid">
+            <HackathonHeaderView />
+          </div>
         </div>
       </div>
     );

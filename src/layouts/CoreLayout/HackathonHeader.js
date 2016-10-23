@@ -39,7 +39,7 @@ class HackathonHeaderView extends React.Component {
         <div className="center aligned hackathon-header">
           <div className="ui six column stackable grid">
             <div className="three wide column"/>
-            <div className="three wide column center aligned">
+            <div className="three wide column center aligned desktop">
               <Image className="hackathon-header-image-effect" src={'user-images/' + this.props.selectedHackathon.pictureURL}/>
               <div className="hackathon-header-image-effect-shadow"></div>
             </div>
@@ -48,12 +48,12 @@ class HackathonHeaderView extends React.Component {
                 <Header className="center aligned">
                     <span className="hackathon-header-title">{this.props.selectedHackathon.title} </span>
                 </Header>
-                <div className="center aligned hackathon-header-description">
+                <div className="center aligned hackathon-header-description desktop">
                   <p className="">
                     {this.props.selectedHackathon.shortDescription}
                   </p>
                 </div>
-                <div className="ui description center aligned hackathon-header-date">
+                <div className="ui description center aligned hackathon-header-date desktop">
                   { (moment(this.props.selectedHackathon.startDate).month() !== moment(this.props.selectedHackathon.endDate).month() ?
                     moment(this.props.selectedHackathon.startDate).format('Do MMM YY') :
                       moment(this.props.selectedHackathon.startDate).format('Do'))
@@ -69,7 +69,6 @@ class HackathonHeaderView extends React.Component {
               </div>
             </div>
           </div>
-
         </div>
       </Content>
     );

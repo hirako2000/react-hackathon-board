@@ -69,7 +69,7 @@ export class UsersAsCardsComponent extends React.Component {
                 </a>
                 <div className="description">
                   <i className="mail icon"></i>
-                  {card.username}
+                  {card.email}
                 </div>
               </div>
               <div className="extra content">

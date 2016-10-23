@@ -122,7 +122,50 @@
   }
 }
 
+@media (min-width: 734px) {
+  .desktop {
+    display: inherit;
+  }
+
+  .mobile {
+    display: none !important;
+  }
+
+  .sidebar {
+    display: none !important;
+  }
+}
+
+@media (max-width: 734px) {
+  .desktop {
+    display: none !important;
+  }
+
+  .mobile {
+    display: inherit !important
+  }
+
+  .sidebar {
+    display: inherit !important;
+  }
+
+}
+
+.hamburger {
+  color: black;
+  padding-left: 10px;
+  font-size: 25px !important;
+  padding-top: 7px;
+}
 object{
   pointer-events: none;
+}
+
+.ui.reveal {
+  z-index: 1;
+}
+
+.bm-item-list {
+  background: black;
 }
 

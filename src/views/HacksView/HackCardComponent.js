@@ -5,7 +5,7 @@ import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
+import {Button, Card, Content, Header, Column, Image, Segment, Icon} from 'react-semantify';
 
 type
 Props = {
@@ -48,14 +48,9 @@ export class HackCardComponent extends React.Component {
           </div>
 
           <a href={ '#/hacks/' + hack._id}>
-            <Reveal className="fade">
-              <Content className="hidden">
-                <Image type="link" src={'user-images/' + hack.pictureURL}  className={classes['brighter']}/>
-              </Content>
-              <Content className="visible">
-                <Image src={'user-images/' + hack.pictureURL} className="" />
-              </Content>
-            </Reveal>
+            <Content className="">
+              <Image src={'user-images/' + hack.pictureURL} className="" />
+            </Content>
           </a>
 
           <Content>

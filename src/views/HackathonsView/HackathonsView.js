@@ -5,7 +5,7 @@ import classes from './HackathonsView.scss';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
 
-import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
+import {Button, Card, Content, Header, Column, Image, Segment, Icon} from 'react-semantify';
 
 type
 Props = {
@@ -66,15 +66,10 @@ export class HackathonsAsCardsComponent extends React.Component {
         <Column key={card._id}>
           <Card className="fluid">
             <a onClick={handleSelect.bind(this, card)}>
-              <Reveal className="fade">
-                <Content className="hidden">
-                  <Image type="link" src={'user-images/' + card.pictureURL} className={classes['brighter']}/>
-                </Content>
-                <Content className="visible">
-                  <Image src={'user-images/' + card.pictureURL}
-                          className={ !card.active ? classes['backnwhite'] : classes['none'] } />
-                </Content>
-              </Reveal>
+              <Content className="">
+                <Image src={'user-images/' + card.pictureURL}
+                        className={ !card.active ? classes['backnwhite'] : classes['none'] } />
+              </Content>
             </a>
 
             <Content>

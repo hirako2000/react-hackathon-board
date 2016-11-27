@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { actions as usersActions } from '../../redux/modules/users';
 import ReactDOM from 'react-dom';
 
-import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
+import {Button, Card, Content, Header, Column, Image, Segment, Icon} from 'react-semantify';
 
 type
 Props = {

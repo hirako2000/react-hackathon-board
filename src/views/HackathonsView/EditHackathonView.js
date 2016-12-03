@@ -285,8 +285,16 @@ export class HackathonViewComponent extends React.Component {
   }
 
   render() {
-    if(!this.props.hackathon) {
-      return <div>Loading...</div>
+    if(!this.props.hackathon.hackathon) {
+      return (
+        <div className="ui segment loading-height">
+          <div className="ui active inverted dimmer row">
+            <div className="ui medium inverted text loader">Loading</div>
+          </div>
+          <p></p>
+          <p></p>
+        </div>
+      );
     }
     return (
       // The key is important for the component to be reset properly

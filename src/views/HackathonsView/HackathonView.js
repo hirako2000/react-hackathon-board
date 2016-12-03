@@ -37,7 +37,15 @@ export class HackathonViewComponent extends React.Component {
 
   render() {
     if(!this.props.hackathon || !this.props.hackathon.hackathon || !this.props.hackathon.hackathon.pictureURL) {
-      return (<div>Loading...</div>);
+      return (
+        <div className="ui segment loading-height">
+          <div className="ui active inverted dimmer row">
+            <div className="ui medium inverted text loader">Loading</div>
+          </div>
+          <p></p>
+          <p></p>
+        </div>
+      );
     }
     var hackathon = this.props.hackathon;
       return (

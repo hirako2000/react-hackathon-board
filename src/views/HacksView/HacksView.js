@@ -47,6 +47,17 @@ export class HacksAsCardsComponent extends React.Component {
   }
 
   render() {
+    if(!this.props.hacks) {
+      return (
+        <div className="ui segment loading-height">
+          <div className="ui active inverted dimmer row">
+            <div className="ui medium inverted text loader">Loading</div>
+          </div>
+          <p></p>
+          <p></p>
+        </div>
+      );
+    }
     var searchString = this.state.search;
     var cards = this.props.hacks
     .filter(function(hack) {

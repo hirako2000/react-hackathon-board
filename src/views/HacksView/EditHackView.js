@@ -277,7 +277,7 @@ export class HackViewComponent extends React.Component {
   }
 
   render() {
-    if(!this.props.hack.hack) {
+    if(!this.props.hack) {
       return (
         <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">

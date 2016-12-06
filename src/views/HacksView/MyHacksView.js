@@ -17,7 +17,7 @@ Props = {
 export class MyHacksComponent extends React.Component {
 
   static propTypes = {
-    myHacks: PropTypes.array.isRequired,
+    myHacks: PropTypes.array,
     listMyHacksFromServer: PropTypes.func.isRequired
   };
 

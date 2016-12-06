@@ -73,7 +73,7 @@ var LeftBar = React.createClass ({
   render: function() {
     if(!this.props.hack.hack) {
       return (
-        <div className="ui segment loading-height">
+        <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
             <div className="ui medium inverted text loader">Loading</div>
           </div>
@@ -185,7 +185,7 @@ var MainPart = React.createClass ({
   render: function() {
     if(!this.props.hack.hack) {
       return (
-        <div className="ui segment loading-height">
+        <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
             <div className="ui medium inverted text loader">Loading</div>
           </div>

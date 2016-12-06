@@ -49,7 +49,7 @@ class UserView extends React.Component {
   render() {
     if(!this.props.otherUser || !this.props.otherUser._id) {
       return(
-        <div className="ui vertical segment loading-height">
+        <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
             <div className="ui medium inverted text loader">Loading</div>
           </div>

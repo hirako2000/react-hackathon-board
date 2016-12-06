@@ -30,6 +30,7 @@ export function nominatedHacks (value: Array): Action {
 
 export const listFromServer = (hackathon) => (dispatch) => {
   // TODO use config path instead
+  dispatch(hacks(null));
   var hackathonId = hackathon && hackathon._id ? hackathon._id : "-1";
   axios.get('/api/hacks?hackathonId=' + hackathonId)
     .then((res) => {

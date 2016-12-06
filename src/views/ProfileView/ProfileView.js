@@ -95,7 +95,7 @@ export class ProfileView extends React.Component<void, Props, void> {
   render () {
     if(!this.props.user || !this.props.user.user) {
       return (
-        <div className="ui segment loading-height">
+        <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
             <div className="ui medium inverted text loader">Loading</div>
           </div>

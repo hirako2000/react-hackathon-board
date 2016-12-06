@@ -47,7 +47,7 @@ export class UsersAsCardsComponent extends React.Component {
   render() {
     if(!this.props.users) {
       return (
-        <div className="ui vertical segment loading-height">
+        <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
             <div className="ui medium inverted text loader">Loading</div>
           </div>
@@ -84,7 +84,7 @@ export class UsersAsCardsComponent extends React.Component {
 
     return(
       <div className="ui container">
-        <Segment loading={!this.props.users} className="ui stackable three column grid basic">
+        <Segment loading={!this.props.users} className="ui stackable five column grid basic">
           {cards}
         </Segment>
       </div>

@@ -18,7 +18,7 @@ Props = {
 export class HacksAsCardsComponent extends React.Component {
 
   static propTypes = {
-    hacks: PropTypes.array.isRequired,
+    hacks: PropTypes.array,
     selectedHackathon: PropTypes.object.isRequired,
     listFromServer: PropTypes.func.isRequired
   };
@@ -49,7 +49,7 @@ export class HacksAsCardsComponent extends React.Component {
   render() {
     if(!this.props.hacks) {
       return (
-        <div className="ui segment loading-height">
+        <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
             <div className="ui medium inverted text loader">Loading</div>
           </div>

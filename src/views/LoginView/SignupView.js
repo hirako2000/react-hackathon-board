@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Label} from 'react-semantify';
 
+import config from '../../config/base';
+
 export class SignupView extends React.Component<void, Props, void> {
 
   constructor(props) {
@@ -118,13 +120,13 @@ export class SignupView extends React.Component<void, Props, void> {
 
           </div>
 
-          <div className="two wide column">
+          <div className={ config.signIn.enableSocialLogin ? 'two wide column' : 'hide-it' }>
             <div className="ui vertical divider">
               Or
             </div>
           </div>
 
-          <div className="seven wide column">
+          <div className={ config.signIn.enableSocialLogin ? 'seven wide column' : 'hide-it' }>
 
             <div className="ui stackable one column grid basic">
               <div className="column">

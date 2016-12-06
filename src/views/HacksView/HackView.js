@@ -208,10 +208,9 @@ var MainPart = React.createClass ({
               {this.props.hack.hack.title}
             </h2>
           </div>
-          <div className="">
+          <div className="padding-top-20px">
             <div className="ui fluid">
               <div className="segment">
-                <h4>About this hack</h4>
                 <div className="word-wrap">
                   <ReactMarkdown source={this.props.hack.hack.description}/>
                 </div>
@@ -257,14 +256,16 @@ export class HackViewComponent extends React.Component {
 
   render() {
     return (
-      <div className="ui internally stackable celled grid">
-        <div className="row">
-          <div className="three wide column">
-            <LeftBar hack={this.props.hack} user={this.props.user} join={this.props.join}
-            leave={this.props.leave} nominate={this.props.nominate}/>
-          </div>
-          <div className="thirteen wide column">
-            <MainPart hack={this.props.hack} params={this.props.params}/>
+      <div className="hacks-summary-margin padding-top-20px">
+        <div className="ui internally stackable grid">
+          <div className="row">
+            <div className="four wide column">
+              <LeftBar hack={this.props.hack} user={this.props.user} join={this.props.join}
+              leave={this.props.leave} nominate={this.props.nominate}/>
+            </div>
+            <div className="twelve wide column">
+              <MainPart hack={this.props.hack} params={this.props.params}/>
+            </div>
           </div>
         </div>
       </div>

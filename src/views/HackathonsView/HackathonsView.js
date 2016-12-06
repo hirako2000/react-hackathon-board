@@ -110,7 +110,7 @@ export class HackathonsAsCardsComponent extends React.Component {
             <Icon className="plus"/> Create Hackathon
           </Button>
         </Segment>
-        <Segment loading={!this.props.hackathons} className="ui stackable three column grid basic">
+        <Segment loading={!this.props.hackathons} className="ui stackable four column grid basic">
           <h2 className={this.props.hackathons.hackathons.length === 0 ? "" : "hide-it"}>
             There is no hackathon yet!
           </h2>

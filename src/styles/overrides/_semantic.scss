@@ -97,6 +97,10 @@
   word-wrap: break-word
 }
 
+.padding-top-20px {
+  padding-top: 20px;
+}
+
 .padding-bottom-footer {
   padding-bottom: 80px;
 }
@@ -107,6 +111,11 @@
 
 .loading-height {
   height: 320px;
+}
+
+.loading-height-header {
+  height: 220px;
+  min-height: 220px;
 }
 
 .text-center {

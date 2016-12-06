@@ -28,8 +28,12 @@ class HackathonHeaderView extends React.Component {
   render() {
     if(!this.props.selectedHackathon || !this.props.selectedHackathon._id) {
       return (
-        <div>
-          Select Hackkathon <a href="/#/hackathons">here</a>
+        <div className="ui segment loading-height-header">
+          <div className="ui active inverted dimmer row">
+            <div className="ui medium inverted text loader">Loading</div>
+          </div>
+          <p></p>
+          <p></p>
         </div>
       );
     }

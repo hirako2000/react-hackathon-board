@@ -48,6 +48,13 @@ export class SignupView extends React.Component<void, Props, void> {
   }
 
   componentDidMount() {
+    var domainMessage = 'Please enter an email address';
+    var domainRegex = 'email';
+    if(config.signIn.userEmailDomain) {
+      domainMessage = domainMessage + ' at @' + config.signIn.userEmailDomain;
+      domainRegex = 'regExp[^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(' + config.signIn.userEmailDomain + ')]';
+
+    }
     $('form').form({
       on: 'blur',
       fields: {
@@ -61,8 +68,8 @@ export class SignupView extends React.Component<void, Props, void> {
           username: {
               identifier: 'username',
               rules: [{
-                  type: 'email',
-                  prompt: 'Please enter an email address'
+                  type   : domainRegex,
+                  prompt : domainMessage
               }]
           },
           password: {
@@ -113,7 +120,7 @@ export class SignupView extends React.Component<void, Props, void> {
                     onChange={this.onPasswordConfirmChange} />
               </div>
               <p>
-                <button type="submit" className="ui fluid teal button">Log In</button>
+                <button type="submit" className="ui fluid teal button">Signup</button>
               </p>
               <div className="ui error message"></div>
             </form>

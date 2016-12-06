@@ -46,8 +46,6 @@ export class LoginView extends React.Component<void, Props, void> {
         username: {
           identifier: 'username',
           rules: [{
-            type: 'email',
-            prompt: 'Please enter an email address',
             type   : domainRegex,
             prompt : domainMessage
           }]

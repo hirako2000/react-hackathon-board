@@ -67,7 +67,7 @@ export class UsersAsCardsComponent extends React.Component {
                 <a href={ '#/people/' + card._id} className="header">
                   {card.profile.name}
                 </a>
-                <div className="description">
+                <div className="description word-wrap">
                   <i className="mail icon"></i>
                   {card.email}
                 </div>

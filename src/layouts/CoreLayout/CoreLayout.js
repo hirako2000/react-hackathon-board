@@ -77,15 +77,15 @@ var All = React.createClass({
         </div>
         <div className="ui inverted vertical footer segment desktop">
           <div className="ui container">
-            <div className="ui content">
+            <span className="ui content">
               Made with<a href="https://facebook.github.io/react/"> React </a>
               and <a href="http://semantic-ui.com/"> Semantic-ui </a>, backed
               by<a href="https://nodejs.org/en/"> Node </a>and<a href="https://github.com/mongodb/mongo"> mongoDB</a>.
-            </div>
+            </span>
 
-            <div className="ui content">
+            <span className="ui content float-right">
               Found a bug? Report an<a href="https://github.com/hirako2000/react-hackathon-board/issues"> issue.</a>
-            </div>
+            </span>
           </div>
         </div>
       </div>

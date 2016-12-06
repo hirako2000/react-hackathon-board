@@ -122,6 +122,14 @@
   text-align: center;
 }
 
+.ui.footer {
+  font-size: 0.8em;
+}
+
+.footer.segment {
+  padding: 5px;
+}
+
 @media (min-height: 320px) {
   .ui.footer {
     position: fixed;

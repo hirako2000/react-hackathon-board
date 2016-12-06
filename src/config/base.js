@@ -1,6 +1,6 @@
 const config = {
   signIn: {
-    userEmailDomain: null,
+    userEmailDomain: null, // null allows all domains, '@domain.com' restrict form to that domain
     enableSocialLogin: true
   }
 };

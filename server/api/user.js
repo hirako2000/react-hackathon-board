@@ -10,6 +10,8 @@ user.get('/me', function * (next) {
   if (this.isAuthenticated()) {
     user = this.passport.user;
     user.password = undefined;
+  } else {
+    return this.status = 401;
   }
   var selectedHackathon;
   if (user.selectedHackathon) {

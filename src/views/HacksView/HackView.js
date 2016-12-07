@@ -92,19 +92,24 @@ var LeftBar = React.createClass ({
         <p/>
 
         <Button color="red"
-                className={this.props.hack.hack.nominated === true || !this.props.user.user._id
+                className={this.props.hack.hack.nominated === true
+                        || !this.props.user.user || !this.props.user.user._id
                         || this.props.user.user.judge !== true ? 'hide-it' : 'fluid' }
                 onClick={(hack) => this.handleNominate(this.props.hack.hack)}>
           Nominate
         </Button>
         <p/>
 
-        <Button color="red" className={!this.props.user.user._id || this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
+        <Button color="red"
+                className={!this.props.user.user || !this.props.user.user._id
+                          || this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
                 onClick={(hack) => this.handleJoin(this.props.hack.hack)}>
           Join
         </Button>
         <p/>
-        <Button color="red" className={!this.props.user.user._id || !this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
+        <Button color="red"
+                className={!this.props.user.user || !this.props.user.user._id
+                          || !this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
                 onClick={(hack) => this.handleLeave(this.props.hack.hack)}>
           Leave
         </Button>

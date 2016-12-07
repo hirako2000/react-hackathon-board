@@ -27,6 +27,8 @@ export const fetchFromServer = () => (dispatch) => {
   axios.get('/api/users/me')
     .then((res) => {
       dispatch(user(res.data));
+    }).catch(function (error) {
+      console.log("Caught error fetching /me");
     });
 };
 

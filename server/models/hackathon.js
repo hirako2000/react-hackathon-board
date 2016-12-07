@@ -14,8 +14,8 @@ var HackathonSchema = new Schema({
   pictureURL: String,
   category: String,
   season: String,
-  open: Boolean,
-  active: Boolean,
+  open: { type: Boolean, default: false },
+  active: { type: Boolean, default: false},
   owner: String
 });
 

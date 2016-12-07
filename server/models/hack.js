@@ -12,11 +12,11 @@ var HackSchema = new Schema({
   category: String,
   season: String,
   hackathon: String,
-  open: Boolean,
-  completed: Boolean,
+  open: { type: Boolean, default: true },
+  completed: { type: Boolean, default: false },
   location: String,
-  science: Boolean,
-  nominated: Boolean
+  science: { type: Boolean, default: false },
+  nominated: { type: Boolean, default: false }
 });
 
 var Hack = mongoose.model('Event', HackSchema);

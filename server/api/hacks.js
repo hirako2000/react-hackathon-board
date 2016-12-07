@@ -10,6 +10,9 @@ var upload = multer({ dest: uploadDir });
 import lwip from 'lwip';
 import _ from 'lodash';
 import mongoose from 'mongoose';
+import json2csv from 'json2csv';
+import fs from 'fs';
+import moment from 'moment';
 
 const hacks = new Router();
 
@@ -225,6 +228,58 @@ var updateEntity = function(existingEntity, newEntity) {
   existingEntity.science = newEntity.science;
   existingEntity.location = newEntity.location;
 };
+
+hacks.get('/export/:id', function * (next) {
+  console.log('GET /hacks/export/' + this.params.id);
+  if (!this.isAuthenticated()) {
+    return this.status = 401;
+  }
+  var user = this.passport.user;
+  if (!user.judge === true) {
+    return this.status = 403;
+  }
+  if(!mongoose.Types.ObjectId.isValid(this.params.id)) {
+    return this.status = 404;
+  }
+
+  var hackathon = yield Hackathon.findOne({'_id': this.params.id});
+  if (!hackathon) {
+    return this.status = 404;
+  }
+
+  var hacks = yield Hack.find({'hackathon': this.params.id});
+  var maxTeamSize = 0;
+  for(var i = 0; i < hacks.length; i++) {
+    // build list of people who joined it
+    var hack = hacks[i];
+    hack['completedText'] = hack.completed ? 'Yes' : 'No';
+    hack['scienceText'] = hack.science ? 'Yes' : 'No';
+
+    for (var j = 0; j < hack.joiners.length; j++) {
+      var teamMember = yield User.findOne({'_id': hack.joiners[j]});
+      hack['teamMember' + (j + 1)] = teamMember.email + ' (' + teamMember.profile.name + ')';
+    }
+    maxTeamSize = maxTeamSize < hack.joiners.length ? hack.joiners.length : maxTeamSize;
+  }
+
+  var fields = ['title', 'shortDescription', 'description', 'location', 'completedText', 'scienceText'];
+  var fieldNames = ['Title', 'Short Description', 'Full Description', 'Location', 'Completed', 'Science'];
+  for(var i = 0; i < maxTeamSize; i++) {
+    // flattening team members
+    fields.push('teamMember' + ( i + 1));
+    fieldNames.push('Team Member ' + ( i + 1));
+  }
+  var csv = json2csv({
+    data: hacks,
+    fields: fields,
+    fieldNames: fieldNames
+  });
+
+  this.body = csv;
+
+  this.set('Content-disposition', 'attachment; filename=' + hackathon.title + '.csv');
+  this.set('Content-type', 'text/csv');
+});
 
 hacks.post('/:id/join', function * (next) {
   console.log('POST /hacks/' + this.params.id + "/join");

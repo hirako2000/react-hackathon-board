@@ -72,6 +72,14 @@ export class HacksAsCardsComponent extends React.Component {
 
     return(
       <div className="hacks-summary-margin">
+        <div className={!this.props.user || !this.props.user.user || !this.props.user.user._id
+                          || this.props.user.user.judge !== true ? 'hide-it' : 'fluid padding-top-20px' }>
+          <a href={ '/api/hacks/export/' + this.props.selectedHackathon._id}>
+            <Button color="teal" className="fluid">
+              Export To CSV
+            </Button>
+          </a>
+        </div>
         <div className="ui items stackable sixteen column relaxed grid basic">
           <div className="three wide column">
             <div className="ui field">
@@ -91,10 +99,9 @@ export class HacksAsCardsComponent extends React.Component {
 
           <div className="thirteen wide column">
             <div className="">
-              <ReactCSSTransitionGroup component="div" className="ui stackable four column grid basic"
-                transitionName="card-disabled" transitionEnterTimeout={500} transitionLeaveTimeout={1}>
+              <div className="ui stackable four column grid basic">
                 {cards}
-              </ReactCSSTransitionGroup>
+              </div>
             </div>
           </div>
 

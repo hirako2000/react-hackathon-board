@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const HACKS = 'HACKS';
 export const MY_HACKS = 'MY_HACKS';
-export const NOMINATED_HACKS = 'MY_HACKS';
+export const NOMINATED_HACKS = 'NOMINATED_HACKS';
 
 // ------------------------------------
 // Actions

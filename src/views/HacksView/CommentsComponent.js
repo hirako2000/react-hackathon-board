@@ -77,6 +77,9 @@ var CommentInput = React.createClass ({
   },
 
   handleSubmit: function(val) {
+    if(!this.state.value) {
+      return;
+    }
     this.props.sendComment(this.props.hackId, {'content': this.state.value});
     this.setState({
       value: ''

@@ -14,6 +14,9 @@ var userSchema = new mongoose.Schema({
   linkedin: String,
   tokens: Array,
 
+  lockedAt: Date,
+  authFailedCount: { type: Number, default: 0 },
+
   judge: Boolean,
   selectedHackathon: String,
 
@@ -35,7 +38,6 @@ var userSchema = new mongoose.Schema({
  * Password hash middleware.
  */
 userSchema.pre('save', function(next) {
-  console.log("Pre save!");
   var user = this;
   if (!user.isModified('password')) {
     console.log("password was NOT modified");

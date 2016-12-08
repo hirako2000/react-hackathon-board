@@ -41,17 +41,43 @@ passport.use(new PassportLocal.Strategy(function(username, password, done) {
       done(null, null);
     } else {
       console.log('found user, checking password..');
+      if(user.lockedAt) {
+        var currentDate = new Date();
+        var coolDown = 1000 * 60 * 10; // 10 mins should do..
+        var timeLapsed = currentDate.getTime() - user.lockedAt.getTime();
+        if(timeLapsed < coolDown) {
+          console.log("User is currently locked out: " + user.username);
+          console.log("Need to wait another: " + ((coolDown - timeLapsed) / 1000) + " seconds");
+          done(null, null);
+          return
+        } else {
+          console.log("Unlocking out " + user.username);
+          user.lockedAt = null;
+          user.authFailedCount = 0;
+          user.save();
+        }
+      }
       user.comparePassword(password, function(err, isMatch){
         if (err){
-          console.log("Password does NOT match");
+          console.log("Password does NOT match, error?");
           done(null, null);
         }
         if (isMatch) {
           // password matches. Log the user in
           console.log("Password matched, " + username + " logged in");
+          user.lockedAt = null;
+          user.authFailedCount = 0;
+          user.save();
           done(null, user);
         } else {
           console.log("Password does NOT match :(");
+          if(user.authFailedCount === 5) {
+            console.log("Locking out: " + username);
+            user.lockedAt = new Date();
+          } else {
+            user.authFailedCount = user.authFailedCount + 1;
+          }
+          user.save();
           done(null, null);
         }
       });

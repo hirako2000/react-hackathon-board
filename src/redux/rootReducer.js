@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { routerReducer as router } from 'react-router-redux';
-import counter from './modules/counter';
 import hackathons from './modules/hackathons';
 import hackathon from './modules/hackathon';
 import selectedHackathon from './modules/selectedHackathon';
@@ -15,7 +14,6 @@ import otherUser from './modules/otherUser';
 import { reducer as notifs } from 're-notif';
 
 export default combineReducers({
-  counter,
   hackathons,
   hackathon,
   selectedHackathon,

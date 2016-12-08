@@ -10,7 +10,6 @@ import CoreLayout from 'layouts/CoreLayout/CoreLayout';
 import LoginView from 'views/LoginView/LoginView';
 import SignupView from 'views/LoginView/SignupView';
 import ProfileView from 'views/ProfileView/ProfileView';
-import HomeView from 'views/HomeView/HomeView';
 import HackathonsView from 'views/HackathonsView/HackathonsView';
 import HackathonView from 'views/HackathonsView/HackathonView';
 import EditHackathonView from 'views/HackathonsView/EditHackathonView';

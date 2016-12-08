@@ -10,6 +10,8 @@ var upload = multer({ dest: uploadDir });
 import lwip from 'lwip';
 import _ from 'lodash';
 import mongoose from 'mongoose';
+import Promise from 'bluebird';
+mongoose.Promise = Promise;
 import json2csv from 'json2csv';
 import fs from 'fs';
 import moment from 'moment';
@@ -238,6 +240,7 @@ hacks.get('/export/:id', function * (next) {
   if (!user.judge === true) {
     return this.status = 403;
   }
+
   if(!mongoose.Types.ObjectId.isValid(this.params.id)) {
     return this.status = 404;
   }

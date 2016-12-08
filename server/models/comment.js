@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import Promise from 'bluebird';
+mongoose.Promise = Promise;
 var Schema = mongoose.Schema;
 
 var CommentSchema = new Schema({

@@ -74,7 +74,10 @@ if (config.env === 'development') {
   // these files. This middleware doesn't need to be enabled outside
   // of development since this directory will be copied into ~/dist
   // when the application is compiled.
-  app.use(convert(serve(paths.client('static'))));
+  var staticOptions = {
+    maxage: '2592000000'
+  };
+  app.use(convert(serve(paths.client('static'), staticOptions)));
 } else {
   debug(
       'Server is being run outside of live development mode.'

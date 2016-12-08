@@ -53,9 +53,12 @@ export class HackathonViewComponent extends React.Component {
           <div className="ui stackable internally grid">
             <div className="row">
               <div className="four wide column">
-                <div className={!this.props.user || !this.props.user.user || this.props.user.user.judge !== true ? "hide-it" : "ui visible items fluid"}>
+                <div className={!this.props.user || !this.props.user.user
+                                || this.props.user.user.judge !== true ? "hide-it" : "ui visible items fluid"}>
                   <a href={ '#/hackathons/edit/' + hackathon.hackathon._id}>
-                    <div className="ui red fluid button">Edit</div>
+                    <div className="ui red fluid button">
+                      Edit
+                    </div>
                   </a>
                 </div>
                 <Content className="visible fluid">

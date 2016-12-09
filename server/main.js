@@ -74,19 +74,17 @@ if (config.env === 'development') {
   // these files. This middleware doesn't need to be enabled outside
   // of development since this directory will be copied into ~/dist
   // when the application is compiled.
-  var staticOptions = {
-    maxage: '2592000000'
-  };
-  app.use(convert(serve(paths.client('static'), staticOptions)));
+  app.use(convert(serve(paths.client('static'))));
 } else {
-  debug(
-      'Server is being run outside of live development mode.'
-    );
+    debug('Server is being run outside of live development mode.');
 
     // Serving ~/dist by default. Ideally these files should be served by
     // the web server and not the app server, but this helps to demo the
     // server in production.
-  app.use(convert(serve(paths.base(config.dir_dist))));
+    var staticConfig = {
+      maxage: 5184000000
+    }
+    app.use(convert(serve(paths.base(config.dir_dist), staticConfig)));
 }
 
 export default app;

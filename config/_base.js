@@ -44,15 +44,26 @@ const config = {
     colors : true
   },
   compiler_vendor : [
+    'axios',
     'babel-polyfill',
     'history',
     'jquery',
+    'moment',
     'react',
+    'react-burger-menu',
+    'react-datepicker',
     'react-dom',
+    'react-dropzone-component',
+    'react-markdown',
     'react-redux',
+    'react-redux-form',
     'react-router',
     'react-router-redux',
-    'redux'
+    'react-semantify',
+    'redux',
+    'redux-actions',
+    'redux-thunk',
+    're-notif'
   ],
 
   // ----------------------------------

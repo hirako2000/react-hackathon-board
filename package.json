@@ -13,6 +13,7 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "start": "better-npm-run start -- --no_debug",
+    "start:prod": "better-npm-run start:prod -- --no_debug",
     "dev": "better-npm-run dev",
     "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug",
@@ -65,6 +66,13 @@
         "DEBUG": "app:*"
       }
     },
+    "start:prod": {
+      "command": "babel-node bin/server",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "app:*"
+      }
+    },
     "test": {
       "command": "babel-node ./node_modules/karma/bin/karma start build/karma.conf",
       "env": {
@@ -81,6 +89,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.2",
+    "babel-polyfill": "^6.13.0",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.6",
     "cookie-parser": "^1.4.3",
@@ -148,7 +157,6 @@
     "babel-plugin-transform-react-constant-elements": "^6.9.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.2.10",
     "babel-plugin-transform-runtime": "^6.9.0",
-    "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",

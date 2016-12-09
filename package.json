@@ -92,6 +92,7 @@
     "babel-polyfill": "^6.13.0",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.6",
+    "compression-webpack-plugin": "^0.3.2",
     "cookie-parser": "^1.4.3",
     "crypto": "0.0.3",
     "debug": "^2.3.3",

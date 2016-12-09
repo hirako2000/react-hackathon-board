@@ -77,7 +77,8 @@ var eventHandlers = {
 
 var djsConfig = {
   uploadMultiple: false,
-  maxFiles: 1
+  maxFiles: 1,
+  dictDefaultMessage: 'Drop file here to upload'
 };
 
 export class DropzoneSingleImageComponent extends React.Component {

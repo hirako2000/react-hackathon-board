@@ -21,7 +21,6 @@ const hacks = new Router();
 hacks.get('/', function * (next) {
   console.log('GET /hacks/');
   var selectedHackathonId =  this.request.query.hackathonId;
-  console.log("with hackathon id: " + selectedHackathonId);
   var hacks;
   if (selectedHackathonId && selectedHackathonId !== "-1") {
     hacks = yield Hack.find({ 'hackathon' : selectedHackathonId });

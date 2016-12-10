@@ -5,7 +5,6 @@ import { Provider, connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router';
 import { actions as beautifierActions } from '../../redux/modules/beautifier';
 
-import {Menu, Item, Icon, Image, Content, Header, Segment} from 'react-semantify';
 import SyntaxHighlighter, { registerLanguage } from "react-syntax-highlighter/dist/light"
 import js from 'highlight.js/lib/languages/javascript';
 import html from 'highlight.js/lib/languages/htmlbars';
@@ -80,7 +79,7 @@ var TypeInput = React.createClass ({
   render: function() {
 
     var types = [
-                  {key: 'js', display: 'JavaScript'},
+                  {key: 'js', display: 'JavaScript/JSON'},
                   {key: 'css', display: 'CSS'},
                   {key: 'html', display: 'HTML'},
                   {key: 'xml', display: 'XML'},

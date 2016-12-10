@@ -36,7 +36,7 @@ export class HackCardComponent extends React.Component {
             <div className="left floated">
              Nominated
             </div>
-            <i className="float-right red trophy icon">
+            <i className="float-right yellow trophy icon">
             </i>
           </div>
           <div className={hack.completed === true ? "extra content" : "hide-it"}>

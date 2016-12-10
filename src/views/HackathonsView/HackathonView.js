@@ -56,7 +56,7 @@ export class HackathonViewComponent extends React.Component {
                 <div className={!this.props.user || !this.props.user.user
                                 || this.props.user.user.judge !== true ? "hide-it" : "ui visible items fluid"}>
                   <a href={ '#/hackathons/edit/' + hackathon.hackathon._id}>
-                    <div className="ui red fluid button">
+                    <div className="ui blue fluid button">
                       Edit
                     </div>
                   </a>

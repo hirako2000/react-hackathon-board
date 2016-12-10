@@ -86,13 +86,13 @@ var LeftBar = React.createClass ({
       <div>
         <a href={ '#/hacks/edit/' + this.props.hack.hack._id }
             className={this.props.hack.isOwner || this.props.user.user.judge ? 'items' : 'hide-it'}>
-          <Button className="fluid" color="teal">
+          <Button className="fluid" color="blue">
             Edit
           </Button>
         </a>
         <p/>
 
-        <Button color="red"
+        <Button color="yellow"
                 className={this.props.hack.hack.nominated === true
                         || !this.props.user.user || !this.props.user.user._id
                         || this.props.user.user.judge !== true ? 'hide-it' : 'fluid' }
@@ -101,7 +101,7 @@ var LeftBar = React.createClass ({
         </Button>
         <p/>
 
-        <Button color="red"
+        <Button color="teal"
                 className={!this.props.user.user || !this.props.user.user._id
                           || this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
                 onClick={(hack) => this.handleJoin(this.props.hack.hack)}>

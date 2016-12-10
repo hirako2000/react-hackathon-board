@@ -11,13 +11,15 @@ import html from 'highlight.js/lib/languages/htmlbars';
 import xml from 'highlight.js/lib/languages/xml';
 import sql from 'highlight.js/lib/languages/sql';
 import css from 'highlight.js/lib/languages/css';
-import docco from 'react-syntax-highlighter/dist/styles/docco';
+import java from 'highlight.js/lib/languages/java';
+import defaultStyle from 'react-syntax-highlighter/dist/styles/defaultStyle';
 
 registerLanguage('javascript', js);
 registerLanguage('htmlbars', html);
 registerLanguage('xml', xml);
 registerLanguage('sql', sql);
 registerLanguage('css', css);
+registerLanguage('java', java);
 
 type
 Props = {
@@ -49,7 +51,7 @@ var BeautifyForm = React.createClass ({
         <div className="ui form">
           <div className="field">
             <label>
-              <TypeInput language ='xml' beautifier={ this.props.beautifier }/>
+              <TypeInput beautifier={ this.props.beautifier }/>
             </label>
             <textarea value={ this.state.value } rows="10"
                       onChange={this.handleChange}>
@@ -120,7 +122,7 @@ var Beautified = React.createClass ({
         <div className="ui">
           <div className="field">
             <div className="ui segment">
-              <SyntaxHighlighter style={docco}>
+              <SyntaxHighlighter style={defaultStyle}>
                   { this.props.beautifier.beautified ? this.props.beautifier.beautified : '' }
               </SyntaxHighlighter>
             </div>

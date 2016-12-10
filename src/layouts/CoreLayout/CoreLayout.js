@@ -119,6 +119,9 @@ var NavBarLeft = React.createClass({
             <Link activeClassName="active" className="item" to="people">
               <Icon className="users" /> People
             </Link>
+            <Link activeClassName="active" className="item" to="beautifier">
+              <Icon className="code" /> Beautifier
+            </Link>
             <AccountNavBarView />
           </Menu>
           <div className="ui fluid">

@@ -4,6 +4,7 @@ import hackathonsAPI from './hackathons';
 import localAPI from './auth/local';
 import socialAPI from './auth/social';
 import userAPI from './user';
+import beautifierAPI from './beautifier';
 import bodyParser from 'koa-bodyparser';
 
 var api = new Router({
@@ -18,5 +19,7 @@ api.use('/users', userAPI.routes());
 
 api.use('/hacks', hacksAPI.routes());
 api.use('/hackathons', hackathonsAPI.routes());
+
+api.use('/beautifier', beautifierAPI.routes());
 
 export default api;

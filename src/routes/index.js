@@ -22,6 +22,7 @@ import UsersView from 'views/UsersView/UsersView';
 import UserView from 'views/UsersView/UserView';
 import RulesView from 'views/HackathonsView/RulesView';
 import PrizesView from 'views/HackathonsView/PrizesView';
+import BeautifierView from 'views/BeautifierView/BeautifierView';
 
 export default (store) => (
   <Route component={CoreLayout}>
@@ -45,5 +46,6 @@ export default (store) => (
     <Route name='otherUser' path='/people/:id' component={UserView} />
     <Route name='rules' path='/rules' component={RulesView} />
     <Route name='prizes' path='/prizes' component={PrizesView} />
+    <Route name='beautifier' path='/beautifier' component={BeautifierView} />
   </Route>
 );

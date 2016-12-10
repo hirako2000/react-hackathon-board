@@ -60,6 +60,7 @@ const config = {
     'react-router',
     'react-router-redux',
     'react-semantify',
+    'react-syntax-highlighter',
     'redux',
     'redux-actions',
     'redux-thunk',

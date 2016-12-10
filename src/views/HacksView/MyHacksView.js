@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { actions as hacksActions } from '../../redux/modules/hacks';
 import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import HackCardComponent from './HackCardComponent';
 
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
@@ -50,10 +49,9 @@ export class MyHacksComponent extends React.Component {
 
           <div className="thirteen wide column">
             <div className="">
-              <ReactCSSTransitionGroup component="div" className="ui stackable four column grid basic"
-                                       transitionName="card" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+              <div component="div" className="ui stackable four column grid basic">
                 {cards}
-              </ReactCSSTransitionGroup>
+              </div>
             </div>
           </div>
 

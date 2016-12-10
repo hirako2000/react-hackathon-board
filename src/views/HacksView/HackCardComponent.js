@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { actions as hacksActions } from '../../redux/modules/hacks';
 import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import {Button, Card, Content, Header, Column, Image, Segment, Icon} from 'react-semantify';
 

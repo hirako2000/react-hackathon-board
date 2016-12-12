@@ -11,6 +11,7 @@ import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Lab
 import { push } from 'react-router-redux';
 import DropzoneSingleImageComponent from './DropzoneComponent';
 import ReactMarkdown from 'react-markdown';
+import moment from 'moment';
 
 type
 Props = {
@@ -224,16 +225,21 @@ var HackathonInput = React.createClass ({
     }
 
     var hackathons = this.props.hackathons.hackathons.map(function (hackathon) {
+      var date = (moment(hackathon.startDate).month() !== moment(hackathon.endDate).month() ?
+        moment(hackathon.startDate).format('Do MMM YY') :
+          moment(hackathon.startDate).format('Do'))
+          + " - "
+          + moment(hackathon.endDate).format('Do MMM YY');
       if(hackathon.open === true) {
         return (
           <option key={hackathon._id} value={hackathon._id}>
-            {hackathon.title}
+            {hackathon.title}  { date }
           </option>
         );
       } else {
           return(
             <option key={hackathon._id} value={hackathon._id} disabled>
-              {hackathon.title}
+              {hackathon.title}  { date }
             </option>
           );
       }

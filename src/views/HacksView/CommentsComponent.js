@@ -93,7 +93,7 @@ var CommentInput = React.createClass ({
                   onChange={this.handleChange}>
         </textarea>
         <div className="ui items">
-          <button className="ui right floated small teal button" onClick={(comment) => this.handleSubmit(this.props.comment)}>
+          <button className="ui right floated tiny teal button" onClick={(comment) => this.handleSubmit(this.props.comment)}>
            Add comment
           </button>
         </div>

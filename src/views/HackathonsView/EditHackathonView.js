@@ -328,7 +328,7 @@ export class HackathonViewComponent extends React.Component {
 
             <DropzoneSingleImageComponent hack={ this.props.hackathon.hackathon } />
             <p>
-              <button className="ui button teal" onClick={(hackathon) => this.handleSubmit(this.props.hackathon)}>Save</button>
+              <button className="ui tiny button teal" onClick={(hackathon) => this.handleSubmit(this.props.hackathon)}>Save</button>
             </p>
           </div>
       </Segment>

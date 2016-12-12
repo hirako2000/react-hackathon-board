@@ -74,7 +74,7 @@ export class HacksAsCardsComponent extends React.Component {
         <div className={!this.props.user || !this.props.user.user || !this.props.user.user._id
                           || this.props.user.user.judge !== true ? 'hide-it' : 'fluid padding-top-20px' }>
           <a href={ '/api/hacks/export/' + this.props.selectedHackathon._id}>
-            <Button color="teal" className="fluid">
+            <Button color="teal" className="fluid tiny">
               Export To CSV
             </Button>
           </a>
@@ -82,7 +82,7 @@ export class HacksAsCardsComponent extends React.Component {
         <div className="ui items stackable sixteen column relaxed grid basic">
           <div className="three wide column">
             <div className="ui field">
-              <Button className={!this.props.user || !this.props.user.user || !this.props.user.user._id ? 'hide-it' : "fluid"} color="blue" onClick={this.handleCreate} >
+              <Button className={!this.props.user || !this.props.user.user || !this.props.user.user._id ? 'hide-it' : "fluid tiny"} color="blue" onClick={this.handleCreate} >
                 <Icon className="plus"/> Create Hack
               </Button>
               <div className="ui items form">

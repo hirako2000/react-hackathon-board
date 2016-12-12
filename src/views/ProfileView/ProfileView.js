@@ -141,7 +141,7 @@ export class ProfileView extends React.Component<void, Props, void> {
 
               <DropzoneSingleImageComponent user={ this.props.user.user } />
               <p>
-                <button className="ui fluid teal button"
+                <button className="ui fluid teal tiny button"
                         onClick={(user) => this.handleSubmit(this.props.user.user)}>
                   Update
                 </button>
@@ -160,4 +160,3 @@ const mapStateToProps = (state) => ({
   user: state.user
 });
 export default connect(mapStateToProps, userActions)(ProfileView);
-

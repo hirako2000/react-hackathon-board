@@ -86,7 +86,7 @@ var LeftBar = React.createClass ({
       <div>
         <a href={ '#/hacks/edit/' + this.props.hack.hack._id }
             className={this.props.hack.isOwner || this.props.user.user.judge ? 'items' : 'hide-it'}>
-          <Button className="fluid" color="blue">
+          <Button className="fluid tiny" color="blue">
             Edit
           </Button>
         </a>
@@ -95,7 +95,7 @@ var LeftBar = React.createClass ({
         <Button color="yellow"
                 className={this.props.hack.hack.nominated === true
                         || !this.props.user.user || !this.props.user.user._id
-                        || this.props.user.user.judge !== true ? 'hide-it' : 'fluid' }
+                        || this.props.user.user.judge !== true ? 'hide-it' : 'fluid tiny' }
                 onClick={(hack) => this.handleNominate(this.props.hack.hack)}>
           Nominate
         </Button>
@@ -103,14 +103,14 @@ var LeftBar = React.createClass ({
 
         <Button color="teal"
                 className={!this.props.user.user || !this.props.user.user._id
-                          || this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
+                          || this.props.hack.hasJoined ? 'hide-it' : 'fluid tiny'}
                 onClick={(hack) => this.handleJoin(this.props.hack.hack)}>
           Join
         </Button>
         <p/>
         <Button color="red"
                 className={!this.props.user.user || !this.props.user.user._id
-                          || !this.props.hack.hasJoined ? 'hide-it' : 'fluid'}
+                          || !this.props.hack.hasJoined ? 'hide-it' : 'fluid tiny'}
                 onClick={(hack) => this.handleLeave(this.props.hack.hack)}>
           Leave
         </Button>
@@ -270,7 +270,9 @@ export class HackViewComponent extends React.Component {
               leave={this.props.leave} nominate={this.props.nominate}/>
             </div>
             <div className="twelve wide column">
-              <MainPart hack={this.props.hack} params={this.props.params}/>
+              <div className="row">
+                <MainPart hack={this.props.hack} params={this.props.params}/>
+              </div>
             </div>
           </div>
         </div>

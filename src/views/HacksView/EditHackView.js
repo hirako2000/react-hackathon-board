@@ -38,10 +38,11 @@ var TitleInput = React.createClass ({
     return (
         <div className="field">
           <label>Title</label>
-          <input type="text" value={ this.state.value }
+          <input type="text" name="title" value={ this.state.value }
                  onChange={this.handleChange}>
           </input>
         </div>
+
     );
   }
 });
@@ -58,7 +59,7 @@ var ShortDescriptionInput = React.createClass ({
     return (
       <div  className="field">
         <label>Short Description</label>
-          <textarea value={ this.state.value } rows="2"
+          <textarea value={ this.state.value } name="shortDescription" rows="2"
                     onChange={this.handleChange}>
         </textarea>
       </div>
@@ -80,7 +81,7 @@ var DescriptionInput = React.createClass ({
       <div className="fields">
         <div className="eight wide field">
           <label>Description (markdown)</label>
-          <textarea value={ this.state.value }
+          <textarea value={ this.state.value } name="description"
                     onChange={this.handleChange}>
           </textarea>
         </div>
@@ -194,12 +195,12 @@ var HackathonInput = React.createClass ({
     if (this.props.hack.hackathon) {
       return { value: this.props.hack.hackathon._id };
     } else {
-      if(this.props.selectedHackathon._id) {
+      if(this.props.selectedHackathon._id && this.props.selectedHackathon.open === true) {
         this.props.hack.hackathon = this.props.selectedHackathon._id;
         return {value: this.props.hack.hackathon}
       } else {
         for (var hackathon in this.props.hackathons) {
-          if(hackathon.active === true){
+          if(hackathon.active === true && hackathon.open === true){
             this.props.hack.hackathon = hackathon._id;
             return { value: hackathon._id};
           }
@@ -223,11 +224,20 @@ var HackathonInput = React.createClass ({
     }
 
     var hackathons = this.props.hackathons.hackathons.map(function (hackathon) {
-      return (
-        <option key={hackathon._id} value={hackathon._id}>
-          {hackathon.title}
-        </option>
-      );
+      if(hackathon.open === true) {
+        return (
+          <option key={hackathon._id} value={hackathon._id}>
+            {hackathon.title}
+          </option>
+        );
+      } else {
+          return(
+            <option key={hackathon._id} value={hackathon._id} disabled>
+              {hackathon.title}
+            </option>
+          );
+      }
+
     });
 
     return (
@@ -267,8 +277,11 @@ export class HackViewComponent extends React.Component {
   }
 
   handleSubmit(val) {
-    if(!val.hackathon && this.props.selectedHackathon._id) {
+    if(!val.hackathon && this.props.selectedHackathon._id && this.props.selectedHackathon.open === true) {
       val.hackathon = this.props.selectedHackathon._id;
+    }
+    if (!val.title || !val.hackathon) {
+      return;
     }
     this.props.updateToSever(this.props.hack.hack ? this.props.hack.hack._id : null, val);
     // TODO - We should use react-router's history
@@ -314,10 +327,12 @@ export class HackViewComponent extends React.Component {
             <HackathonInput  hack={ this.props.hack.hack } hackathons= {this.props.hackathons} selectedHackathon={this.props.selectedHackathon}/>
             <DropzoneSingleImageComponent hack={ this.props.hack.hack } />
             <p>
-              <button className="ui button teal" onClick={(hack) => this.handleSubmit(this.props.hack.hack)}>
+              <button className="ui submit tiny teal button" onClick={(hack) => this.handleSubmit(this.props.hack.hack)}>
                 Save
               </button>
             </p>
+            <div className="ui error message"></div>
+
           </div>
       </Segment>
     );

@@ -105,7 +105,7 @@ export class HackathonsAsCardsComponent extends React.Component {
     return(
       <div className="ui container">
         <Segment className="basic stackable one column grid">
-          <Button className={!this.props.user || !this.props.user.user || this.props.user.user.judge !== true ? 'hide-it' : "column right floated"}
+          <Button className={!this.props.user || !this.props.user.user || this.props.user.user.judge !== true ? 'hide-it' : "column right tiny floated"}
                   color="blue" onClick={this.handleCreate} >
             <Icon className="plus"/> Create Hackathon
           </Button>

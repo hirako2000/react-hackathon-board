@@ -85,7 +85,7 @@ var LeftBar = React.createClass ({
     return (
       <div>
         <a href={ '#/hacks/edit/' + this.props.hack.hack._id }
-            className={this.props.hack.isOwner || this.props.user.user.judge ? 'items' : 'hide-it'}>
+            className={this.props.hack.isOwner || (this.props.user.user && this.props.user.user.judge) ? 'items' : 'hide-it'}>
           <Button className="fluid tiny" color="blue">
             Edit
           </Button>

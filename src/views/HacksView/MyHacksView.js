@@ -29,6 +29,17 @@ export class MyHacksComponent extends React.Component {
   }
 
   render() {
+    if(!this.props.myHacks) {
+      return (
+        <div className="ui basic segment loading-height">
+          <div className="ui active inverted dimmer row">
+            <div className="ui medium inverted text loader">Loading</div>
+          </div>
+          <p></p>
+          <p></p>
+        </div>
+      );
+    }
     var cards = this.props.myHacks
       .map(function (card) {
         return (

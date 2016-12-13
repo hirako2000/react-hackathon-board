@@ -55,7 +55,6 @@ export class NominatedComponent extends React.Component {
         <div className="ui items stackable sixteen column relaxed grid basic">
           <div className="three wide column">
             <div className="ui field">
-              <h1>Nominated Hacks</h1>
             </div>
           </div>
 

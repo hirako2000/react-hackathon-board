@@ -39,6 +39,7 @@ export const listFromServer = (hackathon) => (dispatch) => {
 };
 
 export const listMyHacksFromServer = () => (dispatch) => {
+  dispatch(myHacks(null));
   axios.get('/api/hacks/my')
     .then((res) => {
       dispatch(myHacks(res.data.hacks));
@@ -46,6 +47,7 @@ export const listMyHacksFromServer = () => (dispatch) => {
 };
 
 export const listNominatedHacksFromServer = (hackathon) => (dispatch) => {
+  dispatch(nominatedHacks(null));
   var hackathonId = hackathon && hackathon._id ? hackathon._id : "-1";
   axios.get('/api/hacks/nominated?hackathonId=' + hackathonId)
     .then((res) => {

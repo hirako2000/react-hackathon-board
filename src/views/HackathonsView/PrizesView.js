@@ -42,7 +42,6 @@ class PrizesView extends React.Component {
         <div className="ui items fluid">
           <div className="ui items stackable sixteen column relaxed grid basic">
             <div className="three wide column fluid">
-              <h1>Prizes</h1>
             </div>
             <Segment className="thirteen wide column">
               <div className="content">

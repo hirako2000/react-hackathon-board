@@ -1,4 +1,3 @@
-/* @flow */
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
@@ -8,7 +7,6 @@ import { actions as hackActions } from '../../redux/modules/hack';
 import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Label} from 'react-semantify';
-import { push } from 'react-router-redux';
 import DropzoneSingleImageComponent from './DropzoneComponent';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
@@ -29,7 +27,7 @@ Props = {
 */
 var TitleInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hack.title || '' };
+    return { value: this.props.hack.title || '' };
   },
   handleChange: function(event) {
     this.props.hack.title = event.target.value;
@@ -37,13 +35,12 @@ var TitleInput = React.createClass ({
   },
   render: function() {
     return (
-        <div className="field">
-          <label>Title</label>
-          <input type="text" name="title" value={ this.state.value }
-                 onChange={this.handleChange}>
-          </input>
-        </div>
-
+      <div className="field">
+        <label>Title</label>
+        <input type="text" name="title" value={ this.state.value }
+               onChange={this.handleChange}>
+        </input>
+      </div>
     );
   }
 });
@@ -67,7 +64,6 @@ var ShortDescriptionInput = React.createClass ({
     );
   }
 });
-
 
 var DescriptionInput = React.createClass ({
   getInitialState: function() {
@@ -107,7 +103,7 @@ var LocationInput = React.createClass ({
     return (
         <div className="field">
           <label>Location</label>
-          <input type="text" value={ this.state.value }
+          <input type="text" name="location" value={ this.state.value }
                  onChange={this.handleChange}>
           </input>
         </div>
@@ -278,6 +274,50 @@ export class HackViewComponent extends React.Component {
     this.props.fetchHackathonsFromServer();
   }
 
+  componentDidMount() {
+    $('.ui.form')
+      .form({
+        fields: {
+          title: {
+            identifier: 'title',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a title'
+              }
+            ]
+          },
+          location: {
+            identifier: 'location',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a location'
+              }
+            ]
+          },
+          shortDescription: {
+            identifier: 'shortDescription',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a short description'
+              }
+            ]
+          },
+          description: {
+            identifier: 'description',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a description'
+              }
+            ]
+          }
+        }
+      });
+  }
+
   componentWillUnmount () {
     this.props.reset();
   }
@@ -333,7 +373,8 @@ export class HackViewComponent extends React.Component {
             <HackathonInput  hack={ this.props.hack.hack } hackathons= {this.props.hackathons} selectedHackathon={this.props.selectedHackathon}/>
             <DropzoneSingleImageComponent hack={ this.props.hack.hack } />
             <p>
-              <button className="ui submit tiny teal button" onClick={(hack) => this.handleSubmit(this.props.hack.hack)}>
+              <button className="ui submit tiny teal button"
+                      onClick={(hack) => this.handleSubmit(this.props.hack.hack)}>
                 Save
               </button>
             </p>

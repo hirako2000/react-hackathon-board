@@ -1,4 +1,3 @@
-/* @flow */
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
@@ -8,7 +7,6 @@ import { actions as hackathonActions } from '../../redux/modules/hackathon';
 import classes from './HackathonsView.scss';
 import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Label} from 'react-semantify';
-import { push } from 'react-router-redux';
 import DropzoneSingleImageComponent from '../HacksView/DropzoneComponent';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -39,7 +37,7 @@ var DatePickerStartInput = React.createClass({
     return (
       <span className="three wide field">
         <label>Start Date</label>
-        <DatePicker
+        <DatePicker name="startDate"
         selected={this.state.value}
         onChange={this.handleChange} />
       </span>);
@@ -62,30 +60,34 @@ var DatePickerEndInput = React.createClass({
     return (
       <span className="three wide field">
         <label>End Date</label>
-        <DatePicker
-        selected={this.state.value}
-        onChange={this.handleChange} />
+        <DatePicker selected={this.state.value} onChange={this.handleChange} name="endDate" />
       </span>);
   }
 });
 
 var TitleInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon ? this.props.hackathon.title : '' };
+    return {
+      value: this.props.hackathon ? this.props.hackathon.title ? this.props.hackathon.title : '' : ''
+    };
   },
+
   handleChange: function(event) {
     this.props.hackathon.title = event.target.value;
     this.setState({
       value: event.target.value
     });
   },
+
   render: function() {
     return (
         <div className="eight wide field">
-          <label>Title</label>
-          <input type="text" value={ this.state.value }
-                 onChange={this.handleChange}>
-          </input>
+          <div className="field">
+            <label>Title</label>
+            <input type="text" name="title" value={ this.state.value }
+                   onChange={this.handleChange}>
+            </input>
+          </div>
         </div>
     );
   }
@@ -93,7 +95,7 @@ var TitleInput = React.createClass ({
 
 var LocationInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon ? this.props.hackathon.location : '' };
+    return {value: this.props.hackathon ? this.props.hackathon.location ? this.props.hackathon.location : '' : '' };
   },
   handleChange: function(event) {
     this.props.hackathon.location = event.target.value;
@@ -104,10 +106,12 @@ var LocationInput = React.createClass ({
   render: function() {
     return (
         <div className="two wide field">
-          <label>Location</label>
-          <input type="text" value={ this.state.value }
-                 onChange={this.handleChange}>
-          </input>
+          <div className="field">
+            <label>Location</label>
+            <input type="text" name="location" value={ this.state.value }
+                   onChange={this.handleChange}>
+            </input>
+          </div>
         </div>
     );
   }
@@ -123,11 +127,13 @@ var ShortDescriptionInput = React.createClass ({
   },
   render: function() {
     return (
-      <div  className="eight wide field">
-        <label>Short Description</label>
-          <textarea value={ this.state.value } rows="2"
-                    onChange={this.handleChange}>
-        </textarea>
+      <div className="eight wide field">
+        <div className="field">
+          <label>Short Description</label>
+            <textarea value={ this.state.value } name="shortDescription" rows="2"
+                      onChange={this.handleChange}>
+          </textarea>
+        </div>
       </div>
     );
   }
@@ -146,10 +152,12 @@ var DescriptionInput = React.createClass ({
     return (
       <div className="fields">
         <div className="eight wide field">
-          <label>Description (markdown)</label>
-          <textarea value={ this.state.value }
-                    onChange={this.handleChange}>
-          </textarea>
+          <div className="field">
+            <label>Description (markdown)</label>
+            <textarea value={ this.state.value } name="description"
+                      onChange={this.handleChange}>
+            </textarea>
+          </div>
         </div>
         <div className="eight wide field">
           <label>Description Preview</label>
@@ -173,7 +181,7 @@ var RulesInput = React.createClass ({
       <div className="fields">
         <div className="eight wide field">
           <label>Rules (markdown)</label>
-          <textarea value={ this.state.value }
+          <textarea value={ this.state.value } name="rules"
                     onChange={this.handleChange}>
           </textarea>
         </div>
@@ -199,7 +207,7 @@ var PrizesInput = React.createClass ({
       <div className="fields">
         <div className="eight wide field">
           <label>Prizes (markdown)</label>
-          <textarea value={ this.state.value }
+          <textarea value={ this.state.value } name="prizes"
                     onChange={this.handleChange}>
           </textarea>
         </div>
@@ -215,7 +223,7 @@ var PrizesInput = React.createClass ({
 
 var OpenInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon ? this.props.hackathon.open : true };
+    return {value: this.props.hackathon ? this.props.hackathon.open ? this.props.hackathon.open : true : true };
   },
   handleChange: function(event) {
     this.props.hackathon.open = !this.props.hackathon.open;
@@ -225,7 +233,7 @@ var OpenInput = React.createClass ({
     return (
       <div className="field">
         <div className="ui checkbox">
-          <input type="checkbox" checked={this.state.value}
+          <input type="checkbox" checked={this.state.value} name="open"
                  onChange={this.handleChange}/>
           <label>Open</label>
         </div>
@@ -236,7 +244,7 @@ var OpenInput = React.createClass ({
 
 var ActiveInput = React.createClass ({
   getInitialState: function() {
-    return {value: this.props.hackathon ? this.props.hackathon.active : false };
+    return {value: this.props.hackathon ? this.props.hackathon.active ? this.props.hackathon.active : false : false };
   },
   handleChange: function(event) {
     this.props.hackathon.active = !this.props.hackathon.active;
@@ -246,7 +254,7 @@ var ActiveInput = React.createClass ({
     return (
       <div className="field">
         <div className="ui checkbox">
-          <input type="checkbox" checked={this.state.value}
+          <input type="checkbox" checked={this.state.value} name="active"
                  onChange={this.handleChange}/>
           <label>Active</label>
         </div>
@@ -270,7 +278,23 @@ export class HackathonViewComponent extends React.Component {
     } else {
       this.props.reset();
     }
-    document.getElementById('container');
+  }
+
+  componentDidMount() {
+    $('.ui.form')
+      .form({
+        fields: {
+          title: {
+            identifier: 'title',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a title'
+              }
+            ]
+          }
+        }
+      });
   }
 
   componentWillUnmount () {
@@ -278,6 +302,9 @@ export class HackathonViewComponent extends React.Component {
   }
 
   handleSubmit(val) {
+    if(!val.title) {
+      return;
+    }
     this.props.updateToSever(this.props.hackathon.hackathon._id, val);
     // TODO - We should use react-router's history
     //this.props.history.push('#/'); // deprecated?
@@ -328,9 +355,14 @@ export class HackathonViewComponent extends React.Component {
 
             <DropzoneSingleImageComponent hack={ this.props.hackathon.hackathon } />
             <p>
-              <button className="ui tiny button teal" onClick={(hackathon) => this.handleSubmit(this.props.hackathon)}>Save</button>
+              <button className="ui submit tiny teal button"
+                      onClick={(hackathon) => this.handleSubmit(this.props.hackathon)}>
+                Save
+              </button>
             </p>
+            <div className="ui error message"></div>
           </div>
+
       </Segment>
     );
   }

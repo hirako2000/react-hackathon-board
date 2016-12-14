@@ -72,26 +72,25 @@ Dev
 
 Here's a brief summary of the three which will most likely be your bread and butter:
 
-* Doing live development? Use `npm start` to spin up the dev server.
+* Doing live development? Use `npm run start:dev` to spin up the dev server.
 * Compiling the application to disk? Use `npm run compile`.
-* Deploying to an environment? `npm run deploy` can help with that.
 
-**NOTE:** This package makes use of [debug](https://github.com/visionmedia/debug) to improve your debugging experience. For convenience, all of messages are prefixed with `app:*`. If you'd like to to change what debug statements are displayed, you can override the `DEBUG` environment variable via the CLI (e.g. `DEBUG=app:* npm start`) or tweak the npm scripts (`betterScripts` in `package.json`).
+**NOTE:** This package makes use of [debug](https://github.com/visionmedia/debug) to improve your debugging experience. For convenience, all of messages are prefixed with `app:*`. If you'd like to to change what debug statements are displayed, you can override the `DEBUG` environment variable via the CLI (e.g. `DEBUG=app:* npm run start:dev`) or tweak the npm scripts (`betterScripts` in `package.json`).
 
 Great, now that introductions have been made here's everything in full detail:
 
 |`npm run...`|Description|
 |---|---|
-|`start`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
+|`start:dev`|Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.|
 |`compile`|Compiles the application to disk (`~/dist` by default).|
-|`dev`|Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.|
+|`dev`|Same as `npm run start:dev`, but enables nodemon to automatically restart the server when server-related code is changed.|
 |`dev:nw`|Same as `npm run dev`, but opens the redux devtools in a new window.|
 |`dev:no-debug`|Same as `npm run dev` but disables redux devtools.|
 |`test`|Runs unit tests with Karma and generates a coverage report.|
 |`test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
 |`deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
 |`deploy:dev`|Same as `deploy` but overrides `NODE_ENV` to "development".|
-|`deploy:prod`|Same as `deploy` but overrides `NODE_ENV` to "production".|
+|`deploy:prod`|Same as `deploy`.|
 |`flow:check`|Analyzes the project for type errors.|
 |`lint`|Lint all `.js` files.|
 |`lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
@@ -178,7 +177,7 @@ Webpack
 -------
 
 ### Vendor Bundle
-You can redefine which packages to bundle separately by modifying `compiler_vendor` in `~/config/_base.js`. These default to:
+You can add which packages to bundle separately by modifying `compiler_vendor` in `~/config/_base.js`. These default to:
 
 ```js
 [
@@ -187,7 +186,8 @@ You can redefine which packages to bundle separately by modifying `compiler_vend
   'react-redux',
   'react-router',
   'react-router-redux',
-  'redux'
+  'redux',
+  ...
 ]
 ```
 
@@ -220,7 +220,7 @@ These are global variables available to you anywhere in your source code. If you
 Server
 ------
 
-This app comes packaged with an Koa server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. Using a custom Koa app in place of [webpack-dev-server](https://github.com/webpack/webpack-dev-server) will hopefully make it easier for users to extend the app to include functionality such as back-end API's, isomorphic/universal rendering, and more -- all without bloating the base app. Because of this, it should be noted that the provided server is **not** production-ready. If you're deploying to production, take a look at [the deployment section](#deployment).
+This app comes Koa 2 as server.
 
 Styles
 ------

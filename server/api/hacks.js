@@ -169,7 +169,7 @@ hacks.get('/nominated', function * (next) {
   if (selectedHackathonId && selectedHackathonId !== "-1") {
     hacks = yield Hack.find({ 'hackathon' : selectedHackathonId, 'nominated': true });
   } else {
-    var activeHackathon = yield Hackathon.findOne({'active': true, 'nominated': true});
+    var activeHackathon = yield Hackathon.findOne({'active': true});
     if (!activeHackathon) {
       hacks = [];
     } else {

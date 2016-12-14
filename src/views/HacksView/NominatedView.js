@@ -27,7 +27,7 @@ var NoNomination = React.createClass({
 export class NominatedComponent extends React.Component {
 
   static propTypes = {
-    nominatedHacks: PropTypes.array.isRequired,
+    nominatedHacks: PropTypes.array,
     selectedHackathon: PropTypes.object.isRequired,
     listNominatedHacksFromServer: PropTypes.func.isRequired
   };
@@ -42,6 +42,17 @@ export class NominatedComponent extends React.Component {
   }
 
   render() {
+    if(!this.props.nominatedHacks) {
+      return (
+        <div className="ui basic segment loading-height">
+          <div className="ui active inverted dimmer row">
+            <div className="ui medium inverted text loader">Loading</div>
+          </div>
+          <p></p>
+          <p></p>
+        </div>
+      );
+    }
     var cards = this.props.nominatedHacks
       .map(function (card) {
         return (

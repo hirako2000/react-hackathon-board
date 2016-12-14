@@ -302,7 +302,7 @@ export class HackathonViewComponent extends React.Component {
   }
 
   handleSubmit(val) {
-    if(!val.title) {
+    if(!val.hackathon.title) {
       return;
     }
     this.props.updateToSever(this.props.hackathon.hackathon._id, val);

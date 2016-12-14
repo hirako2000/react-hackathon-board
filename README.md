@@ -38,7 +38,7 @@ Features
 Getting Started
 ---------------
 
-Just clone the repo and install the necessary node modules:
+Clone the repo and install the necessary node modules:
 
 ```shell
 $ git clone https://github.com/hirako2000/react-hackathon-board.git
@@ -51,9 +51,20 @@ Start mongodb
 $ mongod
 ```
 
-Start the node application
+Start the node application (dev - hot module reloading)
 ```shell
-$ npm start                     # Compile and launch
+$ npm run start:dev  # Compile and launch
+```
+Deploy and start for production (with npm)
+```shell
+$ npm run deploy  # Compile all to ./dist
+$ npm run start:prod
+```
+
+Deploy and start for production (with pm2)
+```shell
+$ npm run deploy
+$ pm2 start npm --name=react-hackathton-board -- start
 ```
 
 Dev

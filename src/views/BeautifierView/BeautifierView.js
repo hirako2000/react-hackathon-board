@@ -58,7 +58,8 @@ var BeautifyForm = React.createClass ({
           </textarea>
           </div>
           <p>
-            <button className="ui tiny teal button" onClick={(beautifier) => this.handleSubmit(this.props.beautifier)}>
+            <button className={this.props.beautifier.loading === 'true' ? 'ui tiny disabled loading teal button' : 'ui tiny teal button'}
+                    onClick={(beautifier) => this.handleSubmit(this.props.beautifier)}>
               Beautify
             </button>
           </p>

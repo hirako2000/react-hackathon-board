@@ -21,18 +21,27 @@ export function beautify (value: Object): Action {
 }
 
 export const update = (req) => (dispatch) => {
+  dispatch(beautifier({ content: req.content,
+                        type: req.type,
+                        beautified: req.beautified,
+                        loading: 'true' }
+                      ));
   axios.post('/api/beautifier/', req)
     .catch((res) => {
     })
     .then((res) => {
       if(res) {
-        dispatch(beautifier(res.data));
+        dispatch(beautifier({ content: res.data.content,
+                              type: res.data.type,
+                              beautified: res.data.beautified,
+                              loading: 'false' }
+                            ));
       }
     });
 };
 
 export const reset = () => (dispatch) => {
-  dispatch(beautifier({content: '', type: 'js'}));
+  dispatch(beautifier({content: '', type: 'js', loading: 'false'}));
 };
 
 export const actions = {

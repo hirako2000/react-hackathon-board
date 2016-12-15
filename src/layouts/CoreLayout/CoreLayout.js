@@ -75,7 +75,7 @@ var All = React.createClass({
             {this.props.children}
           </div>
         </div>
-        <div className="ui inverted vertical footer segment desktop">
+        <div className="ui vertical footer segment desktop">
           <div className="ui container">
             <span className="ui content">
               Made with<a href="https://facebook.github.io/react/"> React </a>
@@ -100,7 +100,7 @@ var NavBarLeft = React.createClass({
     return(
       <div>
         <div>
-          <Menu className="inverted borderless stackable">
+          <Menu className="borderless stackable">
             <Link activeClassName="active" className="item" to="hackathons">
               <Icon className="home" /> Home
             </Link>

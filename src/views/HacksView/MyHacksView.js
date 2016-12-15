@@ -60,7 +60,7 @@ export class MyHacksComponent extends React.Component {
 
           <div className="thirteen wide column">
             <div className="">
-              <div component="div" className="ui stackable four column grid basic">
+              <div className="ui stackable four column grid basic">
                 {cards}
               </div>
             </div>

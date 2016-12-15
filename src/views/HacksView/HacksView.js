@@ -60,7 +60,12 @@ export class HacksAsCardsComponent extends React.Component {
     var searchString = this.state.search;
     var cards = this.props.hacks
     .filter(function(hack) {
-        return !hack.title || hack.title.toLowerCase().indexOf(searchString.toLowerCase()) != -1;
+        return (!hack.title
+                  || hack.title.toLowerCase().indexOf(searchString.toLowerCase()) != -1)
+              || (hack.shortDescription
+                      && hack.shortDescription.toLowerCase().indexOf(searchString.toLowerCase()) != -1)
+              || (hack.location
+                      && hack.location.toLowerCase().indexOf(searchString.toLowerCase()) != -1);
     })
     .map(function (card) {
       return (

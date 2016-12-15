@@ -82,10 +82,10 @@ export class HacksAsCardsComponent extends React.Component {
         <div className="ui items stackable sixteen column relaxed grid basic">
           <div className="three wide column">
             <div className="ui field">
-              <Button className={!this.props.user || !this.props.user.user || !this.props.user.user._id ? 'hide-it' : "fluid tiny"} color="blue" onClick={this.handleCreate} >
-                <Icon className="plus"/> Create Hack
-              </Button>
               <div className="ui items form">
+                <Button className={!this.props.user || !this.props.user.user || !this.props.user.user._id ? 'hide-it' : "fluid tiny field"} color="blue" onClick={this.handleCreate} >
+                  <Icon className="plus"/> Create Hack
+                </Button>
                 <div className="field">
                   <input type="text" name="search"
                   value={this.props.hacks.search}

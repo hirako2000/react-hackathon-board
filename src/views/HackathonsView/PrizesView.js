@@ -7,6 +7,7 @@ import { actions as userActions } from '../../redux/modules/user';
 
 import {Menu, Item, Icon, Image, Content, Header, Segment} from 'react-semantify';
 import ReactMarkdown from 'react-markdown';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -30,7 +31,9 @@ class PrizesView extends React.Component {
       return(
         <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
-            <div className="ui medium inverted text loader">Loading</div>
+            <div className="ui medium inverted text loader">
+              <Translate value="common.loading"/>
+            </div>
           </div>
           <p></p>
           <p></p>

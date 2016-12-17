@@ -31,7 +31,7 @@ var TeamList = React.createClass ({
   render: function() {
     if (!this.props.hack || !this.props.hack.joinersDisplay) {
       return (
-        <div>Loading...</div>
+        <Translate value="common.loading"/>
       );
     }
     var members = this.props.hack.joinersDisplay.map(function (member) {
@@ -76,7 +76,9 @@ var LeftBar = React.createClass ({
       return (
         <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
-            <div className="ui medium inverted text loader">Loading</div>
+            <div className="ui medium inverted text loader">
+              <Translate value="common.loading"/>
+            </div>
           </div>
           <p></p>
           <p></p>
@@ -200,7 +202,9 @@ var MainPart = React.createClass ({
       return (
         <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
-            <div className="ui medium inverted text loader">Loading</div>
+            <div className="ui medium inverted text loader">
+              <Translate value="common.loading"/>
+            </div>
           </div>
           <p></p>
           <p></p>

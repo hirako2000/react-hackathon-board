@@ -4,7 +4,7 @@ import { actions as hacksActions } from '../../redux/modules/hacks';
 import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 import HackCardComponent from './HackCardComponent';
-
+import { Translate, Localize } from 'react-i18nify';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
 
 type
@@ -33,7 +33,9 @@ export class MyHacksComponent extends React.Component {
       return (
         <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
-            <div className="ui medium inverted text loader">Loading</div>
+            <div className="ui medium inverted text loader">
+              <Translate value="common.loading"/>
+            </div>
           </div>
           <p></p>
           <p></p>

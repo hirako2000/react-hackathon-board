@@ -14,7 +14,8 @@ const i18n = {
            summary: 'Summary',
            details: 'Details',
            create: 'Create',
-           about: "About"
+           about: "About",
+           loading: "Loading"
          },
          menu: {
            home: 'Home',
@@ -110,7 +111,8 @@ const i18n = {
            summary: "Résumé",
            details: "Détails",
            create: "Créer",
-           about: "à propos"
+           about: "à propos",
+           loading: "Chargement"
          },
          menu: {
            home: 'Acceuil',

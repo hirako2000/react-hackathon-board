@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { actions as usersActions } from '../../redux/modules/users';
 import ReactDOM from 'react-dom';
-
+import { Translate, Localize } from 'react-i18nify';
 import {Button, Card, Content, Header, Column, Image, Segment, Icon} from 'react-semantify';
 
 type
@@ -49,7 +49,9 @@ export class UsersAsCardsComponent extends React.Component {
       return (
         <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
-            <div className="ui medium inverted text loader">Loading</div>
+            <div className="ui medium inverted text loader">
+              <Translate value="common.loading"/>
+            </div>
           </div>
           <p></p>
           <p></p>

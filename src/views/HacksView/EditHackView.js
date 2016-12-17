@@ -355,7 +355,9 @@ export class HackViewComponent extends React.Component {
       return (
         <div className="ui basic segment loading-height">
           <div className="ui active inverted dimmer row">
-            <div className="ui medium inverted text loader">Loading</div>
+            <div className="ui medium inverted text loader">
+              <Translate value="common.loading"/>
+            </div>
           </div>
           <p></p>
           <p></p>

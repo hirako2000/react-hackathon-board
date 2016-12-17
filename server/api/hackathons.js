@@ -54,7 +54,12 @@ hackathons.put('/:id', function * (next) {
     hackathonEntity.owner = this.passport.user._id;
     if (hackathonEntity.active === true) {
       // set other hackathons as inactive
-      yield Hackathon.update({'_id': {$ne: hackathonEntity._id}}, { $set: {active: false} });
+      var query = { "_id" : {$ne: hackathonEntity._id} };
+      var update = {
+          "$set": { active: false }
+      };
+      var options = { "multi": true };
+      yield Hackathon.update(query, update, options);
     }
     yield hackathonEntity.save();
   }

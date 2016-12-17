@@ -34,7 +34,7 @@ Requirements
 Features
 --------
 
-* Coming soon...
+See features [here](https://hirako2000.github.io/2016/12/17/React-Hackathon-Board.html).
 
 Getting Started
 ---------------

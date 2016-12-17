@@ -1,7 +1,8 @@
 React Hackathon Board
 =======================
 
-Under development, the goal of this project is to build a web application to host hackathon events.
+Web application to manage Hackathon events. This project is a full rewrite of [hackathon-board](https://github.com/hirako2000/hackathon-board), This time using ReactJS and Semantic-ui on the front end, Node/Express and MongoDB on the backend.
+See features [here](https://hirako2000.github.io/2016/12/17/React-Hackathon-Board.html)
 
 [![Build Status](https://travis-ci.org/hirako2000/react-hackathon-board.svg?branch=master)](https://travis-ci.org/hirako2000/react-hackathon-board)
 [![Dependency Status](https://david-dm.org/hirako2000/react-hackathon-board.svg?style=flat)](https://david-dm.org/hirako2000/react-hackathon-board)
@@ -33,7 +34,7 @@ Requirements
 Features
 --------
 
-* Coming soon...
+See features [here](https://hirako2000.github.io/2016/12/17/React-Hackathon-Board.html).
 
 Getting Started
 ---------------

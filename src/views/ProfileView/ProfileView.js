@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Label} from 'react-semantify';
 import { actions as userActions } from '../../redux/modules/user';
 import DropzoneSingleImageComponent from '../HacksView/DropzoneComponent';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -110,30 +111,40 @@ export class ProfileView extends React.Component<void, Props, void> {
           <div className="sixteen wide column">
             <div className="ui form" id="validating-form">
               <div className="field">
-                <label>Email</label>
+                <label>
+                  <Translate value="profile.email"/>
+                </label>
                 <input disabled="true" type= "text" name="username" value={this.props.user.user.email}
                        onChange={this.onUsernameChange} placeholder="Email" />
               </div>
               <div className="field">
-                <label>Full Name</label>
+                <label>
+                  <Translate value="profile.fullName"/>
+                </label>
                 <input type="text" name="name" placeholder="Full name"
                        value={this.props.user.user.profile.name}
                        onChange={this.onNameChange} />
               </div>
               <div className="field">
-                <label>Website</label>
+                <label>
+                  <Translate value="profile.website"/>
+                </label>
                 <input type="text" name="website" placeholder="http://example.com"
                        value={this.props.user.user.profile.website}
                        onChange={this.onWebsiteChange} />
               </div>
               <div className="field">
-                <label>Location</label>
+                <label>
+                  <Translate value="profile.location"/>
+                </label>
                 <input type="text" name="location" placeholder="Edinburgh"
                        value={this.props.user.user.profile.location}
                        onChange={this.onLocationChange} />
               </div>
               <div className="field">
-                <label>Description</label>
+                <label>
+                  <Translate value="profile.description"/>
+                </label>
                 <textarea type="text" name="description" placeholder="description"
                        value={this.props.user.user.profile.description}
                        onChange={this.onDescriptionChange} />
@@ -143,7 +154,7 @@ export class ProfileView extends React.Component<void, Props, void> {
               <p>
                 <button className="ui fluid teal tiny button"
                         onClick={(user) => this.handleSubmit(this.props.user.user)}>
-                  Update
+                  <Translate value="common.save"/>
                 </button>
               </p>
               <div className="ui error message"></div>

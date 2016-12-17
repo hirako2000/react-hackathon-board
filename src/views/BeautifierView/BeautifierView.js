@@ -13,6 +13,7 @@ import sql from 'highlight.js/lib/languages/sql';
 import css from 'highlight.js/lib/languages/css';
 import java from 'highlight.js/lib/languages/java';
 import defaultStyle from 'react-syntax-highlighter/dist/styles/defaultStyle';
+import { Translate, Localize } from 'react-i18nify';
 
 registerLanguage('javascript', js);
 registerLanguage('htmlbars', html);
@@ -60,7 +61,7 @@ var BeautifyForm = React.createClass ({
           <p>
             <button className={this.props.beautifier.loading === 'true' ? 'ui tiny disabled loading teal button' : 'ui tiny teal button'}
                     onClick={(beautifier) => this.handleSubmit(this.props.beautifier)}>
-              Beautify
+              <Translate value="menu.beautify"/>
             </button>
           </p>
         </div>

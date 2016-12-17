@@ -5,6 +5,7 @@ import classes from './HacksView.scss';
 import ReactDOM from 'react-dom';
 
 import {Button, Card, Content, Header, Column, Image, Segment, Icon} from 'react-semantify';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -33,14 +34,14 @@ export class HackCardComponent extends React.Component {
         <Card className="fluid">
           <div className={hack.nominated === true ? "extra content" : "hide-it"}>
             <div className="left floated">
-             Nominated
+             <Translate value="hack.nominated"/>
             </div>
             <i className="float-right yellow trophy icon">
             </i>
           </div>
           <div className={hack.completed === true ? "extra content" : "hide-it"}>
             <span className="left floated">
-              Completed
+              <Translate value="hack.completed"/>
             </span>
             <i className="float-right green checkmark icon">
             </i>

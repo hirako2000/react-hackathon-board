@@ -7,6 +7,8 @@ import { Router, Route, Link } from 'react-router';
 import { actions as userActions } from '../../redux/modules/user';
 
 import { Menu, Item, Icon, Dropdown} from 'react-semantify';
+import LocalePickerView from './LocalePicker';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -29,31 +31,33 @@ class AccountNavBarView extends React.Component {
     if(!this.props.user || !this.props.user.user || !this.props.user.user._id) {
       return(
         <Menu className="right borderless stackable">
+          <LocalePickerView/>
           <Link activeClassName="active" className="item" to="login">
-            <Icon className="sign in" /> Login
+            <Icon className="sign in" /> <Translate value="common.login"/>
           </Link>
           <Link activeClassName="active" className="item" to="signup">
-            <Icon className="" /> Sign up
+            <Icon className="" /> <Translate value="common.signup"/>
           </Link>
         </Menu>
       );
     }
     return(
       <Menu className="right borderless noborder stackable">
+        <LocalePickerView/>
         <Dropdown init={true} className="">
           <Item>
             <Icon className="user" /> { this.props.user.user.profile.name ? this.props.user.user.profile.name : this.props.user.user.username }
           </Item>
           <Menu className="ui borderless">
             <Item className="" type="link" href="/#/hacks/my">
-              My Hacks
+              <Translate value="menu.myhacks"/>
             </Item>
             <Item className="" type="link" href="/#/profile">
-               Profile
+               <Translate value="menu.profile"/>
             </Item>
             <div className="divider"/>
             <Item className="" type="link" href="/api/auth/logout">
-              <Icon className="sign out" /> Logout
+              <Icon className="sign out" /> <Translate value="menu.logout"/>
             </Item>
           </Menu>
         </Dropdown>

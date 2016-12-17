@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
 import ReactMarkdown from 'react-markdown';
 import CommentsComponent from './CommentsComponent';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -87,7 +88,7 @@ var LeftBar = React.createClass ({
         <a href={ '#/hacks/edit/' + this.props.hack.hack._id }
             className={this.props.hack.isOwner || (this.props.user.user && this.props.user.user.judge) ? 'items' : 'hide-it'}>
           <Button className="fluid tiny" color="blue">
-            Edit
+            <Translate value="common.edit"/>
           </Button>
         </a>
         <p/>
@@ -97,7 +98,7 @@ var LeftBar = React.createClass ({
                         || !this.props.user.user || !this.props.user.user._id
                         || this.props.user.user.judge !== true ? 'hide-it' : 'fluid tiny' }
                 onClick={(hack) => this.handleNominate(this.props.hack.hack)}>
-          Nominate
+          <Translate value="hack.nominate"/>
         </Button>
         <p/>
 
@@ -105,19 +106,21 @@ var LeftBar = React.createClass ({
                 className={!this.props.user.user || !this.props.user.user._id
                           || this.props.hack.hasJoined ? 'hide-it' : 'fluid tiny'}
                 onClick={(hack) => this.handleJoin(this.props.hack.hack)}>
-          Join
+          <Translate value="hack.join"/>
         </Button>
         <p/>
         <Button color="red"
                 className={!this.props.user.user || !this.props.user.user._id
                           || !this.props.hack.hasJoined ? 'hide-it' : 'fluid tiny'}
                 onClick={(hack) => this.handleLeave(this.props.hack.hack)}>
-          Leave
+          <Translate value="hack.leave"/>
         </Button>
 
         <div className="ui card fluid">
           <div className="content">
-            <div className="header">Organizer</div>
+            <div className="header">
+              <Translate value="hack.organizer"/>
+            </div>
             <div className="">
               <a href={ '#/people/' + this.props.hack.hack.owner}>
                 <span className="word-wrap">{this.props.hack.ownerDisplay}</span>
@@ -126,7 +129,7 @@ var LeftBar = React.createClass ({
           </div>
           <div className="extra content">
                     <span className="left floated">
-                      Science
+                      <Translate value="hack.science"/>
                     </span>
             <i className="float-right minus circle icon"
                className={this.props.hack.hack.science !== true ? 'float-right minus circle icon' : 'float-right checkmark icon'}>
@@ -144,21 +147,23 @@ var LeftBar = React.createClass ({
             </i>
           </div>
           <div className="content">
-            <div className="header">Team</div>
+            <div className="header">
+              <Translate value="hack.team"/>
+            </div>
             <TeamList hack={ this.props.hack } />
           </div>
           <div className="extra content">
-                    <span className="left floated">
-                      {this.props.hack.hack.open === true ? "Open" : "Closed"}
-                    </span>
+              <span className="left floated">
+                {this.props.hack.hack.open === true ? <Translate value="hack.open"/> : <Translate value="hack.closed"/> }
+              </span>
             <i className="float-right minus circle icon"
                className={this.props.hack.hack.open !== true ? 'float-right minus circle icon' : 'float-right checkmark icon'}>
             </i>
           </div>
           <div className="extra content">
-                    <span className="left floated">
-                      {this.props.hack.hack.completed === true ? "Completed" : "Uncompleted"}
-                    </span>
+              <span className="left floated">
+                {this.props.hack.hack.completed === true ?  <Translate value="hack.completed"/> :  <Translate value="hack.uncompleted"/> }
+              </span>
             <i className="float-right minus circle icon"
                className={this.props.hack.hack.completed !== true ? 'float-right minus circle icon' : 'float-right checkmark icon'}>
             </i>
@@ -167,7 +172,9 @@ var LeftBar = React.createClass ({
 
         <div className="ui card fluid">
           <div className="content">
-            <div className="header">Location</div>
+            <div className="header">
+              <Translate value="hack.location"/>
+            </div>
             <div className="">
               <span className="word-wrap">{this.props.hack.hack.location}</span>
             </div>

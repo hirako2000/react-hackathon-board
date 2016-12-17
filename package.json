@@ -147,6 +147,7 @@
     "react-datepicker": "^0.39.0",
     "react-dom": "^15.3.0",
     "react-dropzone-component": "^1.2.1",
+    "react-i18nify": "^1.7.2",
     "react-markdown": "^2.2.0",
     "react-redux": "^5.0.0",
     "react-redux-form": "^1.4.3",

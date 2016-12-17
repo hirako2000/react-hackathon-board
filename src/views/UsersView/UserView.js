@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router';
 import { actions as otherUserActions } from '../../redux/modules/otherUser';
-
+import { Translate, Localize } from 'react-i18nify';
 import {Menu, Item, Icon, Image, Content, Header, Segment} from 'react-semantify';
 
 type
@@ -70,28 +70,28 @@ class UserView extends React.Component {
             </div>
             <div className="thirteen wide column">
               <Segment>
-                <h3>About me</h3>
-                  <pre className="">
-                    {this.props.otherUser.profile.description}
-                  </pre>
+                <h3><Translate value="common.about"/></h3>
+                <pre className="">
+                  {this.props.otherUser.profile.description}
+                </pre>
               </Segment>
 
               <Segment>
-                <h3>Location</h3>
-                  <span>
-                    {this.props.otherUser.profile.location}
-                  </span>
+                <h3><Translate value="profile.location"/></h3>
+                <span>
+                  {this.props.otherUser.profile.location}
+                </span>
               </Segment>
 
               <Segment>
-                <h3>Website</h3>
+                <h3><Translate value="profile.website"/></h3>
                   <span>
                     {this.props.otherUser.profile.website}
                   </span>
               </Segment>
 
               <Segment>
-                <h3>Email</h3>
+                <h3><Translate value="profile.email"/></h3>
                  <span>
                     {this.props.otherUser.email}
                   </span>

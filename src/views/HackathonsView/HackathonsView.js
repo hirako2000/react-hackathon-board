@@ -4,8 +4,8 @@ import { actions as hackathonsActions } from '../../redux/modules/hackathons';
 import classes from './HackathonsView.scss';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
-
 import {Button, Card, Content, Header, Column, Image, Segment, Icon} from 'react-semantify';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -94,7 +94,7 @@ export class HackathonsAsCardsComponent extends React.Component {
             </Content>
             <div className="extra center aligned">
               <a href={'#/hackathons/' + card._id}>
-                  Details
+                  <Translate value="common.details"/>
               </a>
             </div>
           </Card>
@@ -107,7 +107,7 @@ export class HackathonsAsCardsComponent extends React.Component {
         <Segment className="basic stackable one column grid">
           <Button className={!this.props.user || !this.props.user.user || this.props.user.user.judge !== true ? 'hide-it' : "column right tiny floated"}
                   color="blue" onClick={this.handleCreate} >
-            <Icon className="plus"/> Create Hackathon
+            <Icon className="plus"/>  <Translate value="common.create"/>
           </Button>
         </Segment>
         <Segment loading={!this.props.hackathons} className="ui stackable four column grid basic">

@@ -4,6 +4,7 @@ import { actions as commentsActions } from '../../redux/modules/comments';
 import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
 import moment from 'moment';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -56,7 +57,9 @@ var CommentsList =  React.createClass({
 
     return(
       <div className="ui comments">
-        <h5 className="ui header">Comments</h5>
+        <h5 className="ui header">
+          <Translate value="hack.comments"/>
+        </h5>
         {comments}
       </div>
     );
@@ -94,7 +97,7 @@ var CommentInput = React.createClass ({
         </textarea>
         <div className="ui items">
           <button className="ui right floated tiny teal button" onClick={(comment) => this.handleSubmit(this.props.comment)}>
-           Add comment
+            <Translate value="hack.addComment"/>
           </button>
         </div>
       </div>

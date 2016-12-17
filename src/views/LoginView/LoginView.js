@@ -4,6 +4,7 @@ import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Lab
 import { actions as userActions } from '../../redux/modules/user';
 import axios from 'axios';
 import config from '../../config/base';
+import { Translate, Localize, I18n} from 'react-i18nify';
 
 type
 Props = {
@@ -71,10 +72,10 @@ export class LoginView extends React.Component<void, Props, void> {
   }
 
   componentDidMount() {
-    var domainMessage = 'Please enter an email address';
+    var domainMessage = I18n.t('profile.validation.email');
     var domainRegex = 'email';
     if(config.signIn.userEmailDomain) {
-      domainMessage = domainMessage + ' at @' + config.signIn.userEmailDomain;
+      domainMessage = domainMessage + ' @' + config.signIn.userEmailDomain;
       domainRegex = 'regExp[^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(' + config.signIn.userEmailDomain + ')]';
 
     }
@@ -93,7 +94,7 @@ export class LoginView extends React.Component<void, Props, void> {
           identifier: 'password',
           rules: [{
             type: 'empty',
-            prompt: 'Please enter a password'
+            prompt: I18n.t('profile.validation.password')
           }]
         }
       }
@@ -110,12 +111,16 @@ export class LoginView extends React.Component<void, Props, void> {
                 {this.state.error}
               </div>
               <div className="field">
-                <label>Email</label>
+                <label>
+                  <Translate value="profile.email"/>
+                </label>
                 <input type= "text" name="username" value={this.props.username}
                   onChange={this.onUsernameChange} placeholder="Email" />
               </div>
               <div className="field">
-                <label>Password</label>
+                <label>
+                  <Translate value="profile.password"/>
+                </label>
                   <input type="password" name="password" placeholder="password"
                     value={this.props.password}
                     onChange={this.onPasswordChange} />
@@ -123,7 +128,7 @@ export class LoginView extends React.Component<void, Props, void> {
               <p>
                 <button className="ui fluid teal button"
                         onClick={() => this.handleSignin()}>
-                  Log In
+                  <Translate value="common.login"/>
                 </button>
               </p>
               <div className="ui error message"></div>

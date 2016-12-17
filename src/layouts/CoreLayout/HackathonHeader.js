@@ -9,6 +9,7 @@ import { actions as hackathonsActions } from '../../redux/modules/hackathons';
 
 import {Menu, Item, Icon, Image, Content, Header, Card} from 'react-semantify';
 import moment from 'moment';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -68,7 +69,7 @@ class HackathonHeaderView extends React.Component {
               </Content>
               <div className="extra center aligned">
                 <a href={'#/hackathons/' + this.props.selectedHackathon._id}>
-                    Details
+                    <Translate value="common.details"/>
                 </a>
               </div>
             </div>

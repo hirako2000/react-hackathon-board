@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import HackCardComponent from './HackCardComponent';
 
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -80,7 +81,7 @@ export class HacksAsCardsComponent extends React.Component {
                           || this.props.user.user.judge !== true ? 'hide-it' : 'fluid padding-top-20px' }>
           <a href={ '/api/hacks/export/' + this.props.selectedHackathon._id}>
             <Button color="teal" className="fluid tiny">
-              Export To CSV
+              <Translate value="hack.exportToCSV"/>
             </Button>
           </a>
         </div>
@@ -89,7 +90,7 @@ export class HacksAsCardsComponent extends React.Component {
             <div className="ui field">
               <div className="ui items form">
                 <Button className={!this.props.user || !this.props.user.user || !this.props.user.user._id ? 'hide-it' : "fluid tiny field"} color="blue" onClick={this.handleCreate} >
-                  <Icon className="plus"/> Create Hack
+                  <Icon className="plus"/> <Translate value="common.create"/>
                 </Button>
                 <div className="field">
                   <input type="text" name="search"

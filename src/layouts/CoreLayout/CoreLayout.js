@@ -10,6 +10,9 @@ import HackathonHeaderView from './HackathonHeader';
 import {Menu, Item, Icon} from 'react-semantify';
 var Hamburger = require('react-burger-menu').slide;
 
+const Translate = require('react-i18nify').Translate;
+const Localize = require('react-i18nify').Localize;
+
 const kindToClassMap = new Object();
 kindToClassMap['info'] = 'info';
 kindToClassMap['success'] = 'positive';
@@ -78,13 +81,16 @@ var All = React.createClass({
         <div className="ui vertical footer segment desktop">
           <div className="ui container">
             <span className="ui content">
-              Made with<a href="https://facebook.github.io/react/"> React </a>
-              and <a href="http://semantic-ui.com/"> Semantic-ui </a>, backed
-              by<a href="https://nodejs.org/en/"> Node </a>and<a href="https://github.com/mongodb/mongo"> mongoDB</a>.
+              <Translate value="footer.madeWith"/> <a href="https://facebook.github.io/react/"> React </a>
+              <Translate value="footer.and"/><a href="http://semantic-ui.com/"> Semantic-ui</a>,&nbsp;
+              <Translate value="footer.backedBy"/><a href="https://nodejs.org/en/"> Node </a>
+              <Translate value="footer.and"/><a href="https://github.com/mongodb/mongo"> mongoDB</a>.
             </span>
 
             <span className="ui content float-right">
-              Found a bug? Report an<a href="https://github.com/hirako2000/react-hackathon-board/issues"> issue.</a>
+              <Translate value="footer.foundABugReportAn"/>
+              <a href="https://github.com/hirako2000/react-hackathon-board/issues">
+              &nbsp;<Translate value="footer.issue"/>.</a>
             </span>
           </div>
         </div>
@@ -102,25 +108,25 @@ var NavBarLeft = React.createClass({
         <div>
           <Menu className="borderless stackable">
             <Link activeClassName="active" className="item" to="hackathons">
-              <Icon className="home" /> Home
+              <Icon className="home" />  <Translate value="menu.home"/>
             </Link>
             <Link activeClassName="active" className="item" to="hacks">
-              <Icon className="lab" /> Hacks
+              <Icon className="lab" /> <Translate value="menu.hacks"/>
             </Link>
             <Link activeClassName="active" className="item" to="rules">
-              <Icon className="book" /> Rules
+              <Icon className="book" /> <Translate value="menu.rules"/>
             </Link>
             <Link activeClassName="active" className="item" to="prizes">
-              <Icon className="gift" /> Prize
+              <Icon className="gift" /> <Translate value="menu.prizes"/>
             </Link>
             <Link activeClassName="active" className="item" to="judging">
-              <Icon className="trophy" /> Judging
+              <Icon className="trophy" /> <Translate value="menu.judging"/>
             </Link>
             <Link activeClassName="active" className="item" to="people">
-              <Icon className="users" /> People
+              <Icon className="users" /> <Translate value="menu.people"/>
             </Link>
             <Link activeClassName="active" className="item" to="beautifier">
-              <Icon className="code" /> Beautifier
+              <Icon className="code" /> <Translate value="menu.beautifier"/>
             </Link>
             <AccountNavBarView />
           </Menu>

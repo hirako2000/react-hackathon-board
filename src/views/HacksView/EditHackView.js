@@ -10,6 +10,7 @@ import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Lab
 import DropzoneSingleImageComponent from './DropzoneComponent';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
+import { Translate, Localize, I18n } from 'react-i18nify';
 
 type
 Props = {
@@ -36,7 +37,9 @@ var TitleInput = React.createClass ({
   render: function() {
     return (
       <div className="field">
-        <label>Title</label>
+        <label>
+          <Translate value="hack.title"/>
+        </label>
         <input type="text" name="title" value={ this.state.value }
                onChange={this.handleChange}>
         </input>
@@ -56,7 +59,9 @@ var ShortDescriptionInput = React.createClass ({
   render: function() {
     return (
       <div  className="field">
-        <label>Short Description</label>
+        <label>
+          <Translate value="hack.shortDescription"/>
+        </label>
           <textarea value={ this.state.value } name="shortDescription" rows="2"
                     onChange={this.handleChange}>
         </textarea>
@@ -77,13 +82,17 @@ var DescriptionInput = React.createClass ({
     return (
       <div className="fields">
         <div className="eight wide field">
-          <label>Description (markdown)</label>
+          <label>
+            <Translate value="hack.description"/> (markdown)
+          </label>
           <textarea value={ this.state.value } name="description"
                     onChange={this.handleChange}>
           </textarea>
         </div>
         <div className="eight wide field">
-          <label>Description Preview</label>
+          <label>
+            <Translate value="hack.descriptionPreview"/>
+          </label>
           <ReactMarkdown source={this.props.hack.description || ''}/>
         </div>
       </div>
@@ -102,7 +111,9 @@ var LocationInput = React.createClass ({
   render: function() {
     return (
         <div className="field">
-          <label>Location</label>
+          <label>
+            <Translate value="hack.location"/>
+          </label>
           <input type="text" name="location" value={ this.state.value }
                  onChange={this.handleChange}>
           </input>
@@ -126,10 +137,10 @@ var OpenInput = React.createClass ({
           <input type="checkbox" checked={this.state.value}
                  onChange={this.handleChange}/>
           <label>
-            Open
+            <Translate value="hack.open"/>
           </label>
         </div>
-        <span className="ui" data-position="top left" data-tooltip="Check this box if the hack is open to other participants" data-inverted="">
+        <span className="ui" data-position="top left" data-tooltip={I18n.t('hack.openTooltip')} data-inverted="">
           <i className="help icon"></i>
         </span>
       </div>
@@ -152,9 +163,11 @@ var CompletedInput = React.createClass ({
         <div className="ui checkbox">
           <input type="checkbox" checked={this.state.value}
                  onChange={this.handleChange}/>
-          <label>Completed</label>
+          <label>
+            <Translate value="hack.completed"/>
+          </label>
         </div>
-        <span className="ui" data-position="top left" data-tooltip="Check this box once the hack is completed" data-inverted="">
+        <span className="ui" data-position="top left" data-tooltip={I18n.t('hack.completedTooltip')} data-inverted="">
           <i className="help icon"></i>
         </span>
       </div>
@@ -177,9 +190,11 @@ var ScienceInput = React.createClass ({
         <div className="ui checkbox">
           <input type="checkbox" checked={this.state.value}
                  onChange={this.handleChange}/>
-          <label>Science</label>
+          <label>
+            <Translate value="hack.science"/>
+          </label>
         </div>
-        <span className="ui" data-position="top left" data-tooltip="Check this box if this is science project" data-inverted="">
+        <span className="ui" data-position="top left" data-tooltip={I18n.t('hack.scienceTooltip')} data-inverted="">
           <i className="help icon"></i>
         </span>
       </div>
@@ -283,7 +298,7 @@ export class HackViewComponent extends React.Component {
             rules: [
               {
                 type   : 'empty',
-                prompt : 'Please enter a title'
+                prompt : I18n.t('hack.validate.title')
               }
             ]
           },
@@ -292,7 +307,7 @@ export class HackViewComponent extends React.Component {
             rules: [
               {
                 type   : 'empty',
-                prompt : 'Please enter a location'
+                prompt : I18n.t('hack.validate.location')
               }
             ]
           },
@@ -301,7 +316,7 @@ export class HackViewComponent extends React.Component {
             rules: [
               {
                 type   : 'empty',
-                prompt : 'Please enter a short description'
+                prompt : I18n.t('hack.validate.shortDescription')
               }
             ]
           },
@@ -310,7 +325,7 @@ export class HackViewComponent extends React.Component {
             rules: [
               {
                 type   : 'empty',
-                prompt : 'Please enter a description'
+                prompt : I18n.t('hack.validate.description')
               }
             ]
           }
@@ -375,7 +390,7 @@ export class HackViewComponent extends React.Component {
             <p>
               <button className="ui submit tiny teal button"
                       onClick={(hack) => this.handleSubmit(this.props.hack.hack)}>
-                Save
+                <Translate value="common.save"/>
               </button>
             </p>
             <div className="ui error message"></div>

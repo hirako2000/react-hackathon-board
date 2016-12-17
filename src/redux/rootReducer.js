@@ -12,6 +12,7 @@ import user from './modules/user';
 import users from './modules/users';
 import otherUser from './modules/otherUser';
 import beautifier from './modules/beautifier';
+import locale from './modules/locale';
 import { reducer as notifs } from 're-notif';
 
 export default combineReducers({
@@ -28,5 +29,6 @@ export default combineReducers({
   users,
   otherUser,
   beautifier,
-  router
+  router,
+  locale
 });

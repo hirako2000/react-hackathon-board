@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon, Label} from 'react-semantify';
+import { Translate, Localize, I18n} from 'react-i18nify';
 
 import config from '../../config/base';
 
@@ -48,10 +49,10 @@ export class SignupView extends React.Component<void, Props, void> {
   }
 
   componentDidMount() {
-    var domainMessage = 'Please enter an email address';
+    var domainMessage = I18n.t('profile.validation.email');
     var domainRegex = 'email';
     if(config.signIn.userEmailDomain) {
-      domainMessage = domainMessage + ' at @' + config.signIn.userEmailDomain;
+      domainMessage = domainMessage + ' @' + config.signIn.userEmailDomain;
       domainRegex = 'regExp[^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(' + config.signIn.userEmailDomain + ')]';
 
     }
@@ -62,7 +63,7 @@ export class SignupView extends React.Component<void, Props, void> {
             identifier: 'fullname',
             rules: [{
               type: 'empty',
-              prompt: 'Please enter your full name'
+              prompt: I18n.t('profile.validation.fullName')
             }]
           },
           username: {
@@ -76,14 +77,14 @@ export class SignupView extends React.Component<void, Props, void> {
               identifier: 'password',
               rules: [{
                   type: 'empty',
-                  prompt: 'Please enter a password'
+                  prompt: I18n.t('profile.validation.password')
               }]
           },
           passwordConfirm: {
               identifier: 'passwordConfirm',
               rules: [{
-                   type: 'match[password]',
-                  prompt: 'Please confirm your password'
+                  type: 'match[password]',
+                  prompt: I18n.t('profile.validation.confirmPassword')
               }]
           }
       }
@@ -98,29 +99,39 @@ export class SignupView extends React.Component<void, Props, void> {
           <div className="seven wide column">
             <form action="/api/auth/signup" method="POST" className="ui form">
               <div className="field">
-                <label>Full Name</label>
+                <label>
+                  <Translate value="profile.fullName"/>
+                </label>
                 <input type= "text" name="fullname" value={this.props.fullname} maxLength="35"
                        onChange={this.onFullnameChange} placeholder="John Doe" />
               </div>
               <div className="field">
-                <label>Email</label>
+                <label>
+                  <Translate value="profile.email"/>
+                </label>
                 <input type= "text" name="username" value={this.props.username}
                   onChange={this.onUsernameChange} placeholder="Email" />
               </div>
               <div className="field">
-                <label>Password</label>
-                  <input type="password" name="password" placeholder="password"
-                    value={this.props.password}
-                    onChange={this.onPasswordChange} />
+                <label>
+                  <Translate value="profile.password"/>
+                </label>
+                <input type="password" name="password" placeholder="password"
+                  value={this.props.password}
+                  onChange={this.onPasswordChange} />
               </div>
               <div className="field">
-                <label>Confirm Password</label>
-                  <input type="password" name="passwordConfirm" placeholder="password"
-                    value={this.props.passwordConfirm}
-                    onChange={this.onPasswordConfirmChange} />
+                <label>
+                  <Translate value="profile.confirmPassword"/>
+                </label>
+                <input type="password" name="passwordConfirm" placeholder="password"
+                  value={this.props.passwordConfirm}
+                  onChange={this.onPasswordConfirmChange} />
               </div>
               <p>
-                <button type="submit" className="ui fluid teal button">Signup</button>
+                <button type="submit" className="ui fluid teal button">
+                  <Translate value="common.signup"/>
+                </button>
               </p>
               <div className="ui error message"></div>
             </form>

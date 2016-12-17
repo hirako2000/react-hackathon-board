@@ -12,6 +12,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import DatePickerCss from 'react-datepicker/dist/react-datepicker.css';
 import ReactMarkdown from 'react-markdown';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -36,7 +37,9 @@ var DatePickerStartInput = React.createClass({
   render: function() {
     return (
       <span className="three wide field">
-        <label>Start Date</label>
+        <label>
+          <Translate value="hackathon.startDate"/>
+        </label>
         <DatePicker name="startDate"
         selected={this.state.value}
         onChange={this.handleChange} />
@@ -59,7 +62,9 @@ var DatePickerEndInput = React.createClass({
   render: function() {
     return (
       <span className="three wide field">
-        <label>End Date</label>
+      <label>
+        <Translate value="hackathon.endDate"/>
+      </label>
         <DatePicker selected={this.state.value} onChange={this.handleChange} name="endDate" />
       </span>);
   }
@@ -83,7 +88,9 @@ var TitleInput = React.createClass ({
     return (
         <div className="eight wide field">
           <div className="field">
-            <label>Title</label>
+            <label>
+              <Translate value="hackathon.title"/>
+            </label>
             <input type="text" name="title" value={ this.state.value }
                    onChange={this.handleChange}>
             </input>
@@ -107,7 +114,9 @@ var LocationInput = React.createClass ({
     return (
         <div className="two wide field">
           <div className="field">
-            <label>Location</label>
+            <label>
+              <Translate value="hackathon.location"/>
+            </label>
             <input type="text" name="location" value={ this.state.value }
                    onChange={this.handleChange}>
             </input>
@@ -129,8 +138,10 @@ var ShortDescriptionInput = React.createClass ({
     return (
       <div className="eight wide field">
         <div className="field">
-          <label>Short Description</label>
-            <textarea value={ this.state.value } name="shortDescription" rows="2"
+          <label>
+            <Translate value="hackathon.shortDescription"/>
+          </label>
+          <textarea value={ this.state.value } name="shortDescription" rows="2"
                       onChange={this.handleChange}>
           </textarea>
         </div>
@@ -153,14 +164,14 @@ var DescriptionInput = React.createClass ({
       <div className="fields">
         <div className="eight wide field">
           <div className="field">
-            <label>Description (markdown)</label>
+            <label><Translate value="hackathon.description"/> (markdown)</label>
             <textarea value={ this.state.value } name="description"
                       onChange={this.handleChange}>
             </textarea>
           </div>
         </div>
         <div className="eight wide field">
-          <label>Description Preview</label>
+          <label><Translate value="hackathon.descriptionPreview"/></label>
           <ReactMarkdown source={this.props.hackathon && this.props.hackathon.description ? this.props.hackathon.description : ''}/>
         </div>
       </div>
@@ -180,13 +191,13 @@ var RulesInput = React.createClass ({
     return (
       <div className="fields">
         <div className="eight wide field">
-          <label>Rules (markdown)</label>
+          <label><Translate value="hackathon.rules"/> (markdown)</label>
           <textarea value={ this.state.value } name="rules"
                     onChange={this.handleChange}>
           </textarea>
         </div>
         <div className="eight wide field">
-          <label>Rule Preview</label>
+          <label><Translate value="hackathon.rulesPreview"/></label>
           <ReactMarkdown source={this.props.hackathon && this.props.hackathon.rules ? this.props.hackathon.rules : ''}/>
         </div>
       </div>
@@ -206,13 +217,13 @@ var PrizesInput = React.createClass ({
     return (
       <div className="fields">
         <div className="eight wide field">
-          <label>Prizes (markdown)</label>
+          <label><Translate value="hackathon.prizes"/> (markdown)</label>
           <textarea value={ this.state.value } name="prizes"
                     onChange={this.handleChange}>
           </textarea>
         </div>
         <div className="eight wide field">
-          <label>Prizes Preview</label>
+          <label><Translate value="hackathon.prizesPreview"/></label>
           <ReactMarkdown source={this.props.hackathon && this.props.hackathon.prizes ? this.props.hackathon.prizes : ''}/>
         </div>
       </div>
@@ -235,7 +246,7 @@ var OpenInput = React.createClass ({
         <div className="ui checkbox">
           <input type="checkbox" checked={this.state.value} name="open"
                  onChange={this.handleChange}/>
-          <label>Open</label>
+          <label><Translate value="hackathon.open"/></label>
         </div>
       </div>
     );
@@ -256,7 +267,7 @@ var ActiveInput = React.createClass ({
         <div className="ui checkbox">
           <input type="checkbox" checked={this.state.value} name="active"
                  onChange={this.handleChange}/>
-          <label>Active</label>
+          <label><Translate value="hackathon.active"/></label>
         </div>
       </div>
     );
@@ -289,7 +300,7 @@ export class HackathonViewComponent extends React.Component {
             rules: [
               {
                 type   : 'empty',
-                prompt : 'Please enter a title'
+                prompt : <Translate value="hackathon.description"/>
               }
             ]
           }
@@ -330,7 +341,7 @@ export class HackathonViewComponent extends React.Component {
             <h1>{ this.props.hackathon && this.props.hackathon.hackathon ? this.props.hackathon.hackathon.title : ''}</h1>
 
             <div className="ui horizontal divider header">
-              Summary
+              <Translate value="hackathon.summary"/>
             </div>
             <div className="fields">
               <TitleInput hackathon={ this.props.hackathon.hackathon } />
@@ -346,7 +357,7 @@ export class HackathonViewComponent extends React.Component {
             </div>
 
             <div className="ui horizontal divider header">
-              Details
+              <Translate value="hackathon.details"/>
             </div>
 
             <DescriptionInput hackathon={ this.props.hackathon.hackathon } />
@@ -357,7 +368,7 @@ export class HackathonViewComponent extends React.Component {
             <p>
               <button className="ui submit tiny teal button"
                       onClick={(hackathon) => this.handleSubmit(this.props.hackathon)}>
-                Save
+                <Translate value="common.save"/>
               </button>
             </p>
             <div className="ui error message"></div>

@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import {Button, Card, Content, Header, Column, Image, Reveal, Segment, Icon} from 'react-semantify';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
+import { Translate, Localize } from 'react-i18nify';
 
 type
 Props = {
@@ -57,7 +58,7 @@ export class HackathonViewComponent extends React.Component {
                                 || this.props.user.user.judge !== true ? "hide-it" : "ui visible items fluid"}>
                   <a href={ '#/hackathons/edit/' + hackathon.hackathon._id}>
                     <div className="ui blue fluid tiny button">
-                      Edit
+                      <Translate value="common.edit"/>
                     </div>
                   </a>
                 </div>
@@ -67,7 +68,9 @@ export class HackathonViewComponent extends React.Component {
 
                 <div className="ui card fluid">
                   <div className="content">
-                    <div className="header">Organizer</div>
+                    <div className="header">
+                      <Translate value="hackathon.organizer" />
+                    </div>
                     <div className="">
                       <span>{hackathon.ownerDisplay}</span>
                     </div>
@@ -76,7 +79,9 @@ export class HackathonViewComponent extends React.Component {
 
                 <div className="ui card fluid">
                   <div className="content">
-                    <div className="header">Date</div>
+                    <div className="header">
+                      <Translate value="hackathon.date"/>
+                    </div>
                     <div className="ui description">
                       { (moment(hackathon.hackathon.startDate).month() !== moment(hackathon.hackathon.endDate).month() ?
                         moment(hackathon.hackathon.startDate).format('Do MMM YY') :
@@ -91,7 +96,9 @@ export class HackathonViewComponent extends React.Component {
 
                 <div className={hackathon.hackathon.location ? "ui card fluid" : "hide-it"}>
                   <div className="content">
-                    <div className="header">Location</div>
+                    <div className="header">
+                      <Translate value="hackathon.location"/>
+                    </div>
                     <div className="">
                       <span>{hackathon.hackathon.location}</span>
                     </div>
@@ -104,19 +111,25 @@ export class HackathonViewComponent extends React.Component {
 
                   <div className="sixteen wide column">
                     <Segment>
-                      <h3>About this Hackahton</h3>
+                      <h3>
+                        <Translate value="common.about"/>
+                      </h3>
                       <div className="">
                         <ReactMarkdown source={this.props.hackathon.hackathon.description ? this.props.hackathon.hackathon.description : ''}/>
                       </div>
                     </Segment>
                     <Segment>
-                      <h3>Rules</h3>
+                      <h3>
+                        <Translate value="hackathon.rules"/>
+                      </h3>
                       <div className="">
                         <ReactMarkdown source={this.props.hackathon.hackathon.rules ? this.props.hackathon.hackathon.rules : ''}/>
                       </div>
                     </Segment>
                     <Segment>
-                      <h3>Prize</h3>
+                      <h3>
+                        <Translate value="hackathon.prizes"/>
+                      </h3>
                       <div className="">
                         <ReactMarkdown source={this.props.hackathon.hackathon.prizes ? this.props.hackathon.hackathon.prizes : ''}/>
                       </div>

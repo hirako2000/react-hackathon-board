@@ -151,10 +151,16 @@
 
 .ui.vertical.segment.footer {
   background-color: rgba(247, 247, 247, 0.9);
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .footer.segment {
   padding: 5px;
+}
+
+.half-width {
+  width: 50%;
 }
 
 @media (min-height: 320px) {

@@ -6,12 +6,12 @@ import { reducer as notifReducer, actions as notifActions, Notifs } from 're-not
 import { Router, Route, Link } from 'react-router';
 import AccountNavBarView from './AccountNavBar';
 import HackathonHeaderView from './HackathonHeader';
+import LocalePickerView from './LocalePicker';
 
 import {Menu, Item, Icon} from 'react-semantify';
 var Hamburger = require('react-burger-menu').slide;
 
 const Translate = require('react-i18nify').Translate;
-const Localize = require('react-i18nify').Localize;
 
 const kindToClassMap = new Object();
 kindToClassMap['info'] = 'info';
@@ -79,19 +79,25 @@ var All = React.createClass({
           </div>
         </div>
         <div className="ui vertical footer segment desktop">
-          <div className="ui container">
-            <span className="ui content">
+          <div className="ui stackable sixteen column grid basic">
+            <div className="ui eight wide column content">
               <Translate value="footer.madeWith"/> <a href="https://facebook.github.io/react/"> React </a>
               <Translate value="footer.and"/><a href="http://semantic-ui.com/"> Semantic-ui</a>,&nbsp;
               <Translate value="footer.backedBy"/><a href="https://nodejs.org/en/"> Node </a>
               <Translate value="footer.and"/><a href="https://github.com/mongodb/mongo"> mongoDB</a>.
-            </span>
+            </div>
 
-            <span className="ui content float-right">
+            <div className="two wide column">
+              <LocalePickerView/>
+            </div>
+
+            <div className="ui six wide column content">
+              <div className="float-right">
               <Translate value="footer.foundABugReportAn"/>
               <a href="https://github.com/hirako2000/react-hackathon-board/issues">
               &nbsp;<Translate value="footer.issue"/>.</a>
-            </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

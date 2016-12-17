@@ -27,11 +27,24 @@ class AccountNavBarView extends React.Component {
     this.props.fetchFromServer();
   }
 
+  userAvatar() {
+    // react lets you do really weird things...
+     if(this.props.user.user.profile.picture){
+       return (
+       <img className="ui avatar image" src={'user-images/' +  this.props.user.user.profile.picture} />
+       )
+     } else {
+       return(
+         <object className="ui avatar image"type="image/svg+xml" data={'user-images/' + this.props.user.user.profile.avatar}>
+         </object>
+       );
+     }
+   }
+
   render() {
     if(!this.props.user || !this.props.user.user || !this.props.user.user._id) {
       return(
         <Menu className="right borderless stackable">
-          <LocalePickerView/>
           <Link activeClassName="active" className="item" to="login">
             <Icon className="sign in" /> <Translate value="common.login"/>
           </Link>
@@ -41,12 +54,18 @@ class AccountNavBarView extends React.Component {
         </Menu>
       );
     }
+
     return(
       <Menu className="right borderless noborder stackable">
-        <LocalePickerView/>
+        <div className="mobile">
+          <LocalePickerView/>
+        </div>
         <Dropdown init={true} className="">
           <Item>
-            <Icon className="user" /> { this.props.user.user.profile.name ? this.props.user.user.profile.name : this.props.user.user.username }
+            {this.userAvatar()}
+            <div>
+              { this.props.user.user.profile.name ? this.props.user.user.profile.name : this.props.user.user.username }
+            </div>
           </Item>
           <Menu className="ui borderless">
             <Item className="" type="link" href="/#/hacks/my">
@@ -61,7 +80,6 @@ class AccountNavBarView extends React.Component {
             </Item>
           </Menu>
         </Dropdown>
-
       </Menu>
     );
   }

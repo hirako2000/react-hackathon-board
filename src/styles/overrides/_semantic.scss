@@ -124,6 +124,10 @@
   padding-top: 20px;
 }
 
+.padding-top-70px {
+  padding-top: 70px;
+}
+
 .padding-bottom-footer {
   padding-bottom: 80px;
 }
@@ -173,6 +177,12 @@
 }
 
 @media (min-width: 734px) {
+  .fixed-menu {
+    width: 100%;
+    z-index: 200;
+    position: fixed;
+  }
+
   .desktop {
     display: inherit;
   }

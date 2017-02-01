@@ -112,6 +112,7 @@ var NavBarLeft = React.createClass({
     return(
       <div>
         <div>
+          <div className="fixed-menu">
           <Menu className="borderless stackable">
             <Link activeClassName="active" className="item" to="hackathons">
               <Icon className="home" />  <Translate value="menu.home"/>
@@ -136,7 +137,8 @@ var NavBarLeft = React.createClass({
             </Link>
             <AccountNavBarView />
           </Menu>
-          <div className="ui fluid">
+          </div>
+          <div className="ui fluid padding-top-70px">
             <HackathonHeaderView />
           </div>
         </div>

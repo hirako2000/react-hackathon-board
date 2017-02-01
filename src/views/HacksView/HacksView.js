@@ -27,6 +27,7 @@ export class HacksAsCardsComponent extends React.Component {
     var selectedHackathon = this.props.selectedHackathon ? this.props.selectedHackathon : "-1";
     this.props.listFromServer(selectedHackathon);
     this.getData();
+    this.clearSearch = this.clearSearch.bind(this);
     this.onSearch = this.onSearch.bind(this);
   }
 
@@ -34,6 +35,13 @@ export class HacksAsCardsComponent extends React.Component {
     this.setState({
       search: ''
     });
+  }
+
+  clearSearch() {
+    this.setState({
+      search: ''
+    });
+    this.props.hacks.search = '';
   }
 
   handleCreate() {
@@ -96,10 +104,13 @@ export class HacksAsCardsComponent extends React.Component {
                 </Button>
                 <div className="field">
                   <input type="text" name="search"
-                  value={this.props.hacks.search}
+                  value={this.state.search}
                   onChange={this.onSearch}
                   placeholder="Search"/>
                 </div>
+                <Button className="mini fluid" onClick={this.clearSearch}>
+                  Clear
+                </Button>
               </div>
             </div>
           </div>

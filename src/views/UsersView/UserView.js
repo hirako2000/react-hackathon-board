@@ -10,7 +10,8 @@ import {Button, Menu, Item, Icon, Image, Content, Header, Segment} from 'react-s
 type
 Props = {
   otherUser: Object,
-  fetchFromServer: Function
+  fetchFromServer: Function,
+  toggleAdmin: Function
 };
 
 var Avatar = React.createClass({
@@ -33,17 +34,23 @@ class UserView extends React.Component {
 
   static propTypes = {
     otherUser: PropTypes.object.isRequired,
-    fetchFromServer: PropTypes.func.isRequired
+    fetchFromServer: PropTypes.func.isRequired,
+    toggleAdmin: PropTypes.func.isRequired
   };
 
   componentWillMount() {
     this.props.fetchFromServer(this.props.params.id);
     this.getData();
+    this.toggleAdmin = this.toggleAdmin.bind(this);
   }
 
   getData() {
     this.setState({
     });
+  }
+
+  toggleAdmin() {
+    this.props.toggleAdmin(this.props.params.id);
   }
 
   render() {
@@ -75,6 +82,11 @@ class UserView extends React.Component {
                     <Translate value="common.showHacks"/>
                   </Button>
                 </a>
+              </div>
+              <div className={this.props.user.user.judge !== true ? 'hide-it' : 'padding-top-10px'}>
+                <Button onClick={this.toggleAdmin} className="fluid mini" color="red">
+                  <Translate value={this.props.otherUser.judge ? 'removeJudge' : 'makeJudge'}/>
+                </Button>
               </div>
             </div>
 
@@ -116,6 +128,7 @@ class UserView extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  otherUser: state.otherUser
+  otherUser: state.otherUser,
+  user: state.user
 });
 export default connect(mapStateToProps, otherUserActions)(UserView);

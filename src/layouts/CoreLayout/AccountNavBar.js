@@ -44,7 +44,7 @@ class AccountNavBarView extends React.Component {
   render() {
     if(!this.props.user || !this.props.user.user || !this.props.user.user._id) {
       return(
-        <Menu className="right borderless stackable">
+        <Menu className="right borderless noborder stackable">
           <Link activeClassName="active" className="item" to="login">
             <Icon className="sign in" /> <Translate value="common.login"/>
           </Link>

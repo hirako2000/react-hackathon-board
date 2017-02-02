@@ -4,6 +4,19 @@ import Hackathon from '../models/hackathon';
 
 const user = new Router();
 
+user.post('/toggle-admin/:id', function * (next) {
+  if (!this.isAuthenticated() || !this.passport.user.judge) {
+    return this.status = 401;
+  }
+
+  var user = yield User.findOne({'_id': this.params.id}, 'username email profile judge');
+  user.judge = !user.judge;
+  yield user.save();
+
+  this.body = user;
+  console.log("User's judge was toggled to " + user.judge);
+});
+
 user.get('/me', function * (next) {
   console.log('GET /users/me');
   var user = new Object();

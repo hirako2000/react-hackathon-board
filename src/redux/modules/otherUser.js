@@ -16,8 +16,17 @@ export const fetchFromServer = (id) => (dispatch) => {
     });
 };
 
+export const toggleAdmin = (id) => (dispatch) => {
+  axios.post('/api/users/toggle-admin/' + id)
+    .then((res) => {
+      dispatch(otherUser(res.data));
+    });
+};
+
+
 export const actions = {
-  fetchFromServer
+  fetchFromServer,
+  toggleAdmin
 };
 
 const ACTION_HANDLERS = {
@@ -31,4 +40,3 @@ export default function otherUserReducers (state: Object = initialState, action:
 
   return handler ? handler(state, action) : state;
 }
-

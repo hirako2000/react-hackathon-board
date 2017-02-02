@@ -94,7 +94,9 @@ const i18n = {
              fullName: "Enter your full name",
              password: "Enter a password",
              confirmPassword: "Confirm your password"
-           }
+           },
+           makeAdmin: "Make Judge",
+           removeAdmin: "Remove Judge"
          },
          footer: {
            madeWith: "Made with",
@@ -195,7 +197,9 @@ const i18n = {
              fullName: "Entrez votre nom",
              password: "Entrez votre mot de passe",
              confirmPassword: "Confirmez votre mote de passe"
-           }
+           },
+           makeAdmin: "Rendre Juge",
+           removeAdmin: "Enlever Juge"
          },
          footer: {
            madeWith: "Développé avec",

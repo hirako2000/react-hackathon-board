@@ -11,7 +11,8 @@ type
 Props = {
   otherUser: Object,
   fetchFromServer: Function,
-  toggleAdmin: Function
+  toggleAdmin: Function,
+  resetPassword: Function
 };
 
 var Avatar = React.createClass({
@@ -35,13 +36,15 @@ class UserView extends React.Component {
   static propTypes = {
     otherUser: PropTypes.object.isRequired,
     fetchFromServer: PropTypes.func.isRequired,
-    toggleAdmin: PropTypes.func.isRequired
+    toggleAdmin: PropTypes.func.isRequired,
+    resetPassword: PropTypes.func.isRequired
   };
 
   componentWillMount() {
     this.props.fetchFromServer(this.props.params.id);
     this.getData();
     this.toggleAdmin = this.toggleAdmin.bind(this);
+    this.resetPassword = this.resetPassword.bind(this);
   }
 
   getData() {
@@ -51,6 +54,10 @@ class UserView extends React.Component {
 
   toggleAdmin() {
     this.props.toggleAdmin(this.props.params.id);
+  }
+
+  resetPassword() {
+    this.props.resetPassword(this.props.params.id);
   }
 
   render() {
@@ -85,7 +92,12 @@ class UserView extends React.Component {
               </div>
               <div className={this.props.user.user.judge !== true ? 'hide-it' : 'padding-top-10px'}>
                 <Button onClick={this.toggleAdmin} className="fluid mini" color="red">
-                  <Translate value={this.props.otherUser.judge ? 'removeJudge' : 'makeJudge'}/>
+                  <Translate value={this.props.otherUser.judge ? 'profile.removeJudge' : 'profile.makeJudge'}/>
+                </Button>
+              </div>
+              <div className={this.props.user.user.judge !== true ? 'hide-it' : 'padding-top-10px'}>
+                <Button onClick={this.resetPassword} className="fluid mini" color="red">
+                  <Translate value='profile.resetPassword'/>
                 </Button>
               </div>
             </div>

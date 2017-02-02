@@ -31,12 +31,14 @@ export class ProfileView extends React.Component<void, Props, void> {
       website: '',
       location: '',
       picture: '',
-      description: ''
+      description: '',
+      password: ''
     };
 
 
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
+    this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onWebsiteChange = this.onWebsiteChange.bind(this);
     this.onLocationChange = this.onLocationChange.bind(this);
     this.onPictureChange = this.onPictureChange.bind(this);
@@ -53,6 +55,14 @@ export class ProfileView extends React.Component<void, Props, void> {
     }
     this.props.user.user.profile.name = ev.target.value;
     this.setState({name: event.target.value});
+  };
+
+  onPasswordChange(ev) {
+    if (ev.target.value.length > 35) {
+      return;
+    }
+    this.props.user.user.password = ev.target.value;
+    this.setState({password: event.target.value});
   };
 
   onWebsiteChange(ev) {
@@ -126,6 +136,14 @@ export class ProfileView extends React.Component<void, Props, void> {
                 <input type="text" name="name" placeholder="Full name"
                        value={this.props.user.user.profile.name}
                        onChange={this.onNameChange} />
+              </div>
+              <div className="field">
+                <label>
+                  <Translate value="profile.password"/>
+                </label>
+                <input type="password" name="password" placeholder="password"
+                       defaultValue={this.state.password}
+                       onChange={this.onPasswordChange} />
               </div>
               <div className="field">
                 <label>

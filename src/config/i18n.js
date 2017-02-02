@@ -96,7 +96,8 @@ const i18n = {
              confirmPassword: "Confirm your password"
            },
            makeAdmin: "Make Judge",
-           removeAdmin: "Remove Judge"
+           removeAdmin: "Remove Judge",
+           resetPassword: "Reset Password"
          },
          footer: {
            madeWith: "Made with",
@@ -199,7 +200,8 @@ const i18n = {
              confirmPassword: "Confirmez votre mote de passe"
            },
            makeAdmin: "Rendre Juge",
-           removeAdmin: "Enlever Juge"
+           removeAdmin: "Enlever Juge",
+           resetPassword: "Réinitialiser Mot de passe"
          },
          footer: {
            madeWith: "Développé avec",

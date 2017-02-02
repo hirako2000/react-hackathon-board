@@ -4,9 +4,22 @@ import Hackathon from '../models/hackathon';
 
 const user = new Router();
 
+user.post('/reset-password/:id', function * (next) {
+  if (!this.isAuthenticated() || !this.passport.user.judge) {
+    return this.status = 403;
+  }
+
+  var user = yield User.findOne({'_id': this.params.id}, 'password username email profile judge');
+  user.password = 'hack-password!';
+  yield user.save();
+
+  this.body = 'password reset to ' + 'hack-password!';
+  console.log("Password reset for " + user.email);
+});
+
 user.post('/toggle-admin/:id', function * (next) {
   if (!this.isAuthenticated() || !this.passport.user.judge) {
-    return this.status = 401;
+    return this.status = 403;
   }
 
   var user = yield User.findOne({'_id': this.params.id}, 'username email profile judge');
@@ -54,7 +67,11 @@ user.put('/me', function * (next) {
   user.profile.website = this.request.body.profile.website;
   user.profile.picture = this.request.body.profile.picture;
   user.profile.description = this.request.body.profile.description;
+  if(this.request.body.password && this.request.body.password !== '') {
+    user.password = this.request.body.password;
+  }
   yield user.save();
+  user.password = undefined;
   var response = {
     user: user
   };

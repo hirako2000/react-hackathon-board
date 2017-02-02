@@ -161,6 +161,17 @@ hacks.get('/my', function * (next) {
   this.body = response;
 });
 
+hacks.get('/user/:id', function * (next) {
+  console.log('GET /hacks/user/' +  this.params.id);
+  var hacks = yield Hack.find({ $or: [{'owner': this.params.id}, {'joiners':  this.params.id}]});
+
+  var response = {
+    hacks: hacks
+  };
+  console.log("Returning " + hacks.length + " hacks");
+  this.body = response;
+});
+
 hacks.get('/nominated', function * (next) {
   console.log('GET /hacks/nominated');
   var selectedHackathonId =  this.request.query.hackathonId;

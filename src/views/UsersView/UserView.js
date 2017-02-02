@@ -5,7 +5,7 @@ import { Provider, connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router';
 import { actions as otherUserActions } from '../../redux/modules/otherUser';
 import { Translate, Localize } from 'react-i18nify';
-import {Menu, Item, Icon, Image, Content, Header, Segment} from 'react-semantify';
+import {Button, Menu, Item, Icon, Image, Content, Header, Segment} from 'react-semantify';
 
 type
 Props = {
@@ -66,10 +66,18 @@ class UserView extends React.Component {
           <div className="ui items stackable sixteen column relaxed grid basic">
             <div className="three wide column fluid">
               <Avatar profile={this.props.otherUser.profile} />
-              <div className="text-center">
+              <div className="text-center padding-top-10px">
                 <h3>{this.props.otherUser.profile.name}</h3>
               </div>
+              <div className="padding-top-10px">
+                <a href={ '#/hacks/user/' + this.props.otherUser._id }>
+                  <Button className="fluid mini" color="teal">
+                    <Translate value="common.showHacks"/>
+                  </Button>
+                </a>
+              </div>
             </div>
+
             <div className="thirteen wide column">
               <Segment>
                 <h3><Translate value="common.about"/></h3>

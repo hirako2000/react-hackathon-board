@@ -15,7 +15,9 @@ const i18n = {
            details: 'Details',
            create: 'Create',
            about: "About",
-           loading: "Loading"
+           loading: "Loading",
+           clear: "Clear",
+           showHacks: "Show Hacks"
          },
          menu: {
            home: 'Home',
@@ -77,7 +79,8 @@ const i18n = {
            closed: "Closed",
            uncompleted: "Uncompleted",
            comments: "Comments",
-           addComment: "Add Comment"
+           addComment: "Add Comment",
+           userHacks: "People's hacks"
          },
          profile: {
            location: "Location",
@@ -112,7 +115,9 @@ const i18n = {
            details: "Détails",
            create: "Créer",
            about: "à propos",
-           loading: "Chargement"
+           loading: "Chargement",
+           clear: "Effacer",
+           showHacks: "Voir Hacks"
          },
          menu: {
            home: 'Acceuil',
@@ -175,7 +180,8 @@ const i18n = {
            closed: "Fermé",
            uncompleted: "Inachevé",
            comments: "Commentaires",
-           addComment: "Ajouter Commentaire"
+           addComment: "Ajouter Commentaire",
+           userHacks: "Hacks du participant"
          },
          profile: {
            location: "Lieu",

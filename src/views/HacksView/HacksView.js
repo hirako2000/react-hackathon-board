@@ -109,7 +109,7 @@ export class HacksAsCardsComponent extends React.Component {
                   placeholder="Search"/>
                 </div>
                 <Button className="mini fluid" onClick={this.clearSearch}>
-                  Clear
+                  <Translate value="common.clear"/>
                 </Button>
               </div>
             </div>

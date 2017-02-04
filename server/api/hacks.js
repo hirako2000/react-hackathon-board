@@ -389,10 +389,11 @@ hacks.post('/upload-image', upload.single('file'), function * (next) {
     // This logic will crop larger images, while keeping image ratio if image is smaller than 800*800
     var toWidth = 800;
     var toHeight = 800;
-    if(image.width() < toWidth) {
+    // some corrupted image don't have width/height
+    if(image && image.width() && image.width() < toWidth) {
       toWidth = image.width();
     }
-    if(image.height() < toHeight) {
+    if(image && image.height() && image.height() < toHeight) {
       toHeight = image.height();
     }
     // Crops from center

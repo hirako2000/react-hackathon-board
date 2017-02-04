@@ -90,12 +90,12 @@ class UserView extends React.Component {
                   </Button>
                 </a>
               </div>
-              <div className={this.props.user.user.judge !== true ? 'hide-it' : 'padding-top-10px'}>
+              <div className={!this.props.user.user || this.props.user.user.judge !== true ? 'hide-it' : 'padding-top-10px'}>
                 <Button onClick={this.toggleAdmin} className="fluid mini" color="red">
                   <Translate value={this.props.otherUser.judge ? 'profile.removeJudge' : 'profile.makeJudge'}/>
                 </Button>
               </div>
-              <div className={this.props.user.user.judge !== true ? 'hide-it' : 'padding-top-10px'}>
+              <div className={!this.props.user.user || this.props.user.user.judge !== true ? 'hide-it' : 'padding-top-10px'}>
                 <Button onClick={this.resetPassword} className="fluid mini" color="red">
                   <Translate value='profile.resetPassword'/>
                 </Button>

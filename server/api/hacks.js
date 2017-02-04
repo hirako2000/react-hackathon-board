@@ -17,15 +17,16 @@ import fs from 'fs';
 import moment from 'moment';
 
 const hacks = new Router();
+const hackSummaryFields = 'id title shortDescription owner pictureURL category hackathon open completed location science nominated';
 
 hacks.get('/', function * (next) {
   console.log('GET /hacks/');
   var selectedHackathonId =  this.request.query.hackathonId;
   var hacks;
   if (selectedHackathonId && selectedHackathonId !== "-1") {
-    hacks = yield Hack.find({ 'hackathon' : selectedHackathonId });
+    hacks = yield Hack.find({ 'hackathon' : selectedHackathonId }, hackSummaryFields);
   } else {
-    var activeHackathon = yield Hackathon.findOne({'active': true});
+    var activeHackathon = yield Hackathon.findOne({'active': true}, hackSummaryFields);
     if (!activeHackathon) {
       hacks = [];
     } else {
@@ -152,7 +153,7 @@ hacks.get('/my', function * (next) {
     return this.status = 401;
   }
   var user = this.passport.user;
-  var hacks = yield Hack.find({ $or: [{'owner': user._id}, {'joiners': user._id}]});
+  var hacks = yield Hack.find({ $or: [{'owner': user._id}, {'joiners': user._id}]}, hackSummaryFields);
 
   var response = {
     hacks: hacks

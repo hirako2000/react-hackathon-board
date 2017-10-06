@@ -2,7 +2,7 @@ import passport from 'koa-passport';
 import User from '../../models/user';
 
 import PassportLocal from 'passport-local';
-import PassortFacebook from 'passport-facebook';
+import PassportFacebook from 'passport-facebook';
 import PassportGithub from 'passport-github';
 import PassportGoogleOauth from 'passport-google-oauth';
 
@@ -116,7 +116,7 @@ passport.use('local-signup', new PassportLocal.Strategy({passReqToCallback: true
   });
 }));
 
-passport.use(new PassortFacebook.Strategy({
+passport.use(new PassportFacebook.Strategy({
     clientID: '1665600533660584',
     clientSecret: '0cafa134c6bd5ae4be6e305c4e760bf9',
     callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/api/auth/facebook/callback',
